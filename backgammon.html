@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> </meta> 
+<meta https-equiv="Content-Type" content="text/html; charset=UTF-8" /> </meta> 
 
 <html>
 <head>
@@ -336,7 +336,7 @@ function Init()
         for (var j = 0; j < gred; j++)
         {
             map[i][j]=0;
-            document.getElementById("stb").rows[i].cells[j].innerHTML = "<img src='http://i.imgur.com/hG0giS4.png' width=30 height=30>";
+            document.getElementById("stb").rows[i].cells[j].innerHTML = "<img src='https://i.imgur.com/hG0giS4.png' width=30 height=30>";
         }
     }
     dx=7;
@@ -351,7 +351,7 @@ function change_td(x,y)
   if(map[x][y]==0)
   {
     map[x][y]=1;
-    document.getElementById("stb").rows[x].cells[y].innerHTML = "<img src='http://i.imgur.com/0SM64E8.png' width=30 height=30>";
+    document.getElementById("stb").rows[x].cells[y].innerHTML = "<img src='https://i.imgur.com/0SM64E8.png' width=30 height=30>";
     if(check(x,y,1)==1)
     {
       winner(1);
@@ -373,7 +373,7 @@ function change_td(x,y)
 
 function change_tdX(x,y)
 {
-  document.getElementById("stb").rows[x].cells[y].innerHTML = "<img src='http://i.imgur.com/Jtj5CLD.png' width=30 height=30>";
+  document.getElementById("stb").rows[x].cells[y].innerHTML = "<img src='https://i.imgur.com/Jtj5CLD.png' width=30 height=30>";
 }
 
 function check( x, y, s)
