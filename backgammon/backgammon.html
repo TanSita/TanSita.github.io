@@ -320,17 +320,20 @@ var dx,dy;
 
 var map = new Array(gred);
 
-var tab = [60,595,8000,2396746];
-var tab2 = [60,595,4721,299593];
+// var tab = [60,595,8000,2396746];
+// var tab2 = [60,595,4721,299593];
+var tab = [200,400,2000,10000];
+var tab2 = [210,420,2100,20000];
+
 
 Init();
 
 function Init()
 {
-  for(i=0;i<gred;i++)
-  { 
-    map[i] = new Array(gred);
-  }
+    for(i=0;i<gred;i++)
+    { 
+      map[i] = new Array(gred);
+    }
     for (var i = 0; i < gred; i++)
     {
         for (var j = 0; j < gred; j++)
@@ -339,10 +342,28 @@ function Init()
             document.getElementById("stb").rows[i].cells[j].innerHTML = "<img src='https://i.imgur.com/hG0giS4.png' width=30 height=30>";
         }
     }
+
+    document.getElementById("stb").rows[7].cells[8].innerHTML = "<img src='http://www.solidbackgrounds.com/images/2560x1440/2560x1440-black-solid-color-background.jpg' width=30 height=30>";
+    
+    document.getElementById("stb").rows[5].cells[7].innerHTML = "<img src='http://www.solidbackgrounds.com/images/2560x1440/2560x1440-black-solid-color-background.jpg' width=30 height=30>";
+  
+    document.getElementById("stb").rows[9].cells[7].innerHTML = "<img src='http://www.solidbackgrounds.com/images/2560x1440/2560x1440-black-solid-color-background.jpg' width=30 height=30>";
+
+    document.getElementById("stb").rows[8].cells[9].innerHTML = "<img src='http://www.solidbackgrounds.com/images/2560x1440/2560x1440-black-solid-color-background.jpg' width=30 height=30>";
+    
+    document.getElementById("stb").rows[8].cells[5].innerHTML = "<img src='http://www.solidbackgrounds.com/images/2560x1440/2560x1440-black-solid-color-background.jpg' width=30 height=30>";
+    
+    document.getElementById("stb").rows[9].cells[5].innerHTML = "<img src='http://www.solidbackgrounds.com/images/2560x1440/2560x1440-black-solid-color-background.jpg' width=30 height=30>";
+
+    document.getElementById("stb").rows[4].cells[10].innerHTML = "<img src='http://www.solidbackgrounds.com/images/2560x1440/2560x1440-black-solid-color-background.jpg' width=30 height=30>";
+    document.getElementById("stb").rows[6].cells[5].innerHTML = "<img src='http://www.solidbackgrounds.com/images/2560x1440/2560x1440-black-solid-color-background.jpg' width=30 height=30>";
+
+
+
     dx=7;
-  dy=7;
+    dy=7;
     map[7][7]=-1;
-  change_tdX(7,7);
+    change_tdX(7,7);
 }
 
 
