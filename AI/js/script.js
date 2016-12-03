@@ -1,4 +1,3 @@
-
 var chessBoard = [];
 var me = true;
 var over = false;
