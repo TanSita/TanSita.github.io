@@ -249,17 +249,4 @@ var computerAI = function()
 
 	if(!over) me = !me;
 
-	var mycount = 0;
-
-	for(var i=0;i<15;i++)
-	{
-		for(var j=0;j<15;j++)
-		{
-			var temp = document.getElementById(''+mycount);
-			temp.value = myScore[i][j];
-			mycount++;
-		}
-	}
-
-
 }
