@@ -107,8 +107,6 @@ var initwins = function()
 initwins();
 
 
-
-
 var chess = document.getElementById('chess');
 var context = chess.getContext('2d');
 
@@ -346,4 +344,3 @@ var undo = function()
 	}
 
 }
-
