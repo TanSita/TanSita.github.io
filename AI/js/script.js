@@ -8,91 +8,112 @@ var wins = [];
 var mywin = [];
 var computerwin = [];
 
-var arrX = [];
-var arrY = [];
+var myarrX = [];
+var comarrX = [];
+var myarrY = [];
+var comarrY = [];
 
+var myScore = [];
+var computerScore = [];
+var max = 0;
+var u = 0;
+var v = 0;
 
-for(var i=0;i<15;i++)
+var initchessBoard = function()
 {
-	chessBoard[i] = [];
-	for(var j=0;j<15;j++)
+	for(var i=0;i<15;i++)
 	{
-		chessBoard[i][j] = 0;
+		chessBoard[i] = [];
+		for(var j=0;j<15;j++)
+		{
+			chessBoard[i][j] = 0;
+		}
 	}
 }
 
-for(var i=0;i<15;i++)
-{
-	wins[i] = [];
-	for(var j=0;j<15;j++)
-	{
-		wins[i][j] = [];
-	}
-}
-
+initchessBoard();
 var count = 0;
 
-for(var i=0;i<15;i++)
+var initwins = function()
 {
-	for(var j=0;j<11;j++)
+	for(var i=0;i<15;i++)
 	{
-		for(var k=0;k<5;k++)
+		wins[i] = [];
+		for(var j=0;j<15;j++)
 		{
-			wins[i][j+k][count] = true;
+			wins[i][j] = [];
 		}
-		count++;
 	}
-}
 
-for(var i=0;i<15;i++)
-{
-	for(var j=0;j<11;j++)
+	count = 0;
+
+	for(var i=0;i<15;i++)
 	{
-		for(var k=0;k<5;k++)
+		for(var j=0;j<11;j++)
 		{
-			wins[j+k][i][count] = true;
+			for(var k=0;k<5;k++)
+			{
+				wins[i][j+k][count] = true;
+			}
+			count++;
 		}
-		count++;
 	}
-}
 
-for(var i=0;i<11;i++)
-{
-	for(var j=0;j<11;j++)
+	for(var i=0;i<15;i++)
 	{
-		for(var k=0;k<5;k++)
+		for(var j=0;j<11;j++)
 		{
-			wins[i+k][j+k][count] = true;
+			for(var k=0;k<5;k++)
+			{
+				wins[j+k][i][count] = true;
+			}
+			count++;
 		}
-		count++;
 	}
-}
 
-
-for(var i=0;i<11;i++)
-{
-	for(var j=14;j>3;j--)
+	for(var i=0;i<11;i++)
 	{
-		for(var k=0;k<5;k++)
+		for(var j=0;j<11;j++)
 		{
-			wins[i+k][j-k][count] = true;
+			for(var k=0;k<5;k++)
+			{
+				wins[i+k][j+k][count] = true;
+			}
+			count++;
 		}
-		count++;
 	}
+
+
+	for(var i=0;i<11;i++)
+	{
+		for(var j=14;j>3;j--)
+		{
+			for(var k=0;k<5;k++)
+			{
+				wins[i+k][j-k][count] = true;
+			}
+			count++;
+		}
+	}
+
+	for(var i=0; i<count; i++)
+	{
+		mywin[i] = 0;
+		computerwin[i] = 0;
+	}
+
 }
 
-for(var i=0; i<count; i++)
-{
-	mywin[i] = 0;
-	computerwin[i] = 0;
-}
+initwins();
+
+
 
 
 var chess = document.getElementById('chess');
 var context = chess.getContext('2d');
 
 context.strokeStyle = "#AA7700";
-context.lineWidth = 2.25;
+context.lineWidth = 3;
 
 var drawChessBoard = function() 
 {
@@ -150,8 +171,9 @@ chess.onclick = function(e)
 	if(chessBoard[i][j] == 0 ){
 		oneStep(i,j,me);
 		chessBoard[i][j] = 1;
-		arrX.push(i);
-		arrY.push(j);
+
+		myarrX.push(i);
+		myarrY.push(j);
 
 		for(var k=0; k<count; k++)
 		{
@@ -170,19 +192,50 @@ chess.onclick = function(e)
 		if(!over)
 		{
 			me = !me;
-			computerAI();
+			computerAI(true);
+		}
+
+	}
+}
+
+var myoperation = function(i,j)
+{
+	if(over) return;
+	if(!me) return;
+
+	if(chessBoard[i][j] == 0 ) {
+		oneStep(i,j,me);
+		chessBoard[i][j] = 1;
+
+		for(var k=0; k<count; k++)
+		{
+			if(wins[i][j][k])
+			{
+				mywin[k]++;
+				computerwin[k] = 6;
+				if(mywin[k] == 5)
+				{
+					window.alert("You win!!");
+					over = true;
+				}
+			}
+		}
+
+		if(!over)
+		{
+			me = !me;
+			computerAI(false);
 		}
 	}
 }
 
-
-var computerAI = function()
+var initScore = function()
 {
-	var myScore = [];
-	var computerScore = [];
-	var max = 0;
-	var u = 0;
-	var v = 0;
+	myScore = [];
+	computerScore = [];
+	max = 0;
+	u = 0;
+	v = 0;
 
 	for(var i=0; i<15 ;i++)
 	{
@@ -195,6 +248,11 @@ var computerAI = function()
 			computerScore[i][j] = 0;
 		}
 	}
+}
+
+var computerAI = function(flag)
+{
+	initScore();
 
 	for(var i=0;i<15;i++)
 	{
@@ -242,9 +300,11 @@ var computerAI = function()
 
 	oneStep(u,v,false);
 	chessBoard[u][v] = 2;
-	arrX.push(u);
-	arrY.push(v);
-
+	if(flag)
+	{
+		comarrX.push(u);
+		comarrY.push(v);
+	}
 	for(var k=0; k<count; k++)
 	{
 		if(wins[u][v][k])
@@ -261,48 +321,29 @@ var computerAI = function()
 	if(!over) me = !me;
 }
 
-// var undo = function()
-// {
-// 	context.clearRect(0, 0, 450, 450);
+var undo = function()
+{
+	context.clearRect(0, 0, 450, 450); //清空畫布
 
-// 	var x,y,u,v;
+	drawChessBoard(); //重畫一次五子棋的「線」
 
-// 	if(arrX.length!=0)
-// 	{
-// 		x = arrX.pop();
-// 		y = arrY.pop();
-// 		u = arrX.pop();
-// 		v = arrY.pop();
-// 		chessBoard[x][y] = 0;
-// 		chessBoard[u][v] = 0;
-// 	}
+	initchessBoard();
+	initwins();
+	initScore();
 
-// 	drawChessBoard();
+	myarrX.pop();
+	myarrY.pop();
+	comarrX.pop();
+	comarrY.pop();
 
-// 	var temp = true;
+	over = false;
+	me = true;
 
-// 	mywin = [];
-// 	computerwin = [];
+	for(var i=0;i<myarrX.length;i++)
+	{
+		console.log(myarrX[i]+","+myarrY[i])
+		myoperation(myarrX[i],myarrY[i]);
+	}
 
-// 	for(var i=0;i<arrX.length;i++)
-// 	{
-// 		oneStep(arrX[i],arrY[i],temp);
-// 		chessBoard[i][j] = 1;
-// 		for(var k=0; k<count; k++)
-// 		{
-// 			if(wins[i][j][k])
-// 			{
-// 				mywin[k]++;
-// 				computerwin[k] = 6;
-// 			}
-// 		}
-// 		if(temp==true) temp=false;
-// 		else temp = true;
-// 		me = !me;
-// 		computerAI();
-// 	}
-
-
-
-// }
+}
 
