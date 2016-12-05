@@ -261,13 +261,13 @@ var computerAI = function(flag)
 				{
 					if(wins[i][j][k])
 					{
-						if(mywin[k] == 1) myScore[i][j]+= 200;
+						if(mywin[k] == 1) myScore[i][j]+= 100;
 						else if(mywin[k] == 2) myScore[i][j]+= 400;
 						else if(mywin[k] == 3) myScore[i][j]+= 2000;
 						else if(mywin[k] == 4) myScore[i][j]+= 10000;
 
-						if(computerwin[k] == 1) computerScore[i][j]+= 220;
-						else if(computerwin[k] == 2) computerScore[i][j]+= 420;
+						if(computerwin[k] == 1) computerScore[i][j]+= 110;
+						else if(computerwin[k] == 2) computerScore[i][j]+= 800;
 						else if(computerwin[k] == 3) computerScore[i][j]+= 2100;
 						else if(computerwin[k] == 4) computerScore[i][j]+= 20000;
 
@@ -316,6 +316,19 @@ var computerAI = function(flag)
 		}
 	}
 	if(!over) me = !me;
+
+
+	var mycount = 0;
+
+	for(var i=0;i<15;i++)
+	{
+		for(var j=0;j<15;j++)
+		{
+			var temp = document.getElementById(''+mycount);
+			temp.value = myScore[j][i];
+			mycount++;
+		}
+	}
 }
 
 var undo = function()
