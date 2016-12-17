@@ -1,4 +1,4 @@
-#What are the four activities that all software processes must have?
+##What are the four activities that all software processes must have?
 	Specification	規範（學姊寫定義 google說規範）
 	Development (design and implent)	發展
 	Validation	驗證
@@ -8,7 +8,7 @@
 * 102期中 (1)
 
 
-#Please explain the following software process model. Please also show the model in block diagrams.
+##Please explain the following software process model. Please also show the model in block diagrams.
 (a)	The Waterfall model
 ![Waterfall model](http://imgur.com/irYmnoe.jpg)
 (b) Incremental development
@@ -20,7 +20,7 @@
 * 103考題 (2)
 
 
-#Please provide two approaches to cope(應付) with software change.
+##Please provide two approaches to cope(應付) with software change.
 	Change avoidance - prototype
 	Change tolerance – increment develop 
 	Spiral model 
@@ -33,7 +33,7 @@
 * 103考題 (3)
 
 
-#Extreme programming is perhaps the most widely used agile method. It contains many special principles and practices for software development. Please give 5 principles or practices of extreme programming.
+##Extreme programming is perhaps the most widely used agile method. It contains many special principles and practices for software development. Please give 5 principles or practices of extreme programming.
 
 	Ch3 の p.11  principles
 	Ch3 の p.16、p.17  practices
@@ -45,14 +45,14 @@
 * 102期中 (4)
 
 
-#Please list or draw the three phases in Scrum project management and briefly explain the work in each phase.
+##Please list or draw the three phases in Scrum project management and briefly explain the work in each phase.
 
 	Ch3 p.36
 
 * 102期中 (5)
 
 
-#Please provide 3 approaches to discover customer requirements.
+##Please provide 3 approaches to discover customer requirements.
 
 	訪問、觀察跟分析人們如何work(不知道怎翻譯)、場景跟使用者故事
 	Ch4 p.17
@@ -70,7 +70,7 @@
 * 103考題 (6)
 
 
-#Explain the following terminologies: 
+##Explain the following terminologies: 
 ### Alpha testing
 	此軟體的使用者跟發展團隊一起工作，去測試軟體在發展者的site
 
@@ -124,7 +124,7 @@
 * 103考題 (1)
 
 
-#Please provide three major advantages of explicitly designing and documenting software architecture
+##Please provide three major advantages of explicitly designing and documenting software architecture
 	
 	Stakeholder communication, System analysis, Large - scale reuse
 
@@ -133,7 +133,7 @@
 * 102期末 (2)
 
 
-#Please show the Model-View-Controller pattern and explain it briefly.
+##Please show the Model-View-Controller pattern and explain it briefly.
 ![MVC](http://imgur.com/wmZ3Fto.jpg)
 ![MVC2](http://imgur.com/099t4jl.jpg)
 
@@ -142,17 +142,17 @@
 	Controller : 協調View跟Model之間的互動
 
 
-#Please describe the advantages and disadvantages of Model-View-Controller pattern
+##Please describe the advantages and disadvantages of Model-View-Controller pattern
 
-##優點
-	https://zh.wikipedia.org/wiki/MVC#.E4.BC.98.E7.82.B9
+###優點
+	https://zh.wikipedia.org/wiki/MVC##.E4.BC.98.E7.82.B9
 
 	由於MVC模式的三個模組相互獨立，改變其中一個不會影響其他兩個。
 	所以依據這種設計思想能構造良好的少互擾性的構件。
 	同一個 Model 可以被不同的 View 重用，所以大大提高了代碼的可重用性。
 	Controller 提高了應用程式的靈活性和可配置性。
 
-##缺點
+###缺點
 	當程式很簡單的時候，要刻意使用這個pattern反而顯得複雜。
 
 
@@ -183,7 +183,7 @@
 * 103考題 (5)
 
 
-#還沒寫的
+##還沒寫的
 
 	100 期中 
 	6
