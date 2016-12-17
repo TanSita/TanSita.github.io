@@ -61,7 +61,7 @@
 * 101期中 (4) --> 這裡是問requirement elicitation (要求獲取)
 * 102期中 (6)
 
-
+-------------------------
 
 ![quiz7](http://imgur.com/12YG6PN.jpg)
 	討論個 :D
@@ -167,7 +167,7 @@
 * 102期末 (3)
 * 103考題 (4)
 
-----------------------
+-------------------------
 
 ![quiz5](http://imgur.com/RCkKMTy.jpg)
 ![ans5](http://imgur.com/1X4qFmo.jpg)
