@@ -90,7 +90,7 @@
 	主要使用於客製系統中。
 
 ### Stress testing
-	???
+	刻意讓系統超載來測試該系統故障的行為，是性能測試的一種
 
 ### Test-driven development
 ![Test-driven](http://imgur.com/k9GYOoM.jpg)
