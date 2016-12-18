@@ -85,7 +85,9 @@
 	回歸測試的重心，以關鍵性 module 為核心，以有關聯的 module 為輔。 
 
 ### Acceptance testing
-	???
+	讓目標使用者親自使用，
+	並測試該軟體是否滿足該目標使用者及其環境的實際需求，
+	主要使用於客製系統中。
 
 ### Stress testing
 	???
@@ -94,13 +96,13 @@
 ![Test-driven](http://imgur.com/k9GYOoM.jpg)
 
 ### Context models
-	???
+	描述系統內部與外部動作的關係(多個 process)。
 
 ### Model-driven engineering
-	???
+	在開發過程中 model 才是主要的輸出,而程序是從 model 中自動產出。
 
 ### Service-oriented systems
-	???
+	SOA 是一種程式設計的架構模型,它根據需求通過網絡對鬆散 耦合的粗粒度應用組件進行分佈式部署、組合和使用。服務層是 SOA 的基礎,可以直接被應用調用,以控制系統中與軟件代理交互 的人為依賴性。SOA 的幾個關鍵特性:一種粗粒度、松耦合服務架 構,服務之間通過簡單、精確定義接口進行通訊,不涉及底層編程 接口和通訊模型。
 
 ### COTS product reuse
 	COTS 產品是為現有的系統設計的，不是客製化的，
