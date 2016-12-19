@@ -65,9 +65,14 @@
 	訪問、觀察跟分析人們的工作方式、場景跟使用者故事
 	Ch4 p.17
 
+	關於軟體獲取
+	可參考 http://wiki.mbalib.com/zh-tw/%E8%BD%AF%E4%BB%B6%E9%9C%80%E6%B1%82%E8%8E%B7%E5%8F%96
+
+
 * 100期中 (5) --> 這裡是問requirement elicitation (要求獲取) ch4 p.15
 * 101期中 (4) --> 這裡是問requirement elicitation (要求獲取) ch4 p.15
 * 102期中 (6)
+
 
 -------------------------
 
