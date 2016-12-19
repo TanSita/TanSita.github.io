@@ -52,7 +52,8 @@
 ##Please list or draw the three phases in Scrum project management and briefly explain the work in each phase.
 
 	Ch3 p.36
-
+	outline planning(大綱計畫) , sprint(短跑) cycles , project closure(專案結束)
+	
 * 102期中 (5)
 
 
