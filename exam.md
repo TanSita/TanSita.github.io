@@ -41,6 +41,10 @@
 	從那一大堆裡面挑五個就讚讚讚
 
 
+![p11](http://imgur.com/fzqlvqh.jpg)
+![p16](http://imgur.com/pPDbeyY.jpg)
+![p17](http://imgur.com/ViECnDA.jpg)
+
 * 101期中 (3)
 * 102期中 (4)
 
