@@ -85,7 +85,8 @@
 
 ##Explain the following terminologies: 
 ### Alpha testing
-	Alpha版本通常會送到開發軟體的組織或某群體中的軟體測試者作內部測試。
+	Alpha版本通常會送到開發軟體的組織，
+	或某群體中的軟體測試者作內部測試。
 
 ### Beta testing
 	將軟件發佈出去給使用者，允許使用者去進行實驗以及測試，
