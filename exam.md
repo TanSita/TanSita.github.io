@@ -53,17 +53,20 @@
 
 	Ch3 p.36
 	outline planning(大綱計畫) , sprint(短跑) cycles , project closure(專案結束)
+	outline planning ： 建立專案的目標，設計軟體架構。
+	sprint cycles ： 一系列的衝刺cycle , 每個cycle 都會使系統完整度上升
+	project closure ： 寫用戶手冊、系統幫助的框架、跟從project中學到的教訓
 	
 * 102期中 (5)
 
 
 ##Please provide 3 approaches to discover customer requirements.
 
-	訪問、觀察跟分析人們如何work(不知道怎翻譯)、場景跟使用者故事
+	訪問、觀察跟分析人們的工作方式、場景跟使用者故事
 	Ch4 p.17
 
-* 100期中 (5) --> 這裡是問requirement elicitation (要求獲取)
-* 101期中 (4) --> 這裡是問requirement elicitation (要求獲取)
+* 100期中 (5) --> 這裡是問requirement elicitation (要求獲取) ch4 p.15
+* 101期中 (4) --> 這裡是問requirement elicitation (要求獲取) ch4 p.15
 * 102期中 (6)
 
 -------------------------
