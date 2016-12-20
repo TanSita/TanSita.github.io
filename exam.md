@@ -1,6 +1,6 @@
 ##What are the four activities that all software processes must have?
 	Specification	規範（學姊寫定義 google說規範）
-	Development (design and implent)	發展
+	Development (design and implement)	發展
 	Validation	驗證
 	Evolution	演化
 
