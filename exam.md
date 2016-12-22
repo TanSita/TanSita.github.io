@@ -159,7 +159,9 @@
 
 ##Please provide three major advantages of explicitly designing and documenting software architecture
 	
-	Stakeholder communication, System analysis, Large - scale reuse
+	Stakeholder communication, 
+	System analysis, 
+	Large - scale reuse
 
 * 100期末 (2)
 * 101期末 (2)
