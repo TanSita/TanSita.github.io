@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+		.mycss 
+		{
+			background-color:#FFD306;
+			color:black;
+			border:1px #000000 solid;
+			width:250px;
+			height:100px;
+			font-size:25px;
+			font-weight: bold;
+		}
+	</style>
+	<title>
+		AV搜尋器
+	</title>
+</head>
+
+<script type="text/javascript" src="database.js"></script>
+
+<script type="text/javascript">
+
+	function SearchAV() 
+	{
+		var keyword = document.getElementById("UserInput").value
+		document.getElementById("mydiv").innerHTML = "";
+		
+		for(var j=0;j<10;j++)
+		{
+			// var jsons = JSON.parse(JSON.stringify(postData[j] || null ));
+			var jsons = JSON.parse(postData[j]);
+
+			for(var i=0;i<jsons.Videos.length;i++)
+			{
+				if(jsons.Videos[i].title.search(keyword) != -1)
+				{
+					link = document.createElement("a");
+					link.text = jsons.Videos[i].title;
+					link.href = jsons.Videos[i].link;
+					document.getElementById("mydiv").appendChild(link);
+
+					br = document.createElement("br");
+					document.getElementById("mydiv").appendChild(br);
+					br = document.createElement("br");
+					document.getElementById("mydiv").appendChild(br);
+					
+				}
+			}
+		}
+
+</script>
+<body>
+
+	<input type="text" size="100" id="UserInput">
+	<br><br>
+	<input type="button" value="SearchAV" class="mycss" onclick="SearchAV()" ></input>
+	<br><br>
+	<div id="mydiv"></div>
+
+</body>
+</html>
