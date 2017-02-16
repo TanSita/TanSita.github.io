@@ -37,6 +37,7 @@
 				if(jsons.Videos[i].title.search(keyword) != -1)
 				{
 					link = document.createElement("a");
+					link.target = "_blank";
 					link.text = jsons.Videos[i].title;
 					link.href = jsons.Videos[i].link;
 					document.getElementById("mydiv").appendChild(link);
