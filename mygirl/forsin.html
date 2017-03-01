@@ -55,7 +55,10 @@
  -->
 	<script type="text/javascript">
 		// $("#myCanvas").parent().css({position: 'relative'});
-		var ScreenWidth = screen.width;
+		var ratio = window.devicePixelRatio || 1;
+		var ScreenWidth = screen.width * ratio;
+		var ScreenHeight = screen.height * ratio;
+
 		var div1Width = 200;
 		var RedlineWidth = 7;
 		var middle = ScreenWidth/2 - RedlineWidth / 2;
