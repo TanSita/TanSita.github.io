@@ -55,8 +55,8 @@
 
 	<script type="text/javascript">
 		// $("#myCanvas").parent().css({position: 'relative'});
-		var ScreenWidth = document.body.clientWidth;
-		var div1Width = 250;
+		var ScreenWidth = screen.width;
+		var div1Width = 200;
 		var RedlineWidth = 7;
 		var middle = ScreenWidth/2 - RedlineWidth / 2;
 
@@ -72,6 +72,7 @@
              "border-style":"solid"});
 
 		$("#div2").css({position:'absolute', top: 0, left: middle + RedlineWidth + middle/10});
+		$("#message1").css({width:div1Width , height:'100px'});
 
 		var redline = document.getElementById("redline");
 		var redlinex = redline.getContext("2d");
@@ -84,13 +85,8 @@
 		var message1 = document.getElementById("message1");
 		var message1x = message1.getContext("2d");
 		message1x.font="50px Georgia";
-		var gradient=message1x.createLinearGradient(0,0,200,0);
-		gradient.addColorStop("0","magenta");
-		gradient.addColorStop("0.5","blue");
-		gradient.addColorStop("1.0","red");
-		message1x.fillStyle=gradient;
-		message1x.fillText("Big smile!",10,90);
-		message1x.stroke();
+		message1x.fillText("Big smile!",10,50,100);
+		message1x.fillText("Big smile!",10,100,100);
 
 
 	</script>
