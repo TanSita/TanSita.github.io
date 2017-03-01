@@ -99,8 +99,9 @@
 		var middle = ScreenWidth/2 - RedlineWidth/2;
 		var div1Width = middle * 0.8;
 		var div1Height = 500;
-		var cakeWidth = 45;
-		var cakeHeight = 45;
+
+		var cakeWidth = $('#cake1').width();
+		var cakeHeight = $('#cake1').height();
 
 		for(var i=0;i<5;i++)
 		{
@@ -110,7 +111,7 @@
 
 			if(i<4)
 			{
-				$("#cake"+(i+1)).css({position:'absolute', top: 550 + 600*i - cakeHeight, left: middle*0.9+(0.2*middle-90)/2});
+				$("#cake"+(i+1)).css({position:'absolute', top: 550 + 600*i - cakeHeight/2, left: middle*0.9+(0.2*middle-cakeHeight+RedlineWidth)/2});
 			}
 		}
 
