@@ -118,32 +118,17 @@
 		var myright = middle + RedlineWidth + middle/10;
 		var myleft = middle * 0.1;
 
-		$("#div1").css({position:'absolute', top: 550 - div1Height/2, left: myleft});
-		$("#div1").css({width:div1Width , height:div1Height});
-		$("#div1").css({"border-color": "#000000", 
-             "border-width":"5px", 
-             "border-style":"solid"});
-
-
-		$("#div2").css({position:'absolute', top: 1150 - div1Height/2 , left: myright});
-		$("#div2").css({width:div1Width , height:div1Height});
-		$("#div2").css({"border-color": "#000000", 
-             "border-width":"5px", 
-             "border-style":"solid"});
-		
-
-		$("#div3").css({position:'absolute', top: 1750 - div1Height/2, left: myleft});
-		$("#div3").css({width:div1Width , height:div1Height});
-		$("#div3").css({"border-color": "#000000", 
-             "border-width":"5px", 
-             "border-style":"solid"});
-		
-
-		$("#div4").css({position:'absolute', top: 2350 - div1Height/2, left: myright});
-		$("#div4").css({width:div1Width , height:div1Height});
-		$("#div4").css({"border-color": "#000000", 
-             "border-width":"5px", 
-             "border-style":"solid"});
+		for(var i=0;i<4;i++)
+		{
+			var direction;
+			if(i%2==0) direction = myleft;
+			else direction = myright;
+			$("#div"+(i+1)).css({position:'absolute', top: 550 + 600*i - div1Height/2, left: direction});
+			$("#div"+(i+1)).css({width:div1Width , height:div1Height});
+			$("#div"+(i+1)).css({"border-color": "#000000", 
+	             "border-width":"5px", 
+	             "border-style":"solid"});
+		}
 
 	</script>
 </body>
