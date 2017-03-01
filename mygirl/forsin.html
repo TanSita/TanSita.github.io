@@ -45,7 +45,7 @@
 	<div id="div1"><font color="blue" size="5px"><canvas id="message1"></canvas></div>
 
 	<div id="test">
-	   <canvas id="redline" width = "1264" height="1000"></canvas>
+	   <canvas id="redline"></canvas>
 	</div>
 
 	<div id="div2">
@@ -61,6 +61,7 @@
 		var middle = ScreenWidth/2 - RedlineWidth / 2;
 
 		$("#redline").css({position:'absolute', top: 0, left: middle});
+		$("#redline").css({width:ScreenWidth , height:1000});
 		$("#div1").css({position:'absolute', top: 0, left: middle - div1Width - middle/10});
 		$("#div1").css({width:div1Width , height:'1000px'});
 		$("#div1").css({"border-color": "#000000", 
