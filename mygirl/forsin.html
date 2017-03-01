@@ -17,7 +17,6 @@
 		    height: 0px;
 		    width: 0px;
 		}
-
 	</style>
 </head>
 <body>
@@ -37,9 +36,14 @@
 		</article>
 	</div>
 
+   <div id="redline1"></div>
+   <div id="redline2"></div>
+   <div id="redline3"></div>
+   <div id="redline4"></div>
+   <div id="redline5"></div>
 
 	<!-- <div id="test"> -->
-	   <canvas id="redline"></canvas>
+	   <!-- <canvas id="redline"></canvas> -->
 	<!-- </div> -->
 
 	<div id="div2">
@@ -52,53 +56,59 @@
 
 
 	<script type="text/javascript">
+		// var X = $('#wife').height();
+		// alert(X);
+
 		var ScreenWidth = document.documentElement.clientWidth;
 		var ScreenHeight = document.documentElement.clientWidth;
 
-		// var div1Width = 200;
 		var RedlineWidth = 7;
 		var middle = ScreenWidth/2 - RedlineWidth/2;
-		var div1Width = middle-150;
+		var div1Width = middle * 0.8;
+		var div1Height = 500;
+		var triangleWidth = 50;
+		var triangleHeight = 50;
+
+		$("#redline1").css({position:'absolute', top: 0, left: middle});
+		$("#redline1").css({width:RedlineWidth , height:500});
+		$("#redline1").css({"background-color":"pink"});
+
+		$("#redline2").css({position:'absolute', top: 600, left: middle});
+		$("#redline2").css({width:RedlineWidth , height:500});
+		$("#redline2").css({"background-color":"pink"});
 
 
+		$("#redline3").css({position:'absolute', top: 1200, left: middle});
+		$("#redline3").css({width:RedlineWidth , height:500});
+		$("#redline3").css({"background-color":"pink"});
 
-		// alert(ScreenWidth);
-		// alert(middle);
+		$("#redline4").css({position:'absolute', top: 1800, left: middle});
+		$("#redline4").css({width:RedlineWidth , height:500});
+		$("#redline4").css({"background-color":"pink"});
 
-		$("#redline").css({position:'absolute', top: 0, left: middle});
-		$("#redline").css({width:RedlineWidth , height:5000});
-		$("#redline").css({"border-color": "#000000", 
-		             "border-width":"2px", 
-		             "border-style":"solid"});
+		$("#redline5").css({position:'absolute', top: 2400, left: middle});
+		$("#redline5").css({width:RedlineWidth , height:500});
+		$("#redline5").css({"background-color":"pink"});
 
-		$("#div1").css({position:'absolute', top: 0, left: middle - div1Width - middle/10});
-		$("#div1").css({top:1250});
+		// $("#redline1").css({"border-color": "#000000", 
+		//              "border-width":"2px", 
+		//              "border-style":"solid"});
+		
 
-		$("#div1").css({width:div1Width , height:'500px'});
+		$("#div1").css({position:'absolute', top: 550 - div1Height/2, left: middle*0.1});
+		$("#div1").css({width:div1Width , height:div1Height});
 		$("#div1").css({"border-color": "#000000", 
              "border-width":"5px", 
              "border-style":"solid"});
 
-		$("#div2").css({position:'absolute', top: 0, left: middle + RedlineWidth + middle/10});
+		$("#triangle").css({position:'absolute', top: 550 - triangleHeight, left: middle*0.9+8});
+
+
+		var X = $('#wife').height() / 2;
+		$("#div2").css({position:'absolute', top: 1150 - X/2 , left: middle + RedlineWidth + middle/10});
 		
-		$("#div2").css({top: 250});
-
-		$("#div3").css({position:'absolute', top: 0, left: middle + RedlineWidth + middle/10});
+		$("#div3").css({position:'absolute', top: 1750 - X/2, left: middle + RedlineWidth + middle/10});
 		
-		$("#div3").css({top: 750});
-
-		$("#message1").css({width:div1Width , height:'500px'});
-
-		$("#triangle").css({position:'absolute', top: 1250 + 150, left: middle -  middle/11});
-
-		var redline = document.getElementById("redline");
-		var redlinex = redline.getContext("2d");
-		redlinex.fillStyle="#FF0000";
-		redlinex.fillRect(0,0,RedlineWidth*50,10);
-		redlinex.fillRect(0,15,RedlineWidth*50,10);
-		redlinex.fillRect(0,30,RedlineWidth*50,10);
-		redlinex.fillRect(0,45,RedlineWidth*50,10);
-		redlinex.fillRect(0,60,RedlineWidth*50,10);
 
 
 
