@@ -8,41 +8,35 @@
 	</title>
 
 	<style type="text/css">
-		/*#div1*/
-		/*{*/
-			/*position: absolute;*/
-			/*left : 0px;*/
-			/*top : 0px;*/
-			/*width:500px;
-			height:200px;
-			float: left;
-			background-color:#FFD4D4;*/
-		/*}*/
+		#triangle {
+		    border-color: transparent transparent transparent #0000FF;
+		    border-style: solid solid solid solid;
+		    border-width: 50px;
 
-		/*#div2*/
-		/*{*/
-			/*position: absolute;*/
-			/*left : 750px;*/
-			/*top : 0px;*/
-			/*width:500px;
-			height:200px;
-			float: left;
-			background-color:#FFD382;*/
-		/*}*/
-
-		/*#test */
-		/*{*/
-			/*width: 100px;*/
-			/*height: 100px;*/
-			/*float: left;*/
-			/*margin: 0px auto;*/
-		/*}*/
+		    /* 設定 width、height 可更好理解原理 */
+		    height: 0px;
+		    width: 0px;
+		}
 
 	</style>
 </head>
 <body>
 
-	<div id="div1"><font color="blue" size="5px"><canvas id="message1"></canvas></div>
+	<div id="triangle"></div>
+
+	<div id="div1">
+		<article>
+			<font color="blue" size="7px">
+				Hi Hi I am a cat<br>
+				Hi Hi I am a cat<br>
+				Hi Hi I am a cat<br>
+				Hi Hi I am a cat<br>
+				Hi Hi I am a cat<br>
+				Hi Hi I am a cat<br>
+			</font>
+		</article>
+	</div>
+
 
 	<!-- <div id="test"> -->
 	   <canvas id="redline"></canvas>
@@ -66,6 +60,8 @@
 		var middle = ScreenWidth/2 - RedlineWidth/2;
 		var div1Width = middle-150;
 
+
+
 		// alert(ScreenWidth);
 		// alert(middle);
 
@@ -78,7 +74,7 @@
 		$("#div1").css({position:'absolute', top: 0, left: middle - div1Width - middle/10});
 		$("#div1").css({top:1250});
 
-		$("#div1").css({width:div1Width , height:'250px'});
+		$("#div1").css({width:div1Width , height:'500px'});
 		$("#div1").css({"border-color": "#000000", 
              "border-width":"5px", 
              "border-style":"solid"});
@@ -91,8 +87,9 @@
 		
 		$("#div3").css({top: 750});
 
+		$("#message1").css({width:div1Width , height:'500px'});
 
-		$("#message1").css({width:div1Width , height:'100px'});
+		$("#triangle").css({position:'absolute', top: 1250 + 150, left: middle -  middle/11});
 
 		var redline = document.getElementById("redline");
 		var redlinex = redline.getContext("2d");
@@ -103,11 +100,7 @@
 		redlinex.fillRect(0,45,RedlineWidth*50,10);
 		redlinex.fillRect(0,60,RedlineWidth*50,10);
 
-		var message1 = document.getElementById("message1");
-		var message1x = message1.getContext("2d");
-		message1x.font="50px Georgia";
-		message1x.fillText("Big smile!",10,50,100);
-		message1x.fillText("Big smile!",10,100,100);
+
 
 
 	</script>
