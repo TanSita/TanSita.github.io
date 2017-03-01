@@ -42,17 +42,17 @@
 </head>
 <body>
 
-	<div id="div1"><font color="blue" size="5px"><canvas id="message1"></canvas></div>
+	<!-- <div id="div1"><font color="blue" size="5px"><canvas id="message1"></canvas></div> -->
 
 	<div id="test">
 	   <canvas id="redline"></canvas>
 	</div>
 
-	<div id="div2">
+<!-- 	<div id="div2">
 	<img src="images/C.jpg" width="50%" id="wife"></img>
 	</div>
 
-
+ -->
 	<script type="text/javascript">
 		// $("#myCanvas").parent().css({position: 'relative'});
 		var ScreenWidth = screen.width;
@@ -65,14 +65,14 @@
 
 		$("#redline").css({position:'absolute', top: 0, left: middle});
 		$("#redline").css({width:ScreenWidth , height:1000});
-		$("#div1").css({position:'absolute', top: 0, left: middle - div1Width - middle/10});
-		$("#div1").css({width:div1Width , height:'1000px'});
-		$("#div1").css({"border-color": "#000000", 
-             "border-width":"5px", 
-             "border-style":"solid"});
+		// $("#div1").css({position:'absolute', top: 0, left: middle - div1Width - middle/10});
+		// $("#div1").css({width:div1Width , height:'1000px'});
+		// $("#div1").css({"border-color": "#000000", 
+  //            "border-width":"5px", 
+  //            "border-style":"solid"});
 
-		$("#div2").css({position:'absolute', top: 0, left: middle + RedlineWidth + middle/10});
-		$("#message1").css({width:div1Width , height:'100px'});
+		// $("#div2").css({position:'absolute', top: 0, left: middle + RedlineWidth + middle/10});
+		// $("#message1").css({width:div1Width , height:'100px'});
 
 		var redline = document.getElementById("redline");
 		var redlinex = redline.getContext("2d");
@@ -82,11 +82,11 @@
 		redlinex.fillRect(0,150,RedlineWidth,200);
 		redlinex.stroke();
 
-		var message1 = document.getElementById("message1");
-		var message1x = message1.getContext("2d");
-		message1x.font="50px Georgia";
-		message1x.fillText("Big smile!",10,50,100);
-		message1x.fillText("Big smile!",10,100,100);
+		// var message1 = document.getElementById("message1");
+		// var message1x = message1.getContext("2d");
+		// message1x.font="50px Georgia";
+		// message1x.fillText("Big smile!",10,50,100);
+		// message1x.fillText("Big smile!",10,100,100);
 
 
 	</script>
