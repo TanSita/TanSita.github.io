@@ -49,7 +49,11 @@
 	<!-- </div> -->
 
 	<div id="div2">
-	<img src="images/C.jpg" width="50%" id="wife"></img>
+		<img src="images/C.jpg" width="50%" id="wife"></img>
+	</div>
+
+	<div id="div3">
+		<img src="images/C.jpg" width="50%" id="wife2"></img>
 	</div>
 
 
@@ -61,29 +65,42 @@
 		var RedlineWidth = 7;
 		var middle = ScreenWidth/2 - RedlineWidth/2;
 
-		alert(ScreenWidth);
-		alert(middle);
+		// alert(ScreenWidth);
+		// alert(middle);
 
 		$("#redline").css({position:'absolute', top: 0, left: middle});
-		$("#redline").css({width:RedlineWidth , height:500});
+		$("#redline").css({width:RedlineWidth , height:5000});
 		$("#redline").css({"border-color": "#000000", 
 		             "border-width":"2px", 
 		             "border-style":"solid"});
 
 		$("#div1").css({position:'absolute', top: 0, left: middle - div1Width - middle/10});
-		$("#div1").css({width:div1Width , height:'1000px'});
+		$("#div1").css({top:1250});
+
+		$("#div1").css({width:div1Width , height:'250px'});
 		$("#div1").css({"border-color": "#000000", 
              "border-width":"5px", 
              "border-style":"solid"});
 
 		$("#div2").css({position:'absolute', top: 0, left: middle + RedlineWidth + middle/10});
+		
+		$("#div2").css({top: 250});
+
+		$("#div3").css({position:'absolute', top: 0, left: middle + RedlineWidth + middle/10});
+		
+		$("#div3").css({top: 750});
+
+
 		$("#message1").css({width:div1Width , height:'100px'});
 
 		var redline = document.getElementById("redline");
 		var redlinex = redline.getContext("2d");
 		redlinex.fillStyle="#FF0000";
-		redlinex.fillRect(0,0,RedlineWidth*50,100);
-		redlinex.fillRect(0,150,RedlineWidth*50,200);
+		redlinex.fillRect(0,0,RedlineWidth*50,10);
+		redlinex.fillRect(0,15,RedlineWidth*50,10);
+		redlinex.fillRect(0,30,RedlineWidth*50,10);
+		redlinex.fillRect(0,45,RedlineWidth*50,10);
+		redlinex.fillRect(0,60,RedlineWidth*50,10);
 
 		var message1 = document.getElementById("message1");
 		var message1x = message1.getContext("2d");
