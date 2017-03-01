@@ -21,7 +21,7 @@
 </head>
 <body>
 
-	<div id="triangle"></div>
+	<!-- <div id="triangle"></div> -->
 
 	<div id="div1">
 		<article>
@@ -54,10 +54,16 @@
 		<img src="images/C.jpg" width="50%" id="wife2"></img>
 	</div>
 
+	<img src="images/cake.png" width="100" id="cake1"></img>
+	<img src="images/cake.png" width="100" id="cake2"></img>
+	<img src="images/cake.png" width="100" id="cake3"></img>
+	<img src="images/cake.png" width="100" id="cake4"></img>
+
+
 
 	<script type="text/javascript">
-		// var X = $('#wife').height();
-		// alert(X);
+
+		alert($("#cake1").width())
 
 		var ScreenWidth = document.documentElement.clientWidth;
 		var ScreenHeight = document.documentElement.clientWidth;
@@ -66,8 +72,8 @@
 		var middle = ScreenWidth/2 - RedlineWidth/2;
 		var div1Width = middle * 0.8;
 		var div1Height = 500;
-		var triangleWidth = 50;
-		var triangleHeight = 50;
+		var cakeWidth = 50;
+		var cakeHeight = 50;
 
 		$("#redline1").css({position:'absolute', top: 0, left: middle});
 		$("#redline1").css({width:RedlineWidth , height:500});
@@ -101,17 +107,20 @@
              "border-width":"5px", 
              "border-style":"solid"});
 
-		$("#triangle").css({position:'absolute', top: 550 - triangleHeight, left: middle*0.9+8});
+		// $("#triangle").css({position:'absolute', top: 550 - cakeHeight, left: middle*0.9+8});
+		$("#cake1").css({position:'absolute', top: 550 - cakeHeight, left: middle*0.9+22});
 
+		$("#cake2").css({position:'absolute', top: 1150 - cakeHeight, left: middle*0.9+22});
+
+		$("#cake3").css({position:'absolute', top: 1750 - cakeHeight, left: middle*0.9+22});
+
+		$("#cake4").css({position:'absolute', top: 2350 - cakeHeight, left: middle*0.9+22});
 
 		var X = $('#wife').height() / 2;
 		$("#div2").css({position:'absolute', top: 1150 - X/2 , left: middle + RedlineWidth + middle/10});
 		
 		$("#div3").css({position:'absolute', top: 1750 - X/2, left: middle + RedlineWidth + middle/10});
 		
-
-
-
 
 	</script>
 </body>
