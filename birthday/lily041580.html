@@ -82,10 +82,10 @@
 		</article>
 	</div>
 
-	<img src="images/cake.png" width="100" id="cake1"></img>
-	<img src="images/cake.png" width="100" id="cake2"></img>
-	<img src="images/cake.png" width="100" id="cake3"></img>
-	<img src="images/cake.png" width="100" id="cake4"></img>
+	<img src="images/cake.png" width="90" id="cake1"></img>
+	<img src="images/cake.png" width="90" id="cake2"></img>
+	<img src="images/cake.png" width="90" id="cake3"></img>
+	<img src="images/cake.png" width="90" id="cake4"></img>
 
 
 
@@ -99,8 +99,8 @@
 		var middle = ScreenWidth/2 - RedlineWidth/2;
 		var div1Width = middle * 0.8;
 		var div1Height = 500;
-		var cakeWidth = 50;
-		var cakeHeight = 50;
+		var cakeWidth = 45;
+		var cakeHeight = 45;
 
 		for(var i=0;i<5;i++)
 		{
@@ -110,7 +110,7 @@
 
 			if(i<4)
 			{
-				$("#cake"+(i+1)).css({position:'absolute', top: 550 + 600*i - cakeHeight, left: middle*0.9+(0.2*middle-100)/2});
+				$("#cake"+(i+1)).css({position:'absolute', top: 550 + 600*i - cakeHeight, left: middle*0.9+(0.2*middle-90)/2});
 			}
 		}
 
