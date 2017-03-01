@@ -55,13 +55,13 @@
  -->
 	<script type="text/javascript">
 		// $("#myCanvas").parent().css({position: 'relative'});
-		var ratio = 1;
-		if(screen.width < 1024)
-		{
-			ratio = window.devicePixelRatio || 1;
-		}
-		var ScreenWidth = screen.width * ratio;
-		var ScreenHeight = screen.height * ratio;
+		// var ratio = 1;
+		// if(screen.width < 1024)
+		// {
+		// 	ratio = window.devicePixelRatio || 1;
+		// }
+		var ScreenWidth = document.documentElement.clientWidth;
+		var ScreenHeight = document.documentElement.clientWidth;
 
 		var div1Width = 200;
 		var RedlineWidth = 7;
