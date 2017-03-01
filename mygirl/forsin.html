@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<head>
+	<title>
+		ForSin
+	</title>
+
+	<style type="text/css">
+		/*#div1*/
+		/*{*/
+			/*position: absolute;*/
+			/*left : 0px;*/
+			/*top : 0px;*/
+			/*width:500px;
+			height:200px;
+			float: left;
+			background-color:#FFD4D4;*/
+		/*}*/
+
+		/*#div2*/
+		/*{*/
+			/*position: absolute;*/
+			/*left : 750px;*/
+			/*top : 0px;*/
+			/*width:500px;
+			height:200px;
+			float: left;
+			background-color:#FFD382;*/
+		/*}*/
+
+		/*#test */
+		/*{*/
+			/*width: 100px;*/
+			/*height: 100px;*/
+			/*float: left;*/
+			/*margin: 0px auto;*/
+		/*}*/
+
+	</style>
+</head>
+<body>
+
+	<div id="div1"><font color="blue" size="5px"><canvas id="message1"></canvas></div>
+
+	<div id="test">
+	   <canvas id="redline" width = "1264" height="1000"></canvas>
+	</div>
+
+	<div id="div2">
+	<img src="images/C.jpg" width="50%" id="wife"></img>
+	</div>
+
+
+	<script type="text/javascript">
+		// $("#myCanvas").parent().css({position: 'relative'});
+		var ScreenWidth = document.body.clientWidth;
+		var div1Width = 250;
+		var RedlineWidth = 7;
+		var middle = ScreenWidth/2 - RedlineWidth / 2;
+
+		$("#redline").css({position:'absolute', top: 0, left: middle});
+		$("#div1").css({position:'absolute', top: 0, left: middle - div1Width - middle/10});
+		$("#div1").css({width:div1Width , height:'1000px'});
+		$("#div1").css({"border-color": "#000000", 
+             "border-width":"5px", 
+             "border-style":"solid"});
+
+		$("#div2").css({position:'absolute', top: 0, left: middle + RedlineWidth + middle/10});
+
+		var redline = document.getElementById("redline");
+		var redlinex = redline.getContext("2d");
+		redlinex.beginPath();
+		redlinex.fillStyle="#FF0000";
+		redlinex.fillRect(0,0,RedlineWidth,100);
+		redlinex.fillRect(0,150,RedlineWidth,200);
+		redlinex.stroke();
+
+		var message1 = document.getElementById("message1");
+		var message1x = message1.getContext("2d");
+		message1x.font="50px Georgia";
+		var gradient=message1x.createLinearGradient(0,0,200,0);
+		gradient.addColorStop("0","magenta");
+		gradient.addColorStop("0.5","blue");
+		gradient.addColorStop("1.0","red");
+		message1x.fillStyle=gradient;
+		message1x.fillText("Big smile!",10,90);
+		message1x.stroke();
+
+
+	</script>
+</body>
+</html>
