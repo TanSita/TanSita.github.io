@@ -44,9 +44,9 @@
 
 	<!-- <div id="div1"><font color="blue" size="5px"><canvas id="message1"></canvas></div> -->
 
-	<div id="test">
+	<!-- <div id="test"> -->
 	   <canvas id="redline"></canvas>
-	</div>
+	<!-- </div> -->
 
 <!-- 	<div id="div2">
 	<img src="images/C.jpg" width="50%" id="wife"></img>
@@ -63,8 +63,12 @@
 		alert(ScreenWidth);
 		alert(middle);
 
-		$("#redline").css({position:'absolute', top: 0, left: 360});
-		$("#redline").css({width:ScreenWidth , height:1000});
+		$("#redline").css({position:'absolute', top: 0, left: middle});
+		$("#redline").css({width:RedlineWidth , height:500});
+		$("#redline").css({"border-color": "#000000", 
+		             "border-width":"2px", 
+		             "border-style":"solid"});
+
 		// $("#div1").css({position:'absolute', top: 0, left: middle - div1Width - middle/10});
 		// $("#div1").css({width:div1Width , height:'1000px'});
 		// $("#div1").css({"border-color": "#000000", 
@@ -76,11 +80,9 @@
 
 		var redline = document.getElementById("redline");
 		var redlinex = redline.getContext("2d");
-		redlinex.beginPath();
 		redlinex.fillStyle="#FF0000";
-		redlinex.fillRect(0,0,RedlineWidth,100);
-		redlinex.fillRect(0,150,RedlineWidth,200);
-		redlinex.stroke();
+		redlinex.fillRect(0,0,350,100);
+		// redlinex.fillRect(0,150,RedlineWidth,200);
 
 		// var message1 = document.getElementById("message1");
 		// var message1x = message1.getContext("2d");
