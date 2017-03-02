@@ -4,14 +4,14 @@
 <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 <head>
 	<title>
-		ForSin
+		Happy Birthday 
 	</title>
 
 	<style type="text/css">
 		#triangle {
-		    border-color: transparent transparent transparent #0000FF;
+		    border-color: transparent transparent transparent rgb(212,70,70);
 		    border-style: solid solid solid solid;
-		    border-width: 50px;
+		    border-width: 15px;
 
 		    /* 設定 width、height 可更好理解原理 */
 		    height: 0px;
@@ -21,8 +21,7 @@
 </head>
 <body>
 
-	<!-- <div id="triangle"></div> -->
-
+	<div id="triangle"></div>
 
    <div id="redline1"></div>
    <div id="redline2"></div>
@@ -31,25 +30,25 @@
    <div id="redline5"></div>
 
 	<div id="div1">
+		<div id="div5">
+			<font color="White" size="6px">
+				2016/11/23 初次聊天&nbsp&nbsp
+			</font>
+		</div>
+		<div id="div6"></div>
 		<article>
-			<font color="blue" size="7px">
-				Hi Hi I am a cat<br>
-				Hi Hi I am a cat<br>
-				Hi Hi I am a cat<br>
-				Hi Hi I am a cat<br>
-				Hi Hi I am a cat<br>
-				Hi Hi I am a cat<br>
+			<font color="black" size="5px">
+				原本李慈恩就出賣妳了xD&nbsp&nbsp<br>
+				但不知道該聊些什麼 :3&nbsp&nbsp<br>
+				後來滑一滑IG看到妳跟薇媛有合照&nbsp&nbsp<br>
+				那時候覺得 不加可能之後會後悔～&nbsp&nbsp<br>
 			</font>
 		</article>
 	</div>
 
-	<div id="div2">
+	<!-- <div id="div2">
 		<article>
 			<font color="blue" size="7px">
-				Hi Hi I am a cat<br>
-				Hi Hi I am a cat<br>
-				Hi Hi I am a cat<br>
-				Hi Hi I am a cat<br>
 				Hi Hi I am a cat<br>
 				Hi Hi I am a cat<br>
 			</font>
@@ -80,7 +79,7 @@
 				Hi Hi I am a cat<br>
 			</font>
 		</article>
-	</div>
+	</div> -->
 
 	<img src="images/cake.png" width="90" id="cake1"></img>
 	<img src="images/cake.png" width="90" id="cake2"></img>
@@ -88,9 +87,7 @@
 	<img src="images/cake.png" width="90" id="cake4"></img>
 
 
-
 	<script type="text/javascript">
-		// var X = $('#wife').height() / 2;
 
 		var ScreenWidth = document.documentElement.clientWidth;
 		var ScreenHeight = document.documentElement.clientWidth;
@@ -98,37 +95,44 @@
 		var RedlineWidth = 7;
 		var middle = ScreenWidth/2 - RedlineWidth/2;
 		var div1Width = middle * 0.8;
-		var div1Height = 500;
+		var div1Height = 250;
 
 		var cakeWidth = $('#cake1').width();
 		var cakeHeight = $('#cake1').height();
+		var distance = 300;
+		var gap = 100;
 
 		for(var i=0;i<5;i++)
 		{
-			$("#redline"+(i+1)).css({position:'absolute', top: 600*i, left: middle});
-			$("#redline"+(i+1)).css({width:RedlineWidth , height:500});
-			$("#redline"+(i+1)).css({"background-color":"pink"});
+			$("#redline"+(i+1)).css({position:'absolute', top: (distance+gap)*i, left: middle});
+			$("#redline"+(i+1)).css({width:RedlineWidth , height:distance});
+			$("#redline"+(i+1)).css({"background-color":"rgb(212,70,70)"});
 
 			if(i<4)
 			{
-				$("#cake"+(i+1)).css({position:'absolute', top: 550 + 600*i - cakeHeight/2, left: middle*0.9+(0.2*middle-cakeHeight+RedlineWidth)/2});
+				$("#cake"+(i+1)).css({position:'absolute', top: (distance+gap/2) + (distance+gap) *i - cakeHeight/2, left: middle*0.9+(0.2*middle-cakeHeight+RedlineWidth)/2});
 			}
 		}
 
 		var myright = middle + RedlineWidth + middle/10;
 		var myleft = middle * 0.1;
 
-		for(var i=0;i<4;i++)
-		{
-			var direction;
-			if(i%2==0) direction = myleft;
-			else direction = myright;
-			$("#div"+(i+1)).css({position:'absolute', top: 550 + 600*i - div1Height/2, left: direction});
-			$("#div"+(i+1)).css({width:div1Width , height:div1Height});
-			$("#div"+(i+1)).css({"border-color": "#000000", 
-	             "border-width":"5px", 
-	             "border-style":"solid"});
-		}
+		//上 右 下 左
+
+		$("#div1").css({position:'absolute', top: (distance+gap/2) + (distance+gap)*0 - cakeHeight/2, left: myleft});
+		$("#div1").css({width:div1Width , height:div1Height});
+		$("#div1").css({"background-color" : "rgb(237,237,237)",
+	         	 "text-align": "right",
+	         	 "font-family":"DFKai-sb"});
+
+		$("#div5").css({width:div1Width , height:45});
+
+		$("#div5").css({"background-color" : "rgb(212,70,70)",
+	             "margin":"0px 0px 25px 0px" });
+
+		$("#triangle").css({position:'absolute', top: (distance+gap/2) + (distance+gap)*0 - cakeHeight/2 + 7.5 , left:0.9*middle});
+
+
 
 	</script>
 </body>
