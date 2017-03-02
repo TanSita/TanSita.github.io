@@ -92,46 +92,52 @@
 		var ScreenWidth = document.documentElement.clientWidth;
 		var ScreenHeight = document.documentElement.clientWidth;
 
-		var RedlineWidth = 7;
-		var middle = ScreenWidth/2 - RedlineWidth/2;
-		var div1Width = middle * 0.8;
-		var div1Height = 250;
+		$( document ).ready(function() {
+			ScreenWidth = document.documentElement.clientWidth;
+			ScreenHeight = document.documentElement.clientWidth;
+			var RedlineWidth = 7;
+			var middle = ScreenWidth/2 - RedlineWidth/2;
+			var div1Width = middle * 0.8;
+			var div1Height = 250;
 
-		var cakeWidth = $('#cake1').width();
-		var cakeHeight = $('#cake1').height();
-		var distance = 300;
-		var gap = 100;
+			var cakeWidth = $('#cake1').width();
+			var cakeHeight = $('#cake1').height();
+			var distance = 300;
+			var gap = 100;
 
-		for(var i=0;i<5;i++)
-		{
-			$("#redline"+(i+1)).css({position:'absolute', top: (distance+gap)*i, left: middle});
-			$("#redline"+(i+1)).css({width:RedlineWidth , height:distance});
-			$("#redline"+(i+1)).css({"background-color":"rgb(212,70,70)"});
-
-			if(i<4)
+			for(var i=0;i<5;i++)
 			{
-				$("#cake"+(i+1)).css({position:'absolute', top: (distance+gap/2) + (distance+gap) *i - cakeHeight/2, left: middle*0.9+(0.2*middle-cakeHeight+RedlineWidth)/2});
+				$("#redline"+(i+1)).css({position:'absolute', top: (distance+gap)*i, left: middle});
+				$("#redline"+(i+1)).css({width:RedlineWidth , height:distance});
+				$("#redline"+(i+1)).css({"background-color":"rgb(212,70,70)"});
+
+				if(i<4)
+				{
+					$("#cake"+(i+1)).css({position:'absolute', top: (distance+gap/2) + (distance+gap) *i - cakeHeight/2, left: middle*0.9+(0.2*middle-cakeHeight+RedlineWidth)/2});
+				}
 			}
-		}
 
-		var myright = middle + RedlineWidth + middle/10;
-		var myleft = middle * 0.1;
+			var myright = middle + RedlineWidth + middle/10;
+			var myleft = middle * 0.1;
 
-		//上 右 下 左
+			//上 右 下 左
 
-		$("#div1").css({position:'absolute', top: (distance+gap/2) + (distance+gap)*0 - cakeHeight/2, left: myleft});
-		$("#div1").css({width:div1Width , height:div1Height});
-		$("#div1").css({"background-color" : "rgb(237,237,237)",
-	         	 "text-align": "right",
-	         	 "font-family":"DFKai-sb"});
+			$("#div1").css({position:'absolute', top: (distance+gap/2) + (distance+gap)*0 - cakeHeight/2, left: myleft});
+			$("#div1").css({width:div1Width , height:div1Height});
+			$("#div1").css({"background-color" : "rgb(237,237,237)",
+		         	 "text-align": "right",
+		         	 "font-family":"DFKai-sb"});
 
-		$("#div5").css({width:div1Width , height:45});
+			$("#div5").css({width:div1Width , height:45});
 
-		$("#div5").css({"background-color" : "rgb(212,70,70)",
-	             "margin":"0px 0px 25px 0px" });
+			$("#div5").css({"background-color" : "rgb(212,70,70)",
+		             "margin":"0px 0px 25px 0px" });
 
-		$("#triangle").css({position:'absolute', top: (distance+gap/2) + (distance+gap)*0 - cakeHeight/2 + 7.5 , left:0.9*middle});
+			$("#triangle").css({position:'absolute', top: (distance+gap/2) + (distance+gap)*0 - cakeHeight/2 + 7.5 , left:0.9*middle});
 
+		});
+
+		
 
 
 	</script>
