@@ -90,11 +90,13 @@
 	<script type="text/javascript">
 
 		var ScreenWidth = document.documentElement.clientWidth;
-		var ScreenHeight = document.documentElement.clientWidth;
+		var ScreenHeight = document.documentElement.clientHeight;
 
 		$( document ).ready(function() {
 			ScreenWidth = document.documentElement.clientWidth;
-			ScreenHeight = document.documentElement.clientWidth;
+			ScreenHeight = document.documentElement.clientHeight;
+			alert(ScreenWidth);
+			alert(ScreenHeight);
 			var RedlineWidth = 7;
 			var middle = ScreenWidth/2 - RedlineWidth/2;
 			var div1Width = middle * 0.8;
