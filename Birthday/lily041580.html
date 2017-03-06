@@ -130,7 +130,7 @@
 			var RedlineWidth = 7;
 			var middle = ScreenWidth/2 - RedlineWidth/2;
 			var div1Width = middle * 0.8;
-			var div1Height = 250;
+			// var div1Height = 250;
 
 			// var cakeWidth = $('#cake1').width();
 			// var cakeHeight = $('#cake1').height();
@@ -163,7 +163,8 @@
 				if(i%2==0) direction = myleft;
 				else direction = myright;
 				$("#div"+(i+1)).css({position:'absolute', top: (distance+gap/2) + (distance+gap)*i - cakeHeight/2, left: direction});
-				$("#div"+(i+1)).css({width:div1Width , height:div1Height});
+				// $("#div"+(i+1)).css({width:div1Width , height:div1Height});
+				$("#div"+(i+1)).css({width:div1Width});
 				
 				$("#div"+(i+1)).css({"background-color" : "rgb(237,237,237)",
 			         	 "font-family":"sans-serif"});
