@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<head>
+	<title>
+		Happy Birthday 
+	</title>
+
+	<style type="text/css">
+
+		#Blank
+		{
+			width:10%;
+		    height:10000px;
+		    float: left;
+		}
+
+		#LeftDiv {
+		    width:30%;
+		    height:10000px;
+		    float: left;
+		}
+
+		#MidDiv {
+		    width:10%;
+		    height:10000px;
+		    float: left;
+		}
+
+		#RightDiv {
+		    width:30%;
+		    height:10000px;
+		    float: left;
+		}
+
+		#DivTitle {
+			background-color : rgb(212,70,70);
+			font-family : sans-serif;
+		}
+
+		#DivContent
+		{
+			background-color : rgb(237,237,237);
+			margin : 0px 0px 0px 0px;
+		}
+
+		#DivEnd
+		{
+			text-align: right;
+		}
+
+		#RedlineFirst
+		{
+			/*上 右 下 左*/
+			width: 10%;
+			height: 200px;
+			background-color : rgb(212,70,70);
+			margin : 10px 0px 10px 0px;
+		}
+
+		#Redline
+		{
+			/*上 右 下 左*/
+			width: 10%;
+			height: 300px;
+			background-color : rgb(212,70,70);
+			margin : 10px 0px 10px 0px;
+		}
+
+		#LeftDiv1 
+		{
+			position: relative;
+			top : 220px;
+		}
+
+		#LeftTriangle1
+		{
+			/*background-color: black;*/
+			/*height: 10000px;*/
+		    float: left;
+
+		    border-color: transparent rgb(212,70,70) transparent transparent;
+		    border-style: solid solid solid solid;
+		    border-width: 15px;
+
+			position: relative;
+		    top: 227.5px;
+		}
+
+		#SelfPortrait
+		{
+			position: relative;
+			top: 77.5px;
+		}
+
+		#RightTriangle1
+		{
+			/*background-color: black;*/
+			/*height: 10000px;*/
+		    float: left;
+
+		    border-color: transparent transparent transparent rgb(212,70,70);
+		    border-style: solid solid solid solid;
+		    border-width: 15px;
+
+			position: relative;
+		    top: 227.5px;
+		}
+
+	</style>
+
+
+</head>
+<body>
+
+	<div id="Blank"></div>
+
+	<div id="LeftDiv">
+		<center>
+			<div id="LeftDiv1">
+				<div id="DivTitle">
+					<font color="White" size="6px">
+						柚子出生
+					</font>
+				</div>
+
+				<div id="DivContent">
+					<article>
+						<font color="black" size="5px">
+							一顆好吃的柚子誕生啦！<br>
+						</font>
+						<img src="images/yo.png" width="25%"></img>
+					</article>
+
+					<div id="DivEnd">
+						<font color="black" size="3px">
+							1996/04/15&nbsp&nbsp
+						</font>
+					</div>
+				</div>
+			</div>
+
+		</center>
+	</div>
+
+	<div id="RightTriangle1"></div>
+
+
+	<div id="MidDiv">
+		<center>
+			<div id="RedlineFirst"></div>
+			<img src="images/cake.png" width="100px" height="100px">
+			<div id="Redline"></div>
+			<img src="images/cake.png" width="100px" height="100px">
+
+		</center>
+	</div>
+	
+
+	<!-- <div id="LeftTriangle1"></div> -->
+
+
+	<div id="RightDiv">
+		<center>
+			<img id="SelfPortrait" src="images/self_portrait.png" height="400px">
+
+
+		</center>
+	</div>
+
+	<div id="Blank"></div>
+
+
+
+	<script type="text/javascript">
+		$("#div1").css({"background-color" : "rgb(237,237,237)",
+			         	 "font-family":"sans-serif"});
+
+		$("#div1_1").css({"background-color" : "rgb(212,70,70)",
+	             "margin":"0px 0px 0px 0px" });
+
+		$("#div2").css({"background-color" : "rgb(237,237,237)",
+			         	 "font-family":"sans-serif"});
+
+		$("#div2_1").css({"background-color" : "rgb(212,70,70)",
+	             "margin":"0px 0px 0px 0px" });
+
+
+	</script>
+</body>
+</html>
