@@ -165,6 +165,10 @@
 
 		$("#Cake").click(function()
 		{
+			$("#hint").hide();
+			$("#LeftDiv").hide();
+			$("#RightDiv").hide();
+			
 			var BD = $("#BlackDot");
 			var mytime = $("#time");
 			mytime.text(timearray[count]);
@@ -183,6 +187,7 @@
 
     		$("#When").animate({opacity:'100'},100);
     		$("#Cake").hide(100).delay(10000).show(100);
+
     		$("#hint").show(100).delay(10000).hide(100);
     		$("#LeftDiv").show(1000);
     		$("#RightDiv").show(1000);
