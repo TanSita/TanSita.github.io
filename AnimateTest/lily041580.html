@@ -154,7 +154,7 @@
 			'原本李慈恩就出賣妳了xD<br>但不知道該聊些什麼 :3<br>後來滑一滑IG看到妳跟薇媛有合照<br>走在路上又會莫名一直看到妳xDD<br>就覺得該加了～ :D<br>',
 			'沒想到第一次打招呼...<br>居然是在藝術治療xD<br>老師還是一個很嗨的吸毒犯<br>我以為妳不會認出來欸<br>結果妳還蠻厲害der<br>');
 
-		var FontEnds = new Array('1996/04/15&nbsp&nbsp','2016/11/23&nbsp&nbsp','2017/02/24&nbsp&nbsp');
+		var FontEnds = new Array('1996/04/15&nbsp&nbsp','2016/11/23&nbsp&nbsp','2017/02/24&nbsp&nbsp','');
 		
 		var pictures = new Array('#yo','#lala','#self_portrait');
 
@@ -163,6 +163,7 @@
 		$("#hint").hide();
 		$("#LeftDiv").hide();
 		$("#RightDiv").hide();
+
 		$("#yo").hide();
 		$("#lala").hide();
 		$("#self_portrait").hide();
@@ -172,35 +173,44 @@
 			$("#hint").hide();
 			$("#LeftDiv").hide();
 			$("#RightDiv").hide();
+
 			$("#yo").hide();
 			$("#lala").hide();
 			$("#self_portrait").hide();
 
-			var BD = $("#BlackDot");
-			var mytime = $("#time");
-			mytime.text(timearray[count]);
-    		$("#When").animate({opacity:'0'},0);
-
-			for(var i=0;i<10;i++)
+			if(count<3)
 			{
-	    		BD.animate({left:'+='+BDarray[count]+'px'},100);
-	    		$("#When").animate({left:'+='+Whenarray[count]+'px',opacity:'0'},100);
-	    	}
-			$("#FontTitle").html(FontTitles[count]);
-			$("#FontContent").html(FontContents[count]);
-			$("#FontEnd").html(FontEnds[count]);
+				var BD = $("#BlackDot");
+				var mytime = $("#time");
+				mytime.text(timearray[count]);
+	    		$("#When").animate({opacity:'0'},0);
 
-			// $("#picture").attr("src",pictures[count]);
-			$(pictures[count]).show()
+				for(var i=0;i<10;i++)
+				{
+		    		BD.animate({left:'+='+BDarray[count]+'px'},100);
+		    		$("#When").animate({left:'+='+Whenarray[count]+'px',opacity:'0'},100);
+		    	}
+				$("#FontTitle").html(FontTitles[count]);
+				$("#FontContent").html(FontContents[count]);
+				$("#FontEnd").html(FontEnds[count]);
 
-    		$("#When").animate({opacity:'100'},100);
-    		$("#Cake").hide(100).delay(3000).show(100);
+				$(pictures[count]).show()
 
-    		$("#hint").show(100).delay(3000).hide(100);
-    		$("#LeftDiv").show(1000);
-    		$("#RightDiv").show(1000);
+	    		$("#When").animate({opacity:'100'},100);
+	    		$("#Cake").hide(100).delay(5000).show(100);
 
-    		count += 1;
+	    		$("#hint").show(100).delay(5000).hide(100);
+	    		$("#LeftDiv").slideDown(5000);
+	    		$("#RightDiv").slideDown(5000);
+
+	    		count += 1;
+    		}
+    		else
+    		{
+    			$("#Cake").hide();
+	    		$("#hint").text("選禮物囉～～～～～～～");
+	    		$("#hint").show();
+    		}
 
 		}); 
 
