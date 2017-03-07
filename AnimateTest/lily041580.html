@@ -56,24 +56,112 @@
 			left : 0px;
 		}
 
+		#LeftDiv {
+		    width:50%;
+		    height:10000px;
+		    float: left;
+		}
+
+		#RightDiv {
+		    width:50%;
+		    height:10000px;
+		    float: left;
+		}
+
+		#DivTitle {
+			/*height: 45px;*/
+			background-color : rgb(212,70,70);
+			font-family : sans-serif;
+		}
+
+		#DivContent
+		{
+			background-color : rgb(237,237,237);
+			margin : 0px 0px 0px 0px;
+		}
+
+		#DivEnd
+		{
+			text-align: right;
+		}
+
+		#SizeController
+		{
+			width: 70%;
+		}
+
 	</style>
 <body>
 
 	<div id="Redline"></div>		
 	<div id="BlackDot"></div>
+
 	<div id="When">
 		<font color="white" size="5px" id="time">19960415</font>
 	</div>
 	<center>
-		<img id="Cake" src="images/cake.png" width="15%">
+		<img id="Cake" src="images/cake.png" width="20%">
+		<font color="black" size="5px" id="hint">蛋糕離家出走了 聽說10秒後會回來</font>
 	</center>
+
+	<div id="LeftDiv">
+		<center>
+			<div id="SizeController">
+				<div id="DivTitle">
+					<font color="White" size="6px" id="FontTitle">
+						柚子出生
+					</font>
+				</div>
+
+				<div id="DivContent">
+					<article>
+						<font color="black" size="5px" id="FontContent">
+							一顆好吃的柚子誕生啦！<br>
+						</font>
+						<!-- <img src="images/yo.png" width="25%"></img> -->
+					</article>
+
+					<div id="DivEnd">
+						<font color="black" size="3px" id="FontEnd">
+							1996/04/15&nbsp&nbsp
+						</font>
+					</div>
+				</div>
+			</div>
+		</center>
+	</div>
+
+	<div id="RightDiv">
+		<center>
+			<img src="" width="50%" id="picture">
+		</center>
+	</div>
+
+
 
 	<script type="text/javascript">
 
 		var timearray = new Array("19960415","20161123","20170224");
 		var BDarray = new Array(5,20,5);
 		var Whenarray = new Array(0,20,5);
+		
+		var FontTitles = new Array("柚子出生","初次聊天","初次見面");
+
+		var FontContents = new Array(
+			'一顆好吃的柚子誕生啦！<br>就在右邊哦 :D<br>',
+			'原本李慈恩就出賣妳了xD<br>但不知道該聊些什麼 :3<br>後來滑一滑IG看到妳跟薇媛有合照<br>走在路上又會莫名一直看到妳xDD<br>就覺得該加了～ :D<br>',
+			'沒想到第一次打招呼...<br>居然是在藝術治療xD<br>老師還是一個很嗨的吸毒犯<br>我以為妳不會認出來欸<br>結果妳還蠻厲害der<br>');
+
+		var FontEnds = new Array('1996/04/15&nbsp&nbsp','2016/11/23&nbsp&nbsp','2017/02/24&nbsp&nbsp');
+		
+		var pictures = new Array('images/yo.png','images/yo.png','images/self_portrait.png');
+
 		var count = 0;
+
+		$("#hint").hide();
+		$("#LeftDiv").hide();
+		$("#RightDiv").hide();
+
 
 		$("#Cake").click(function()
 		{
@@ -87,7 +175,19 @@
 	    		BD.animate({left:'+='+BDarray[count]+'px'},100);
 	    		$("#When").animate({left:'+='+Whenarray[count]+'px',opacity:'0'},100);
 	    	}
+			$("#FontTitle").html(FontTitles[count]);
+			$("#FontContent").html(FontContents[count]);
+			$("#FontEnd").html(FontEnds[count]);
+
+			$("#picture").attr("src",pictures[count]);
+
     		$("#When").animate({opacity:'100'},100);
+    		$("#Cake").hide(100).delay(10000).show(100);
+    		$("#hint").show(100).delay(10000).hide(100);
+    		$("#LeftDiv").show(100);
+    		$("#RightDiv").show(100);
+
+
     		count += 1;
 
 		}); 
