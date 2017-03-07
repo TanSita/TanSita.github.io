@@ -133,7 +133,8 @@
 
 	<div id="RightDiv">
 		<center>
-			<img src="images/yo.png" width="50%" id="picture">
+			<img src="images/yo.png" width="50%" id="yo">
+			<img src="images/self_portrait.png" width="50%" id="self_portrait">
 		</center>
 	</div>
 
@@ -154,13 +155,15 @@
 
 		var FontEnds = new Array('1996/04/15&nbsp&nbsp','2016/11/23&nbsp&nbsp','2017/02/24&nbsp&nbsp');
 		
-		var pictures = new Array('images/yo.png','images/yo.png','images/self_portrait.png');
+		var pictures = new Array('#yo','#lala','#self_portrait');
 
 		var count = 0;
 
 		$("#hint").hide();
 		$("#LeftDiv").hide();
 		$("#RightDiv").hide();
+		$("#yo").hide();
+		$("#self_portrait").hide();
 
 
 		$("#Cake").click(function()
@@ -168,7 +171,9 @@
 			$("#hint").hide();
 			$("#LeftDiv").hide();
 			$("#RightDiv").hide();
-			
+			$("#yo").hide();
+			$("#self_portrait").hide();
+
 			var BD = $("#BlackDot");
 			var mytime = $("#time");
 			mytime.text(timearray[count]);
@@ -183,7 +188,9 @@
 			$("#FontContent").html(FontContents[count]);
 			$("#FontEnd").html(FontEnds[count]);
 
-			$("#picture").attr("src",pictures[count]);
+			// $("#picture").attr("src",pictures[count]);
+			$(pictures[count-1]).hide()
+			$(pictures[count]).show()
 
     		$("#When").animate({opacity:'100'},100);
     		$("#Cake").hide(100).delay(10000).show(100);
