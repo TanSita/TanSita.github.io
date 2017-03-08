@@ -261,6 +261,9 @@
 		{
 			if(LeftCardFlag)
 			{
+				$("#LeftCard").css('opacity','0');
+				$("#LeftCard").attr('src', "images/MatchaTea.png");
+
 				var gift = "一杯珍珠抹茶拿鐵";
 				var another = "\n還可以再點點看其他卡片喔～";
 				CardClick+=1;
@@ -286,7 +289,7 @@
 		      type: "warning",
 		      // showCancelButton: true
 		    }, function() {
-				$("#LeftCard").attr('src', "images/MatchaTea.png");
+				$("#LeftCard").css('opacity','100');
 		    });
 		}
 
