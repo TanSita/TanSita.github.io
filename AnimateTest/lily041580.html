@@ -2,6 +2,9 @@
 <html>
 <meta charset="utf-8">
 <script src="jquery-1.11.3.min.js"></script>
+<script src="dist/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
+
 <head>
 	<title>
 		Happy Birthday 
@@ -58,13 +61,13 @@
 
 		#LeftDiv {
 		    width:50%;
-		    height:10000px;
+		    /*height:10000px;*/
 		    float: left;
 		}
 
 		#RightDiv {
 		    width:50%;
-		    height:10000px;
+		    /*height:10000px;*/
 		    float: left;
 		}
 
@@ -85,11 +88,6 @@
 			text-align: right;
 		}
 
-		/*#SizeController*/
-		/*{*/
-			/*width: 70%;*/
-		/*}*/
-
 	</style>
 <body>
 
@@ -102,6 +100,14 @@
 	<center>
 		<img id="Cake" src="images/cake.png" width="20%">
 		<font color="black" size="5px" id="hint">蛋糕離家出走了 聽說10秒後會回來</font>
+		<img id="ClickMe" src="images/ClickMe.png" width="50px">
+		<br><br><br>
+		<img id="HBcard" src="images/HBcard.png" width="90%">
+
+		<img id="LeftCard" src="images/card.png" width="30%">
+		<img id="MidCard" src="images/card.png" width="30%">
+		<img id="RightCard" src="images/card.png" width="30%">
+
 	</center>
 
 	<div id="LeftDiv">
@@ -143,30 +149,40 @@
 
 	<script type="text/javascript">
 
-		var timearray = new Array("19960415","20161123","20170224");
-		var BDarray = new Array(5,20,5);
-		var Whenarray = new Array(0,20,5);
+		var timearray = new Array("19960415","20161123","20170224","Now");
+		var BDarray = new Array(5,20,5,5);
+		var Whenarray = new Array(0,20,5,5);
+		var delayTimes = new Array(3000,8000,8000,1000);
+		// var delayTimes = new Array(1000,1000,1000,1000);
 		
-		var FontTitles = new Array("柚子出生","初次聊天","初次見面");
+		var FontTitles = new Array("柚子出生","初次聊天","初次見面",'');
 
 		var FontContents = new Array(
 			'一顆好吃的柚子誕生啦！<br>就在右邊哦 :D<br>',
 			'原本李慈恩就出賣妳了xD<br>但不知道該聊些什麼 :3<br>後來滑一滑IG看到妳跟薇媛有合照<br>走在路上又會莫名一直看到妳xDD<br>就覺得該加了～ :D<br>',
-			'沒想到第一次打招呼...<br>居然是在藝術治療xD<br>老師還是一個很嗨的吸毒犯<br>我以為妳不會認出來欸<br>結果妳還蠻厲害der<br>');
+			'沒想到第一次打招呼...<br>居然是在藝術治療xD<br>老師還是一個很嗨的吸毒犯<br>我以為妳認不出我欸xD<br>結果妳還蠻厲害der<br>','');
 
 		var FontEnds = new Array('1996/04/15&nbsp&nbsp','2016/11/23&nbsp&nbsp','2017/02/24&nbsp&nbsp','');
 		
-		var pictures = new Array('#yo','#lala','#self_portrait');
+		var pictures = new Array('#yo','#lala','#self_portrait','');
 
 		var count = 0;
 
 		$("#hint").hide();
+		$("#ClickMe").hide();
+
+		$("#HBcard").hide();
 		$("#LeftDiv").hide();
 		$("#RightDiv").hide();
+
+		$("#LeftCard").hide();
+		$("#MidCard").hide();
+		$("#RightCard").hide();
 
 		$("#yo").hide();
 		$("#lala").hide();
 		$("#self_portrait").hide();
+
 
 		$("#Cake").click(function()
 		{
@@ -178,7 +194,7 @@
 			$("#lala").hide();
 			$("#self_portrait").hide();
 
-			if(count<3)
+			if(count<4)
 			{
 				var BD = $("#BlackDot");
 				var mytime = $("#time");
@@ -190,29 +206,89 @@
 		    		BD.animate({left:'+='+BDarray[count]+'px'},100);
 		    		$("#When").animate({left:'+='+Whenarray[count]+'px',opacity:'0'},100);
 		    	}
+
 				$("#FontTitle").html(FontTitles[count]);
 				$("#FontContent").html(FontContents[count]);
 				$("#FontEnd").html(FontEnds[count]);
-
-				$(pictures[count]).show()
-
+				$("#hint").text("蛋糕離家出走了 聽說"+(delayTimes[count]/1000)+"秒後會回來～");
 	    		$("#When").animate({opacity:'100'},100);
-	    		$("#Cake").hide(100).delay(5000).show(100);
 
-	    		$("#hint").show(100).delay(5000).hide(100);
-	    		$("#LeftDiv").slideDown(5000);
-	    		$("#RightDiv").slideDown(5000);
+	    		if(count<3)
+	    		{
+					$(pictures[count]).show()
+		    		$("#Cake").hide(100).delay(delayTimes[count]).show(100);
 
-	    		count += 1;
+		    		$("#hint").show(100).delay(delayTimes[count]).hide(100);
+		    		$("#LeftDiv").slideDown(500);
+		    		$("#RightDiv").slideDown(500);
+		    		count += 1;
+	    		}
+	    		else
+	    		{
+		    		$("#hint").hide();
+					$("#LeftDiv").hide();
+					$("#RightDiv").hide();
+
+					$("#yo").hide();
+					$("#lala").hide();
+					$("#self_portrait").hide();
+
+
+	    			$("#Cake").hide();
+		    		$("#hint").text("看信時間～看完點右邊按鈕～");
+		    		$("#hint").show();
+		    		$("#ClickMe").show();
+		    		$("#HBcard").show();
+	    		}
     		}
-    		else
-    		{
-    			$("#Cake").hide();
-	    		$("#hint").text("選禮物囉～～～～～～～");
-	    		$("#hint").show();
-    		}
-
 		}); 
+
+		$("#ClickMe").click(function()
+		{
+    		$("#hint").text("禮物三選一囉 :D");
+    		$("#ClickMe").hide();
+
+    		$("#HBcard").hide();
+    		$("#LeftCard").show();
+    		$("#MidCard").show();
+    		$("#RightCard").show();
+		});
+
+		var CardClick = 0;
+		var LeftCardFlag = true;
+
+		$("#LeftCard").click(function(e)
+		{
+			if(LeftCardFlag)
+			{
+				var gift = "一杯珍珠抹茶拿鐵";
+				var another = "\n還可以再點點看其他卡片喔～";
+				CardClick+=1;
+				e.preventDefault(); // Prevent the href from redirecting directly
+				if(CardClick>=3)
+				{
+					warnBeforeRedirect(gift,"");
+				}
+				else
+				{
+					warnBeforeRedirect(gift,another);
+				}
+				LeftCardFlag = false;
+			}
+		});
+
+
+		function warnBeforeRedirect(gift,another) 
+		{
+		    swal({
+		      title: "Warning", 
+		      text: "遊戲王卡發出了一道神秘的光芒！！\n恭喜你抽到「" + gift + "」 :D " + another,
+		      type: "warning",
+		      // showCancelButton: true
+		    }, function() {
+				$("#LeftCard").attr('src', "images/MatchaTea.png");
+		    });
+		}
 
 	</script>		
 
