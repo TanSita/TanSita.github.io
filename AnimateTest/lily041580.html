@@ -82,9 +82,10 @@
 	<center>
 		<img id="Cake" src="images/cake.png" width="20%">
 		<font color="white" size="5px" id="hint">蛋糕離家出走了 聽說10秒後會回來</font>
-		<img id="ClickMe" src="images/ClickMe.png" width="100px">
-		<br><br><br>
+		<br><br>
 		<img id="HBcard" src="images/HBcard.png" width="90%">
+		<br><br>
+		<img id="ClickMe" src="images/ClickMe.png" width="100px">
 
 		<img id="LeftCard" src="images/card.png" width="30%">
 		<img id="MidCard" src="images/card.png" width="30%">
@@ -121,7 +122,7 @@
 	<div id="RightDiv">
 		<center>
 			<img src="images/yo.png" width="50%" id="yo">
-			<img src="images/lala.png" width="50%" id="lala">
+			<img src="images/energy.png" width="80%" id="energy">
 			<img src="images/self_portrait.png" width="50%" id="self_portrait">
 		</center>
 	</div>
@@ -134,8 +135,8 @@
 		var timearray = new Array("19960415","20161123","20170224","Now");
 		var BDarray = new Array(5,20,5,5);
 		var Whenarray = new Array(5,20,5,5);
-		// var delayTimes = new Array(3000,8000,8000);
-		var delayTimes = new Array(1000,1000,1000);
+		var delayTimes = new Array(3000,8000,8000);
+		// var delayTimes = new Array(1000,1000,1000);
 		
 		var FontTitles = new Array("柚子出生","初次聊天","初次見面");
 
@@ -146,18 +147,19 @@
 
 		var FontEnds = new Array('1996/04/15&nbsp&nbsp&nbsp&nbsp&nbsp','2016/11/23&nbsp&nbsp&nbsp&nbsp&nbsp','2017/02/24&nbsp&nbsp&nbsp&nbsp&nbsp');
 		
-		var pictures = new Array('#yo','#lala','#self_portrait');
+		var pictures = new Array('#yo','#energy','#self_portrait');
 		var picHeights = new Array();
 
 		var count = 0;
 
 
 		$("#hint").hide();
+		$("#Cake").hide();
 
 		$("#LeftDiv").css({opacity:'0'});
 		$("#RightDiv").css({opacity:'0'});
 		$("#yo").css({opacity:'0'});
-		$("#lala").css({opacity:'0'});
+		$("#energy").css({opacity:'0'});
 		$("#self_portrait").css({opacity:'0'});
 
 		$("#ClickMe").hide();
@@ -176,6 +178,7 @@
 		$(window).load(function() 
 		{
 			console.log("I am ready!!");
+			$("#Cake").show();
 
 			$("#Cake").click(function()
 			{
@@ -246,7 +249,7 @@
 		    			console.log(count-1);
 
 		    			$("#Cake").hide();
-			    		$("#hint").text("看信時間～看完點右邊按鈕～");
+			    		$("#hint").text("看信時間～看完點信下面的按鈕～");
 			    		$("#hint").show();
 			    		$("#ClickMe").show();
 			    		$("#HBcard").show();
@@ -292,7 +295,6 @@
 						ShowGift(gift,another);
 					}
 					LeftCardFlag = false;
-
 				}
 			});
 
