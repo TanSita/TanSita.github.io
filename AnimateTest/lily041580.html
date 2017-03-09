@@ -12,30 +12,10 @@
 
 	<style type="text/css">
 
-		#Redline
-		{
-			/*上 右 下 左*/
-			position: relative;
-			left : 0px;
-
-			width: 100%;
-			height: 20px;
-			background-color : rgb(212,70,70);
-		    border-radius: 25px;
-			margin : 10px 0px 10px 0px;
-		}
-
 		#BlackDot
 		{
 			position: relative;
-			top: -30px;
 			left :0px;
-
-			width: 50px;
-			height: 20px;
-			background-color : black;
-		    border-radius: 25px;
-			margin : 10px 0px 0px 0px;
 		}
 		
 		#When
@@ -59,26 +39,28 @@
 			left : 0px;
 		}
 
-		#LeftDiv {
+		#LeftDiv 
+		{
 		    width:50%;
-		    /*height:10000px;*/
 		    float: left;
 		}
 
 		#RightDiv {
+			/*position: relative;*/
 		    width:50%;
-		    /*height:10000px;*/
 		    float: left;
 		}
 
 		#DivTitle {
 			/*height: 45px;*/
+		    border-radius: 25px 25px 0px 0px;
 			background-color : rgb(212,70,70);
 			font-family : sans-serif;
 		}
 
 		#DivContent
 		{
+		    border-radius: 0px 0px 25px 25px;
 			background-color : rgb(237,237,237);
 			margin : 0px 0px 0px 0px;
 		}
@@ -89,17 +71,16 @@
 		}
 
 	</style>
-<body>
+<body background="http://i.imgur.com/QmqUlIe.gif">
 
-	<div id="Redline"></div>		
-	<div id="BlackDot"></div>
+	<img id="BlackDot" src="images/ufo.gif" dynsrc="images/ufo.gif" width="150px" loop="0" >
 
 	<div id="When">
 		<font color="white" size="5px" id="time">19960415</font>
 	</div>
 	<center>
 		<img id="Cake" src="images/cake.png" width="20%">
-		<font color="black" size="5px" id="hint">蛋糕離家出走了 聽說10秒後會回來</font>
+		<font color="white" size="5px" id="hint">蛋糕離家出走了 聽說10秒後會回來</font>
 		<img id="ClickMe" src="images/ClickMe.png" width="100px">
 		<br><br><br>
 		<img id="HBcard" src="images/HBcard.png" width="90%">
@@ -124,7 +105,6 @@
 						<font color="black" size="5px" id="FontContent">
 							一顆好吃的柚子誕生啦！<br>
 						</font>
-						<!-- <img src="images/yo.png" width="25%"></img> -->
 					</article>
 
 					<div id="DivEnd">
@@ -151,7 +131,7 @@
 
 		var timearray = new Array("19960415","20161123","20170224","Now");
 		var BDarray = new Array(5,20,5,5);
-		var Whenarray = new Array(0,20,5,5);
+		var Whenarray = new Array(5,20,5,5);
 		var delayTimes = new Array(3000,8000,8000,1000);
 		// var delayTimes = new Array(1000,1000,1000,1000);
 		
@@ -162,7 +142,7 @@
 			'原本李慈恩就出賣妳了xD<br>但不知道該聊些什麼 :3<br>後來滑一滑IG看到妳跟薇媛有合照<br>走在路上又會莫名一直看到妳xDD<br>就覺得該加了～ :D<br>',
 			'沒想到第一次打招呼...<br>居然是在藝術治療xD<br>老師還是一個很嗨的吸毒犯<br>我以為妳認不出我欸xD<br>結果妳還蠻厲害der<br>','');
 
-		var FontEnds = new Array('1996/04/15&nbsp&nbsp','2016/11/23&nbsp&nbsp','2017/02/24&nbsp&nbsp','');
+		var FontEnds = new Array('1996/04/15&nbsp&nbsp&nbsp&nbsp&nbsp','2016/11/23&nbsp&nbsp&nbsp&nbsp&nbsp','2017/02/24&nbsp&nbsp&nbsp&nbsp&nbsp','');
 		
 		var pictures = new Array('#yo','#lala','#self_portrait','');
 
@@ -200,24 +180,34 @@
 				var mytime = $("#time");
 				mytime.text(timearray[count]);
 	    		$("#When").animate({opacity:'0'},0);
+	    		BD.attr('src', "images/ufo.gif");
 
 				for(var i=0;i<10;i++)
 				{
-		    		BD.animate({left:'+='+BDarray[count]+'px'},100);
+					if(i==9)
+					{
+			    		BD.animate({left:'+='+BDarray[count]+'px'},100).promise().done(function(){BD.attr('src', "images/ufo_final.gif") });
+			    	}
+			    	else
+			    		BD.animate({left:'+='+BDarray[count]+'px'},100);
+
 		    		$("#When").animate({left:'+='+Whenarray[count]+'px',opacity:'0'},100);
 		    	}
+
 
 				$("#FontTitle").html(FontTitles[count]);
 				$("#FontContent").html(FontContents[count]);
 				$("#FontEnd").html(FontEnds[count]);
+
 				$("#hint").text("蛋糕離家出走了 聽說"+(delayTimes[count]/1000)+"秒後會回來～");
 	    		$("#When").animate({opacity:'100'},100);
 
 	    		if(count<3)
 	    		{
-					$(pictures[count]).show()
-		    		$("#Cake").hide(100).delay(delayTimes[count]).show(100);
 
+		    		$("#Cake").hide(100).delay(delayTimes[count]).show(100);
+					$(pictures[count]).show();
+		    		
 		    		$("#hint").show(100).delay(delayTimes[count]).hide(100);
 		    		$("#LeftDiv").slideDown(500);
 		    		$("#RightDiv").slideDown(500);
