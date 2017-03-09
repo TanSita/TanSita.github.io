@@ -44,6 +44,7 @@
 			position: relative;
 		    width:50%;
 		    float: left;
+		    opacity : 0;
 		}
 
 		#RightDiv {
@@ -130,12 +131,7 @@
 
 	<script type="text/javascript">
 
-	console.log("hiiiiiiiiiiii");
-
-	$(window).load(function() 
-	{
-		console.log("I am ready!!");
-
+		console.log("hiiiiiiiiiiii");
 		var timearray = new Array("19960415","20161123","20170224","Now");
 		var BDarray = new Array(5,20,5,5);
 		var Whenarray = new Array(5,20,5,5);
@@ -170,137 +166,140 @@
 		$("#LeftCard").hide();
 		$("#MidCard").hide();
 		$("#RightCard").hide();
-
 		
-		$("#Cake").click(function()
+		$(window).load(function() 
 		{
-			$("#hint").hide();
+			console.log("I am ready!!");
 
-			if(count<BDarray.length)
+			$("#Cake").click(function()
 			{
-				var BD = $("#BlackDot");
-				var mytime = $("#time");
-				mytime.text(timearray[count]);
-	    		$("#When").animate({opacity:'0'},0);
-	    		BD.attr('src', "images/ufo.gif");
+				$("#hint").hide();
 
-				for(var i=0;i<10;i++)
+				if(count<BDarray.length)
 				{
-					if(i==9)
+					var BD = $("#BlackDot");
+					var mytime = $("#time");
+					mytime.text(timearray[count]);
+		    		$("#When").animate({opacity:'0'},0);
+		    		BD.attr('src', "images/ufo.gif");
+
+					for(var i=0;i<10;i++)
 					{
-			    		BD.animate({left:'+='+BDarray[count]+'px'},100).promise().done(function(){BD.attr('src', "images/ufo_final.gif") });
+						if(i==9)
+						{
+				    		BD.animate({left:'+='+BDarray[count]+'px'},100).promise().done(function(){BD.attr('src', "images/ufo_final.gif") });
+				    	}
+				    	else
+				    	{
+				    		BD.animate({left:'+='+BDarray[count]+'px'},100);
+				    	}
+
+			    		$("#When").animate({left:'+='+Whenarray[count]+'px',opacity:'0'},100);
 			    	}
-			    	else
-			    	{
-			    		BD.animate({left:'+='+BDarray[count]+'px'},100);
-			    	}
 
-		    		$("#When").animate({left:'+='+Whenarray[count]+'px',opacity:'0'},100);
-		    	}
+					$("#FontTitle").html(FontTitles[count]);
+					$("#FontContent").html(FontContents[count]);
+					$("#FontEnd").html(FontEnds[count]);
+		    		$("#When").animate({opacity:'100'});
 
-				$("#FontTitle").html(FontTitles[count]);
-				$("#FontContent").html(FontContents[count]);
-				$("#FontEnd").html(FontEnds[count]);
-	    		$("#When").animate({opacity:'100'});
-
-	    		if(count < FontTitles.length)
-	    		{
-		    		$("#Cake").hide(100).delay(delayTimes[count]).show(100);
-		    		if(count>0)
+		    		if(count < FontTitles.length)
 		    		{
-		    			$(pictures[count-1]).hide();
+			    		$("#Cake").hide(100).delay(delayTimes[count]).show(100);
+			    		if(count>0)
+			    		{
+			    			$(pictures[count-1]).hide();
+			    			console.log(count-1);
+			    		}
+						$(pictures[count]).css({opacity:'100'});
+
+						$("#hint").text("蛋糕離家出走了 聽說"+(delayTimes[count]/1000)+"秒後會回來～"	);
+			    		$("#hint").show(100).delay(delayTimes[count]).hide(100);
+
+			    		var LeftDivHeight = $("#LeftDiv").height();
+			    		var picHeight = $(pictures[count]).height();
+			    		var distance = (picHeight - LeftDivHeight) / 2;
+
+			    		if(distance<0)
+			    		{
+			    			distance = 50;
+			    		}
+
+			    		$("#LeftDiv").css({"opacity":'100'});
+			    		$("#LeftDiv").css({"top":distance});
+			    		$("#RightDiv").css({opacity:'100'});
+
+			    		count += 1;
+		    		}
+		    		else //count = FontTitles.length
+		    		{
+			    		$("#hint").hide();
+						$("#LeftDiv").hide();
+						$("#RightDiv").hide();
+
+						$(pictures[count-1]).hide();
 		    			console.log(count-1);
+
+		    			$("#Cake").hide();
+			    		$("#hint").text("看信時間～看完點右邊按鈕～");
+			    		$("#hint").show();
+			    		$("#ClickMe").show();
+			    		$("#HBcard").show();
 		    		}
-					$(pictures[count]).css({opacity:'100'});
-
-					$("#hint").text("蛋糕離家出走了 聽說"+(delayTimes[count]/1000)+"秒後會回來～"	);
-		    		$("#hint").show(100).delay(delayTimes[count]).hide(100);
-
-		    		var LeftDivHeight = $("#LeftDiv").height();
-		    		var picHeight = $(pictures[count]).height();
-		    		var distance = (picHeight - LeftDivHeight) / 2;
-
-		    		if(distance<0)
-		    		{
-		    			distance = 50;
-		    		}
-
-		    		$("#LeftDiv").css({"opacity":'100'});
-		    		$("#LeftDiv").css({"top":distance});
-		    		$("#RightDiv").css({opacity:'100'});
-
-		    		count += 1;
 	    		}
-	    		else //count = FontTitles.length
-	    		{
-		    		$("#hint").hide();
-					$("#LeftDiv").hide();
-					$("#RightDiv").hide();
+			}); 
 
-					$(pictures[count-1]).hide();
-	    			console.log(count-1);
-
-	    			$("#Cake").hide();
-		    		$("#hint").text("看信時間～看完點右邊按鈕～");
-		    		$("#hint").show();
-		    		$("#ClickMe").show();
-		    		$("#HBcard").show();
-	    		}
-    		}
-		}); 
-
-		$("#ClickMe").click(function()
-		{
-    		$("#hint").text("三張卡片都可以點，選一個喜歡的帶回家 :D");
-    		$("#ClickMe").hide();
-
-    		$("#HBcard").hide();
-    		$("#LeftCard").show();
-    		$("#MidCard").show();
-    		$("#RightCard").show();
-		});
-
-
-
-		var CardClick = 0;
-		var LeftCardFlag = true;
-
-		$("#LeftCard").click(function(e)
-		{
-			if(LeftCardFlag)
+			$("#ClickMe").click(function()
 			{
-				$("#LeftCard").css('opacity','0');
-				$("#LeftCard").attr('src', "images/MatchaTea.png");
+	    		$("#hint").text("三張卡片都可以點，選一個喜歡的帶回家 :D");
+	    		$("#ClickMe").hide();
 
-				var gift = "一杯珍珠抹茶拿鐵";
-				var another = "\n還可以再點點看其他卡片喔～";
-				CardClick+=1;
-				e.preventDefault(); // Prevent the href from redirecting directly
-				if(CardClick>=3)
+	    		$("#HBcard").hide();
+	    		$("#LeftCard").show();
+	    		$("#MidCard").show();
+	    		$("#RightCard").show();
+			});
+
+
+
+			var CardClick = 0;
+			var LeftCardFlag = true;
+
+			$("#LeftCard").click(function(e)
+			{
+				if(LeftCardFlag)
 				{
-					ShowGift(gift,"");
+					$("#LeftCard").css('opacity','0');
+					$("#LeftCard").attr('src', "images/MatchaTea.png");
+
+					var gift = "一杯珍珠抹茶拿鐵";
+					var another = "\n還可以再點點看其他卡片喔～";
+					CardClick+=1;
+					e.preventDefault(); // Prevent the href from redirecting directly
+					if(CardClick>=3)
+					{
+						ShowGift(gift,"");
+					}
+					else
+					{
+						ShowGift(gift,another);
+					}
+					LeftCardFlag = false;
 				}
-				else
-				{
-					ShowGift(gift,another);
-				}
-				LeftCardFlag = false;
+			});
+
+
+			function ShowGift(gift,another) 
+			{
+			    swal({
+			      title: "Warning", 
+			      text: "遊戲王卡發出了一道神秘的光芒！！\n恭喜你抽到「" + gift + "」 :D " + another,
+			      type: "warning",
+			      // showCancelButton: true
+			    }, function() {
+					$("#LeftCard").css('opacity','100');
+			    });
 			}
 		});
-
-
-		function ShowGift(gift,another) 
-		{
-		    swal({
-		      title: "Warning", 
-		      text: "遊戲王卡發出了一道神秘的光芒！！\n恭喜你抽到「" + gift + "」 :D " + another,
-		      type: "warning",
-		      // showCancelButton: true
-		    }, function() {
-				$("#LeftCard").css('opacity','100');
-		    });
-		}
-	});
 
 	</script>		
 
