@@ -41,6 +41,7 @@
 
 		#LeftDiv 
 		{
+			position: relative;
 		    width:50%;
 		    float: left;
 		}
@@ -145,8 +146,14 @@
 		var FontEnds = new Array('1996/04/15&nbsp&nbsp&nbsp&nbsp&nbsp','2016/11/23&nbsp&nbsp&nbsp&nbsp&nbsp','2017/02/24&nbsp&nbsp&nbsp&nbsp&nbsp','');
 		
 		var pictures = new Array('#yo','#lala','#self_portrait','');
+		var picHeights = new Array();
 
 		var count = 0;
+
+		for(var i=0;i<3;i++)
+		{
+			picHeights.push($(pictures[i]).height());
+		}
 
 		$("#hint").hide();
 		$("#ClickMe").hide();
@@ -204,10 +211,14 @@
 
 	    		if(count<3)
 	    		{
-
 		    		$("#Cake").hide(100).delay(delayTimes[count]).show(100);
 					$(pictures[count]).show();
 		    		
+					var picHeight = picHeights[count];
+					var LeftDivHeight = $("#LeftDiv").height();
+					var distance = (picHeight - LeftDivHeight) /2;
+		    		$("#LeftDiv").css("top",distance);
+
 		    		$("#hint").show(100).delay(delayTimes[count]).hide(100);
 		    		$("#LeftDiv").slideDown(500);
 		    		$("#RightDiv").slideDown(500);
