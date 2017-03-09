@@ -133,56 +133,44 @@
 		var timearray = new Array("19960415","20161123","20170224","Now");
 		var BDarray = new Array(5,20,5,5);
 		var Whenarray = new Array(5,20,5,5);
-		var delayTimes = new Array(3000,8000,8000,1000);
-		// var delayTimes = new Array(1000,1000,1000,1000);
+		// var delayTimes = new Array(3000,8000,8000,1000);
+		var delayTimes = new Array(1000,1000,1000);
 		
-		var FontTitles = new Array("柚子出生","初次聊天","初次見面",'');
+		var FontTitles = new Array("柚子出生","初次聊天","初次見面");
 
 		var FontContents = new Array(
 			'一顆好吃的柚子誕生啦！<br>就在右邊哦 :D<br>',
 			'原本李慈恩就出賣妳了xD<br>但不知道該聊些什麼 :3<br>後來滑一滑IG看到妳跟薇媛有合照<br>走在路上又會莫名一直看到妳xDD<br>就覺得該加了～ :D<br>',
-			'沒想到第一次打招呼...<br>居然是在藝術治療xD<br>老師還是一個很嗨的吸毒犯<br>我以為妳認不出我欸xD<br>結果妳還蠻厲害der<br>','');
+			'沒想到第一次打招呼...<br>居然是在藝術治療xD<br>老師還是一個很嗨的吸毒犯<br>我以為妳認不出我欸xD<br>結果妳還蠻厲害der<br>');
 
-		var FontEnds = new Array('1996/04/15&nbsp&nbsp&nbsp&nbsp&nbsp','2016/11/23&nbsp&nbsp&nbsp&nbsp&nbsp','2017/02/24&nbsp&nbsp&nbsp&nbsp&nbsp','');
+		var FontEnds = new Array('1996/04/15&nbsp&nbsp&nbsp&nbsp&nbsp','2016/11/23&nbsp&nbsp&nbsp&nbsp&nbsp','2017/02/24&nbsp&nbsp&nbsp&nbsp&nbsp');
 		
-		var pictures = new Array('#yo','#lala','#self_portrait','');
+		var pictures = new Array('#yo','#lala','#self_portrait');
 		var picHeights = new Array();
 
 		var count = 0;
 
-		for(var i=0;i<3;i++)
-		{
-			picHeights.push($(pictures[i]).height());
-			alert(picHeights[i]);
-		}
-
 		$("#hint").hide();
-		$("#ClickMe").hide();
 
+		$("#LeftDiv").css({opacity:'0'});
+		$("#RightDiv").css({opacity:'0'});
+		$("#yo").css({opacity:'0'});
+		$("#lala").css({opacity:'0'});
+		$("#self_portrait").css({opacity:'0'});
+
+		$("#ClickMe").hide();
 		$("#HBcard").hide();
-		$("#LeftDiv").hide();
-		$("#RightDiv").hide();
 
 		$("#LeftCard").hide();
 		$("#MidCard").hide();
 		$("#RightCard").hide();
 
-		$("#yo").hide();
-		$("#lala").hide();
-		$("#self_portrait").hide();
-
-
+		
 		$("#Cake").click(function()
 		{
 			$("#hint").hide();
-			$("#LeftDiv").hide();
-			$("#RightDiv").hide();
 
-			$("#yo").hide();
-			$("#lala").hide();
-			$("#self_portrait").hide();
-
-			if(count<4)
+			if(count<BDarray.length)
 			{
 				var BD = $("#BlackDot");
 				var mytime = $("#time");
@@ -197,44 +185,50 @@
 			    		BD.animate({left:'+='+BDarray[count]+'px'},100).promise().done(function(){BD.attr('src', "images/ufo_final.gif") });
 			    	}
 			    	else
+			    	{
 			    		BD.animate({left:'+='+BDarray[count]+'px'},100);
+			    	}
 
 		    		$("#When").animate({left:'+='+Whenarray[count]+'px',opacity:'0'},100);
 		    	}
 
-
 				$("#FontTitle").html(FontTitles[count]);
 				$("#FontContent").html(FontContents[count]);
 				$("#FontEnd").html(FontEnds[count]);
+	    		$("#When").animate({opacity:'100'});
 
-				$("#hint").text("蛋糕離家出走了 聽說"+(delayTimes[count]/1000)+"秒後會回來～");
-	    		$("#When").animate({opacity:'100'},100);
-
-	    		if(count<3)
+	    		if(count < FontTitles.length)
 	    		{
 		    		$("#Cake").hide(100).delay(delayTimes[count]).show(100);
-					$(pictures[count]).show();
-		    		
-					var picHeight = picHeights[count];
-					var LeftDivHeight = $("#LeftDiv").height();
-					var distance = (picHeight - LeftDivHeight) /2;
-		    		$("#LeftDiv").css("top",distance);
+		    		if(count>0)
+		    		{
+		    			$(pictures[count-1]).hide();
+		    			console.log(count-1);
+		    		}
+					$(pictures[count]).css({opacity:'100'});
 
+					$("#hint").text("蛋糕離家出走了 聽說"+(delayTimes[count]/1000)+"秒後會回來～"	);
 		    		$("#hint").show(100).delay(delayTimes[count]).hide(100);
-		    		$("#LeftDiv").slideDown(500);
-		    		$("#RightDiv").slideDown(500);
+
+		    		var LeftDivHeight = $("#LeftDiv").height();
+		    		var picHeight = $(pictures[count]).height();
+		    		var distance = (picHeight - LeftDivHeight) / 2;
+
+
+		    		$("#LeftDiv").css({"opacity":'100'});
+		    		$("#LeftDiv").css({"top":distance});
+		    		$("#RightDiv").css({opacity:'100'});
+
 		    		count += 1;
 	    		}
-	    		else
+	    		else //count = FontTitles.length
 	    		{
 		    		$("#hint").hide();
 					$("#LeftDiv").hide();
 					$("#RightDiv").hide();
 
-					$("#yo").hide();
-					$("#lala").hide();
-					$("#self_portrait").hide();
-
+					$(pictures[count-1]).hide();
+	    			console.log(count-1);
 
 	    			$("#Cake").hide();
 		    		$("#hint").text("看信時間～看完點右邊按鈕～");
@@ -256,6 +250,8 @@
     		$("#RightCard").show();
 		});
 
+
+
 		var CardClick = 0;
 		var LeftCardFlag = true;
 
@@ -272,18 +268,18 @@
 				e.preventDefault(); // Prevent the href from redirecting directly
 				if(CardClick>=3)
 				{
-					warnBeforeRedirect(gift,"");
+					ShowGift(gift,"");
 				}
 				else
 				{
-					warnBeforeRedirect(gift,another);
+					ShowGift(gift,another);
 				}
 				LeftCardFlag = false;
 			}
 		});
 
 
-		function warnBeforeRedirect(gift,another) 
+		function ShowGift(gift,another) 
 		{
 		    swal({
 		      title: "Warning", 
