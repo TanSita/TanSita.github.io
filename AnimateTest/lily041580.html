@@ -44,7 +44,6 @@
 			position: relative;
 		    width:50%;
 		    float: left;
-		    opacity : 0;
 		}
 
 		#RightDiv {
@@ -135,8 +134,8 @@
 		var timearray = new Array("19960415","20161123","20170224","Now");
 		var BDarray = new Array(5,20,5,5);
 		var Whenarray = new Array(5,20,5,5);
-		var delayTimes = new Array(3000,8000,8000);
-		// var delayTimes = new Array(1000,1000,1000);
+		// var delayTimes = new Array(3000,8000,8000);
+		var delayTimes = new Array(1000,1000,1000);
 		
 		var FontTitles = new Array("柚子出生","初次聊天","初次見面");
 
@@ -152,6 +151,7 @@
 
 		var count = 0;
 
+
 		$("#hint").hide();
 
 		$("#LeftDiv").css({opacity:'0'});
@@ -166,7 +166,13 @@
 		$("#LeftCard").hide();
 		$("#MidCard").hide();
 		$("#RightCard").hide();
-		
+
+		function sleepFor( sleepDuration )
+		{
+		    var now = new Date().getTime();
+		    while(new Date().getTime() < now + sleepDuration){ /* do nothing */ } 
+		}
+
 		$(window).load(function() 
 		{
 			console.log("I am ready!!");
@@ -268,13 +274,15 @@
 			{
 				if(LeftCardFlag)
 				{
-					$("#LeftCard").css('opacity','0');
+					$("#LeftCard").css({'opacity':'0'});
 					$("#LeftCard").attr('src', "images/MatchaTea.png");
 
 					var gift = "一杯珍珠抹茶拿鐵";
 					var another = "\n還可以再點點看其他卡片喔～";
+
 					CardClick+=1;
-					e.preventDefault(); // Prevent the href from redirecting directly
+					// e.preventDefault(); // Prevent the href from redirecting directly
+					
 					if(CardClick>=3)
 					{
 						ShowGift(gift,"");
@@ -284,9 +292,9 @@
 						ShowGift(gift,another);
 					}
 					LeftCardFlag = false;
+
 				}
 			});
-
 
 			function ShowGift(gift,another) 
 			{
@@ -296,9 +304,11 @@
 			      type: "warning",
 			      // showCancelButton: true
 			    }, function() {
-					$("#LeftCard").css('opacity','100');
+					$("#LeftCard").css({'opacity':'100'});
 			    });
+
 			}
+
 		});
 
 	</script>		
