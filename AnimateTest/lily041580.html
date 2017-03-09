@@ -130,11 +130,17 @@
 
 	<script type="text/javascript">
 
+	console.log("hiiiiiiiiiiii");
+
+	$( document ).ready(function() 
+	{
+		console.log("I am ready!!");
+
 		var timearray = new Array("19960415","20161123","20170224","Now");
 		var BDarray = new Array(5,20,5,5);
 		var Whenarray = new Array(5,20,5,5);
-		// var delayTimes = new Array(3000,8000,8000,1000);
-		var delayTimes = new Array(1000,1000,1000);
+		var delayTimes = new Array(3000,8000,8000);
+		// var delayTimes = new Array(1000,1000,1000);
 		
 		var FontTitles = new Array("柚子出生","初次聊天","初次見面");
 
@@ -294,6 +300,7 @@
 				$("#LeftCard").css('opacity','100');
 		    });
 		}
+	});
 
 	</script>		
 
