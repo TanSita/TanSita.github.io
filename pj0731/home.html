@@ -58,15 +58,15 @@
 
     for(var i=0;i<=24;i++)
     {
-      $("#img"+i).hide();
+      $("#img"+i).css({opacity: 0});
     }
 
-    $("#0").css({top:800});
-    $("#P").css({top:1000});
-    $("#J").css({top:1600});
+    $("#0").css({top:1200});
+    $("#P").css({top:1200});
+    $("#J").css({top:1200});
     $("#H").css({top:1200});
-    $("#B").css({top:1400});
-    $("#D").css({top:1800});
+    $("#B").css({top:1200});
+    $("#D").css({top:1200});
 
     var Balloon0 = setInterval(function()
     { 
@@ -167,12 +167,12 @@
     var count = 0;
     var QAQ = setInterval(function()
     {
-      $("#img"+r[count]).show();
-      count+=1;
-      if(count==25)
-      {
-        clearInterval(QAQ);
-      }
+        $("#img"+r[count]).css({opacity: 100});
+        count+=1;
+        if(count==25)
+        {
+            clearInterval(QAQ);
+        }
     },200);
 
         }
