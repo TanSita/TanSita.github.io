@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+<link rel="stylesheet" type="text/css" href="css/default.css">
+<!-- <link rel='stylesheet prefetch' href='https://fonts.useso.com/css?family=Roboto:400,100,300,500'> -->
+<link rel="stylesheet" type="text/css" href="css/styles.css">
+    <title>
+        Happy Birthday 
+    </title>
+    <style type="text/css">
+        body {background-color: black;}
+    </style>
+</head>
+
+<body>
+<nav class="navbar navbar-inverse" id="myMenu">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="home.html">Happy Birthday</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="home.html">Home</a></li>
+      <li><a id="CARD" href="card.html">CARD</a></li>
+      <li><a id="VIDEO" href="https://drive.google.com/file/d/0B_kU3rRZErkWU0JkRHdSMWNlWWM/view" target="_blank">VIDEO</a></li>
+    </ul>
+  </div>
+</nav>
+
+<center>
+    <font size="5" color="#ff0000" style="font-weight: bold">請假裝這邊有個黑洞，然後稍待片刻</font>
+
+</center>
+
+<div class="envato-animate">
+  <span class="envato-balloon" id="0">0</span>
+  <span class="envato-balloon" id="P">P</span>
+  <span class="envato-balloon" id="J">J</span>
+  <span class="envato-balloon" id="H">H</span>
+  <span class="envato-balloon" id="B">B</span>
+  <span class="envato-balloon" id="D">D</span>
+</div>
+
+<br>
+<center> 
+  <img src="img/0.png" width="10%" id="img0"><img src="img/1.png" width="10%" id="img1"><img src="img/2.png" width="10%" id="img2"><img src="img/3.png" width="10%" id="img3"><img src="img/4.png" width="10%" id="img4"><br><img src="img/5.png" width="10%" id="img5"><img src="img/6.png" width="10%" id="img6"><img src="img/7.png" width="10%" id="img7"><img src="img/8.png" width="10%" id="img8"><img src="img/9.png" width="10%" id="img9"><br><img src="img/10.png" width="10%" id="img10"><img src="img/11.png" width="10%" id="img11"><img src="img/12.png" width="10%" id="img12"><img src="img/13.png" width="10%" id="img13"><img src="img/14.png" width="10%" id="img14"><br><img src="img/15.png" width="10%" id="img15"><img src="img/16.png" width="10%" id="img16"><img src="img/17.png" width="10%" id="img17"><img src="img/18.png" width="10%" id="img18"><img src="img/19.png" width="10%" id="img19"><br><img src="img/20.png" width="10%" id="img20"><img src="img/21.png" width="10%" id="img21"><img src="img/22.png" width="10%" id="img22"><img src="img/23.png" width="10%" id="img23"><img src="img/24.png" width="10%" id="img24"><br>
+</center> 
+
+
+</body>
+</html>
+
+<script type="text/javascript">
+
+    for(var i=0;i<=24;i++)
+    {
+      $("#img"+i).hide();
+    }
+
+    $("#0").css({top:800});
+    $("#P").css({top:1000});
+    $("#J").css({top:1600});
+    $("#H").css({top:1200});
+    $("#B").css({top:1400});
+    $("#D").css({top:1800});
+
+    var Balloon0 = setInterval(function()
+    { 
+    $("#0").animate(
+    {
+      top: "-=8"
+    }, 50, function() 
+    {
+        if($('#0').offset().top <= $('#myMenu').offset().top + $('#myMenu').height() + 80)
+        {
+            $("#0").stop(true,true);
+            clearInterval(Balloon0);
+        }
+    })
+    , 10
+    });
+
+
+    var BalloonP = setInterval(function()
+    { 
+    $("#P").animate(
+    {
+      top: "-=8"
+    }, 50, function() 
+    {
+        if($('#P').offset().top <= $('#myMenu').offset().top + $('#myMenu').height() + 80)
+        {
+            $("#P").stop(true,true);
+            clearInterval(BalloonP);
+        }
+    })
+    , 10
+    });
+
+
+    var BalloonJ = setInterval(function()
+    { 
+    $("#J").animate(
+    {
+      top: "-=8"
+    }, 50, function() 
+    {
+        if($('#J').offset().top <= $('#myMenu').offset().top + $('#myMenu').height() + 80)
+        {
+            $("#J").stop(true,true);
+            clearInterval(BalloonJ);
+        }
+    })
+    , 10
+    });
+
+
+    var BalloonH = setInterval(function()
+    { 
+    $("#H").animate(
+    {
+      top: "-=8"
+    }, 50, function() 
+    {
+        if($('#H').offset().top <= $('#myMenu').offset().top + $('#myMenu').height() + 80)
+        {
+            $("#H").stop(true,true);
+            clearInterval(BalloonH);
+        }
+    })
+    , 10
+    });
+
+
+    var BalloonB = setInterval(function()
+    { 
+    $("#B").animate(
+    {
+      top: "-=8"
+    }, 50, function() 
+    {
+        if($('#B').offset().top <= $('#myMenu').offset().top + $('#myMenu').height() + 80)
+        {
+            $("#B").stop(true,true);
+            clearInterval(BalloonB);
+        }
+    })
+    , 10
+    });
+
+    var BalloonD = setInterval(function()
+    { 
+    $("#D").animate(
+    {
+      top: "-=8"
+    }, 50, function() 
+    {
+        if($('#D').offset().top <= $('#myMenu').offset().top + $('#myMenu').height() + 80)
+        {
+            $("#D").stop(true,true);
+            clearInterval(BalloonD);
+            var r = new Array(14, 21, 18, 20, 19, 12, 24, 16, 13, 22, 7, 15, 23, 2, 6, 17, 1, 0, 8, 9, 4, 5, 11, 10, 3);
+    var count = 0;
+    var QAQ = setInterval(function()
+    {
+      $("#img"+r[count]).show();
+      count+=1;
+      if(count==25)
+      {
+        clearInterval(QAQ);
+      }
+    },200);
+
+        }
+    })
+    , 10
+    });
+
+
+    
+
+</script>
+
+
+
