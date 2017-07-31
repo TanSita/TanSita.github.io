@@ -7,7 +7,6 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/normalize.css" />
 <link rel="stylesheet" type="text/css" href="css/default.css">
-<!-- <link rel='stylesheet prefetch' href='https://fonts.useso.com/css?family=Roboto:400,100,300,500'> -->
 <link rel="stylesheet" type="text/css" href="css/styles.css">
     <title>
         Happy Birthday 
@@ -70,118 +69,31 @@
 
     var Balloon0 = setInterval(function()
     { 
-    $("#0").animate(
-    {
-      top: "-=8"
-    }, 50, function() 
-    {
-        if($('#0').offset().top <= $('#myMenu').offset().top + $('#myMenu').height() + 80)
+        $(".envato-balloon").animate(
         {
-            $("#0").stop(true,true);
-            clearInterval(Balloon0);
-        }
-    })
+            top: "-=8"
+        }, 50, 
+        function() 
+        {
+            if($('.envato-balloon').offset().top <= $('#myMenu').offset().top + $('#myMenu').height() + 80)
+            {
+                $("#0").stop(true,true);
+                clearInterval(Balloon0);
+                var r = new Array(14, 21, 18, 20, 19, 12, 24, 16, 13, 22, 7, 15, 23, 2, 6, 17, 1, 0, 8, 9, 4, 5, 11, 10, 3);
+                var count = 0;
+                var QAQ = setInterval(function()
+                {
+                    $("#img"+r[count]).css({opacity: 100});
+                    count+=1;
+                    if(count==25)
+                    {
+                        clearInterval(QAQ);
+                    }
+                },50);
+            }
+        })
     , 10
     });
-
-
-    var BalloonP = setInterval(function()
-    { 
-    $("#P").animate(
-    {
-      top: "-=8"
-    }, 50, function() 
-    {
-        if($('#P').offset().top <= $('#myMenu').offset().top + $('#myMenu').height() + 80)
-        {
-            $("#P").stop(true,true);
-            clearInterval(BalloonP);
-        }
-    })
-    , 10
-    });
-
-
-    var BalloonJ = setInterval(function()
-    { 
-    $("#J").animate(
-    {
-      top: "-=8"
-    }, 50, function() 
-    {
-        if($('#J').offset().top <= $('#myMenu').offset().top + $('#myMenu').height() + 80)
-        {
-            $("#J").stop(true,true);
-            clearInterval(BalloonJ);
-        }
-    })
-    , 10
-    });
-
-
-    var BalloonH = setInterval(function()
-    { 
-    $("#H").animate(
-    {
-      top: "-=8"
-    }, 50, function() 
-    {
-        if($('#H').offset().top <= $('#myMenu').offset().top + $('#myMenu').height() + 80)
-        {
-            $("#H").stop(true,true);
-            clearInterval(BalloonH);
-        }
-    })
-    , 10
-    });
-
-
-    var BalloonB = setInterval(function()
-    { 
-    $("#B").animate(
-    {
-      top: "-=8"
-    }, 50, function() 
-    {
-        if($('#B').offset().top <= $('#myMenu').offset().top + $('#myMenu').height() + 80)
-        {
-            $("#B").stop(true,true);
-            clearInterval(BalloonB);
-        }
-    })
-    , 10
-    });
-
-    var BalloonD = setInterval(function()
-    { 
-    $("#D").animate(
-    {
-      top: "-=8"
-    }, 50, function() 
-    {
-        if($('#D').offset().top <= $('#myMenu').offset().top + $('#myMenu').height() + 80)
-        {
-            $("#D").stop(true,true);
-            clearInterval(BalloonD);
-            var r = new Array(14, 21, 18, 20, 19, 12, 24, 16, 13, 22, 7, 15, 23, 2, 6, 17, 1, 0, 8, 9, 4, 5, 11, 10, 3);
-    var count = 0;
-    var QAQ = setInterval(function()
-    {
-        $("#img"+r[count]).css({opacity: 100});
-        count+=1;
-        if(count==25)
-        {
-            clearInterval(QAQ);
-        }
-    },200);
-
-        }
-    })
-    , 10
-    });
-
-
-    
 
 </script>
 
