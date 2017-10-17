@@ -24,10 +24,13 @@
 	<script> new WOW().init();</script>
 
     <!-- touch-punch.min.js -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.2/jquery.ui.touch-punch.min.js"></script> -->
-
     <script src="js/jquery.ui.touch-punch.min.js"></script>
 
+
+    <!-- Smooth -->
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.kinetic.min.js"></script>
+    <script src="js/jquery.smoothTouchScroll.js"></script>
 
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -301,6 +304,15 @@
 
         }
 
+        #TouchScroller div.scrollableArea *
+        {
+            position: relative;
+            display: block;
+            float: left;
+            padding: 0;
+            margin: 0;
+        }
+
 
   </style>
 </head>
@@ -342,21 +354,22 @@
 
 
 <div class="jumbotron">
-    <div class="row hello ui-draggable ui-widget-content">
 
-        <div class="col-sm-3 col-xs-3 ">
-            <img src="img/吐司.jpg" class="img-circle" width="75px" height="75px">
+    <div class="TouchScroller kinetic-active">
+        <div class="row">
+            <div class="col-sm-3 col-xs-3 ">
+                <img src="img/吐司.jpg" class="img-circle" width="75px" height="75px">
+            </div>
+            <div class="col-sm-3 col-xs-3 ">
+                <img src="img/乳酪餅.jpg" class="img-circle" width="75px" height="75px">
+            </div>
+            <div class="col-sm-3 col-xs-3 ">
+                <img src="img/蛋餅.jpg" class="img-circle" width="75px" height="75px">
+            </div>
+            <div class="col-sm-3 col-xs-3 ">
+                <img src="img/薯餅.jpg" class="img-circle" width="75px" height="75px">
+            </div>
         </div>
-        <div class="col-sm-3 col-xs-3 ">
-            <img src="img/乳酪餅.jpg" class="img-circle" width="75px" height="75px">
-        </div>
-        <div class="col-sm-3 col-xs-3 ">
-            <img src="img/蛋餅.jpg" class="img-circle" width="75px" height="75px">
-        </div>
-        <div class="col-sm-3 col-xs-3 ">
-            <img src="img/薯餅.jpg" class="img-circle" width="75px" height="75px">
-        </div>
-
     </div>
 
     <center>
@@ -671,10 +684,17 @@ $(document).ready(function(){
 
 
 <script type="text/javascript">
-    
-    // $(".hello").draggable({});
 
-    $(".hello").draggable({
+
+    $('.TouchScroller').kinetic();
+  
+    // $(document).ready(function() {
+    //     $("#TouchScroller").smoothTouchScroll({ 
+    //         continuousScrolling: true
+    //     });
+    // });
+
+    $(".TouchScroller").draggable({
         axis: "x",
         start: function(event, ui) {
             start = ui.position.left;
