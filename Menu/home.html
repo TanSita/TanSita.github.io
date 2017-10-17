@@ -13,6 +13,8 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js" type="text/javascript"></script>
+
 
 
 	<!-- animate.css -->
@@ -339,18 +341,18 @@
 
 
 <div class="jumbotron">
-    <div class="row hello">
+    <div class="row hello draggable ui-widget-content">
 
-        <div class="col-sm-3 col-xs-3 hello">
+        <div class="col-sm-3 col-xs-3 ">
             <img src="img/吐司.jpg" class="img-circle" width="75px" height="75px">
         </div>
-        <div class="col-sm-3 col-xs-3 hello">
+        <div class="col-sm-3 col-xs-3 ">
             <img src="img/乳酪餅.jpg" class="img-circle" width="75px" height="75px">
         </div>
-        <div class="col-sm-3 col-xs-3 hello">
+        <div class="col-sm-3 col-xs-3 ">
             <img src="img/蛋餅.jpg" class="img-circle" width="75px" height="75px">
         </div>
-        <div class="col-sm-3 col-xs-3 hello">
+        <div class="col-sm-3 col-xs-3 ">
             <img src="img/薯餅.jpg" class="img-circle" width="75px" height="75px">
         </div>
 
@@ -668,40 +670,17 @@ $(document).ready(function(){
 
 <script type="text/javascript">
     
-    // $(".hello").mousewheel( function(e, delta) 
-    // {
-    //     if( Math.abs(e.deltaX) ) {
-    //         this.scrollLeft -= (e.deltaX * 20);
-    //     } else {
-    //         this.scrollLeft -= (e.deltaY * 20);
-    //     }
+    var start,stop;
 
-    //     e.preventDefault();
-    // });
-
-
-    // using bind
-    $('.hello').bind('mousewheel', function(event, delta, deltaX, deltaY) 
-    {
-        console.log(delta, deltaX, deltaY);
+    $(".hello").draggable({
+        axis: "x",
+        start: function(event, ui) {
+            start = ui.position.left;
+        },
+        stop: function(event, ui) {
+            stop = ui.position.left;
+        }
     });
- 
-    // using the event helper
-    $('.hello').mousewheel(function(event, delta, deltaX, deltaY) 
-    {
-        if(Math.abs(event.deltaX)) 
-        {
-            $(".hello").css('left', '-=' + deltaX + 'px');
-            console.log(delta, deltaX, deltaY);
-        } 
-    });
-
-
-    // $('.hello').click(function() 
-    // { 
-    //     $(".hello").css('left', '-=20px');
-    //     alert($(".hello").position().left);
-    // });
 
 </script>
 
