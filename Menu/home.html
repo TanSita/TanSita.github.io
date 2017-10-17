@@ -677,17 +677,17 @@ $(document).ready(function(){
 
 <script type="text/javascript">
     
-    $(".hello").draggable({});
+    // $(".hello").draggable({});
 
-    // $(".hello").draggable({
-    //     axis: "x",
-    //     start: function(event, ui) {
-    //         start = ui.position.left;
-    //     },
-    //     stop: function(event, ui) {
-    //         stop = ui.position.left;
-    //     }
-    // });
+    $(".hello").draggable({
+        axis: "x",
+        start: function(event, ui) {
+            start = ui.position.left;
+        },
+        stop: function(event, ui) {
+            stop = ui.position.left;
+        }
+    });
 
 </script>
 
