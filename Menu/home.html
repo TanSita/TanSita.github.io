@@ -345,7 +345,7 @@
 
 
 <div class="jumbotron">
-    <div class="row hello draggable ui-widget-content">
+    <div class="row hello ui-draggable ui-widget-content">
 
         <div class="col-sm-3 col-xs-3 ">
             <img src="img/吐司.jpg" class="img-circle" width="75px" height="75px">
@@ -675,15 +675,17 @@ $(document).ready(function(){
 
 <script type="text/javascript">
     
-    $(".hello").draggable({
-        axis: "x",
-        start: function(event, ui) {
-            start = ui.position.left;
-        },
-        stop: function(event, ui) {
-            stop = ui.position.left;
-        }
-    });
+    $(".hello").draggable({});
+
+    // $(".hello").draggable({
+    //     axis: "x",
+    //     start: function(event, ui) {
+    //         start = ui.position.left;
+    //     },
+    //     stop: function(event, ui) {
+    //         stop = ui.position.left;
+    //     }
+    // });
 
 </script>
 
