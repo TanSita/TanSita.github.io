@@ -19,6 +19,10 @@
 	<!-- animate.css -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
 
+    <!-- smoothTouchScroll.css -->
+    <link rel="Stylesheet" type="text/css" href="css/smoothTouchScroll.css" />
+
+
 	<!-- wow.js -->
 	<script src="js/wow.js"></script>
 	<script> new WOW().init();</script>
@@ -30,7 +34,7 @@
     <!-- Smooth -->
     <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
     <script src="js/jquery.kinetic.min.js"></script>
-    <script src="js/jquery.smoothTouchScroll.js"></script>
+    <script src="js/jquery.smoothTouchScroll.min.js"></script>
 
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -304,13 +308,27 @@
 
         }
 
-        #TouchScroller div.scrollableArea *
+        #touchScroller
+        {
+            width:100%;
+            height: 330px;
+            position: relative;
+        }
+        
+        #touchScroller div.scrollableArea a
         {
             position: relative;
-            display: block;
             float: left;
-            padding: 0;
             margin: 0;
+            padding: 0 5px;
+            /* If you don't want the images in the scroller to be selectable, try the following
+               block of code. It's just a nice feature that prevent the images from
+               accidentally becoming selected/inverted when the user interacts with the scroller. */
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -o-user-select: none;
+            user-select: none;
         }
 
 
@@ -355,7 +373,18 @@
 
 <div class="jumbotron">
 
-    <div class="TouchScroller kinetic-active">
+    <div id="touchScroller">
+        <a href="#"><img src="images/field.jpg" alt="Demo image" id="field" width="75px" height="75px"/></a>
+        <a href="#"><img src="images/gnome.jpg" alt="Demo image" id="gnome" width="75px" height="75px"/></a>
+        <a href="#"><img src="images/pencils.jpg" alt="Demo image" id="pencils" width="75px" height="75px"/></a>
+        <a href="#"><img src="images/golf.jpg" alt="Demo image" id="golf" width="75px" height="75px"/></a>
+        <a href="#"><img src="images/river.jpg" alt="Demo image" id="river" width="75px" height="75px"/></a>
+        <a href="#"><img src="images/train.jpg" alt="Demo image" id="train" width="75px" height="75px"/></a>
+        <a href="#"><img src="images/leaf.jpg" alt="Demo image" id="leaf" width="75px" height="75px"/></a>
+        <a href="#"><img src="images/dog.jpg" alt="Demo image" id="dog" width="75px" height="75px" /></a>
+    </div>
+
+<!--     <div class="TouchScroller kinetic-active">
         <div class="row">
             <div class="col-sm-3 col-xs-3 ">
                 <img src="img/吐司.jpg" class="img-circle" width="75px" height="75px">
@@ -370,7 +399,8 @@
                 <img src="img/薯餅.jpg" class="img-circle" width="75px" height="75px">
             </div>
         </div>
-    </div>
+    </div> 
+-->
 
     <center>
         <h3>來找找好吃的食物吧！</h3> 
@@ -685,8 +715,12 @@ $(document).ready(function(){
 
 <script type="text/javascript">
 
+    $(function() {
+        $("#touchScroller").smoothTouchScroll();
+        // $("#touchScroller").smoothTouchScroll({ continuousScrolling: true });
+    });
 
-    $('.TouchScroller').kinetic();
+    // $('.TouchScroller').kinetic();
   
     // $(document).ready(function() {
     //     $("#TouchScroller").smoothTouchScroll({ 
@@ -694,15 +728,18 @@ $(document).ready(function(){
     //     });
     // });
 
-    $(".TouchScroller").draggable({
-        axis: "x",
-        start: function(event, ui) {
-            start = ui.position.left;
-        },
-        stop: function(event, ui) {
-            stop = ui.position.left;
-        }
-    });
+    // $(".TouchScroller").draggable({
+    //     axis: "x",
+    //     start: function(event, ui) {
+    //         start = ui.position.left;
+    //     },
+    //     stop: function(event, ui) {
+    //         stop = ui.position.left;
+    //     }
+    // });
+
+
+
 
 </script>
 
