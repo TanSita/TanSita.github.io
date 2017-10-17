@@ -12,6 +12,7 @@
 	<!-- jquery 要先放 , bs會用到-->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 
 	<!-- animate.css -->
@@ -20,6 +21,11 @@
 	<!-- wow.js -->
 	<script src="js/wow.js"></script>
 	<script> new WOW().init();</script>
+
+    <!-- mousewheel.js -->
+    <script src="js/jquery.mousewheel.js"></script>
+    <script src="js/jquery.mousewheel.min.js"></script>
+
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -333,18 +339,18 @@
 
 
 <div class="jumbotron">
-    <div class="row">
+    <div class="row hello">
 
-        <div class="col-sm-3 col-xs-3">
+        <div class="col-sm-3 col-xs-3 hello">
             <img src="img/吐司.jpg" class="img-circle" width="75px" height="75px">
         </div>
-        <div class="col-sm-3 col-xs-3">
+        <div class="col-sm-3 col-xs-3 hello">
             <img src="img/乳酪餅.jpg" class="img-circle" width="75px" height="75px">
         </div>
-        <div class="col-sm-3 col-xs-3">
+        <div class="col-sm-3 col-xs-3 hello">
             <img src="img/蛋餅.jpg" class="img-circle" width="75px" height="75px">
         </div>
-        <div class="col-sm-3 col-xs-3">
+        <div class="col-sm-3 col-xs-3 hello">
             <img src="img/薯餅.jpg" class="img-circle" width="75px" height="75px">
         </div>
 
@@ -658,6 +664,45 @@ $(document).ready(function(){
     });
   });
 })
+</script>
+
+<script type="text/javascript">
+    
+    // $(".hello").mousewheel( function(e, delta) 
+    // {
+    //     if( Math.abs(e.deltaX) ) {
+    //         this.scrollLeft -= (e.deltaX * 20);
+    //     } else {
+    //         this.scrollLeft -= (e.deltaY * 20);
+    //     }
+
+    //     e.preventDefault();
+    // });
+
+
+    // using bind
+    $('.hello').bind('mousewheel', function(event, delta, deltaX, deltaY) 
+    {
+        console.log(delta, deltaX, deltaY);
+    });
+ 
+    // using the event helper
+    $('.hello').mousewheel(function(event, delta, deltaX, deltaY) 
+    {
+        if(Math.abs(event.deltaX)) 
+        {
+            $(".hello").css('left', '-=' + deltaX + 'px');
+            console.log(delta, deltaX, deltaY);
+        } 
+    });
+
+
+    // $('.hello').click(function() 
+    // { 
+    //     $(".hello").css('left', '-=20px');
+    //     alert($(".hello").position().left);
+    // });
+
 </script>
 
 </body>
