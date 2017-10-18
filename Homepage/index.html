@@ -177,7 +177,7 @@
 
   </style>
 </head>
-<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="50">
+<body id="home" data-spy="scroll" data-target=".navbar" data-offset="50">
 
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
@@ -187,12 +187,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>                        
             </button>
-            <a class="navbar-brand" href="#myPage">電子菜單</a>
+            <a class="navbar-brand" href="#home">電子菜單</a>
         </div>
     
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#myPage">首頁</a></li>
+                <li><a href="#home">首頁</a></li>
                 <li><a href="#about">關於我們</a></li>
                 <li><a href="#contact">聯繫我們</a></li>
                 
@@ -296,7 +296,7 @@
 
 <!-- Footer -->
 <footer class="text-center">
-    <a class="up-arrow" href="#myPage" data-toggle="tooltip" >
+    <a class="up-arrow" href="#home" data-toggle="tooltip" >
         <span class="glyphicon glyphicon-chevron-up"></span>
     </a>
     <br>
@@ -309,7 +309,7 @@ $(document).ready(function(){
   $('[data-toggle="tooltip"]').tooltip(); 
   
   // Add smooth scrolling to all links in navbar + footer link
-  $(".navbar a, footer a[href='#myPage']").on('click', function(event) {
+  $(".navbar a, footer a[href='#home']").on('click', function(event) {
 
     // Make sure this.hash has a value before overriding default behavior
     if (this.hash !== "") {
