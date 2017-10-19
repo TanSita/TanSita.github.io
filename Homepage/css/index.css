@@ -108,3 +108,19 @@ footer a:hover
     margin-left: 0px;
     margin-right: 0px;
 }
+
+.imgframe
+{
+    padding-top: 10px;
+    padding-bottom: 20px;
+    background-color: #000;
+    border: 5px;
+    border-style: solid;
+    border-color: white;
+    border-radius: 15px;
+}
+
+.imgframe h4
+{
+    color: white;
+}
