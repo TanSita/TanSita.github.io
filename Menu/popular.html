@@ -28,7 +28,6 @@
 	<!-- <p id="W">Width : </p> -->
 
 	<img id="myimg" src="images/冰淇淋鬆餅.jpg">
-	<!-- <img id="myimg" src="http://image.digitalarchives.tw/ImageCache/00/50/fd/05.jpg"> -->
 
 
 	<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
@@ -45,60 +44,60 @@
 </body>
 
 <script type="text/javascript">
-	var w = document.documentElement.clientWidth;
-	var h = document.documentElement.clientHeight;
 
-	var naturalWidth = $("#myimg")[0].naturalWidth; 
-	var naturalHeight = $("#myimg")[0].naturalHeight; 
+	var imgs = ["images/冰淇淋鬆餅.jpg","http://image.digitalarchives.tw/ImageCache/00/50/fd/05.jpg","http://www.18park.com.tw/data/goods/201605/1462938134RMYPV1.jpg"];
 
-	var a = naturalHeight / naturalWidth;
-	var b = naturalWidth / naturalHeight;
+	var index = 0;
 
-	if(a*w < h)
+	function myfunction()
 	{
-		$("#myimg").css('width', w + 'px');
-		$("#myimg").css('height', a*w + 'px');
-		var diff = (h - a*w) / 2;
-		$("#myimg").css('margin-top', diff + 'px');
+		var w = document.documentElement.clientWidth;
+		var h = document.documentElement.clientHeight;
+
+		var naturalWidth = $("#myimg")[0].naturalWidth; 
+		var naturalHeight = $("#myimg")[0].naturalHeight; 
+
+		var a = naturalHeight / naturalWidth;
+		var b = naturalWidth / naturalHeight;
+
+		if(a*w < h)
+		{
+			$("#myimg").css('width', w + 'px');
+			$("#myimg").css('height', a*w + 'px');
+			var diff = (h - a*w) / 2;
+			$("#myimg").css('margin-top', diff + 'px');
+		}
+
+		if(b*h < w)
+		{
+			$("#myimg").css('width', b*h + 'px');
+			$("#myimg").css('height', h + 'px');
+			var diff = (w - b*h) / 2;
+			$("#myimg").css('margin-left', diff + 'px');
+		}
 	}
 
-	if(b*h < w)
+	myfunction();
+
+	$("a.left").click(function()
 	{
-		$("#myimg").css('width', b*h + 'px');
-		$("#myimg").css('height', h + 'px');
-		var diff = (w - b*h) / 2;
-		$("#myimg").css('margin-left', diff + 'px');
-	}
+		if(index>0)
+		{
+			index--;
+			$("#myimg").attr("src",imgs[index]);
+			myfunction();
+		}
+	});
 
-
-
-	// naturalWidth /= temp;
-	// naturalHeight /= temp;
-
-
-
-	// if(naturalWidth < naturalHeight)
-	// {
-	// 	$("#myimg").css('width', w + 'px');
-	// 	$("#myimg").css('height', 'auto');
-	// }
-	// else
-	// {
-	// 	$("#myimg").css('height', h + 'px');
-	// 	$("#myimg").css('width', 'auto');
-	// }
-
-	// naturalWidth /= temp;
-	// naturalHeight /= temp;
-
-	// console.log(w,h);
-	// console.log(naturalWidth*times,naturalHeight*times);
-
-
-
-	// $("#myimg").css('width', '360px');
-	// $("#myimg").css('height', '270px');
-	// $("#myimg").css('margin-top', '121px');
+	$("a.right").click(function()
+	{
+		if(index < imgs.length-1)
+		{
+			index++;
+			$("#myimg").attr("src",imgs[index]);
+			myfunction();
+		}
+	});
 
 
 
