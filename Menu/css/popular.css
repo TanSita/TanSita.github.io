@@ -1,0 +1,12 @@
+.carousel-control.right, .carousel-control.left 
+{
+    width: 20%;
+    background-image: none;
+    /*color: #f4511e;*/
+}
+
+img
+{
+	padding-top: 10%;
+	padding-bottom: 10%;
+}
