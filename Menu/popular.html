@@ -24,10 +24,10 @@
 
 <body data-spy="scroll" data-target=".navbar" data-offset="60">
 
-	<p id="H">Height : </p>
-	<p id="W">Width : </p>
+	<!-- <p id="H">Height : </p> -->
+	<!-- <p id="W">Width : </p> -->
 
-	<!-- <img src="images/冰淇淋鬆餅.jpg" width="100%"> -->
+	<img id="myimg" src="images/冰淇淋鬆餅.jpg">
 
 
 	<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
@@ -47,8 +47,23 @@
 	var w = document.documentElement.clientWidth;
 	var h = document.documentElement.clientHeight;
 
-	$("#H").text($("#H").text()+h);
-	$("#W").text($("#W").text()+w);
+	// $("#H").text($("#H").text()+h);
+	// $("#W").text($("#W").text()+w);
+
+
+	// var naturalWidth = $("#myimg").width(); 
+	// var naturalHeight = $("#myimg").height(); 
+
+	// console.log(naturalHeight);
+	// console.log(naturalWidth);
+
+	console.log(h);
+	console.log(w);
+
+	$("#myimg").css('height', h);
+	$("#myimg").css('width', w);
+
+
 
 </script>
 </html>
