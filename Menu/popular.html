@@ -50,19 +50,38 @@
 	var naturalWidth = $("#myimg")[0].naturalWidth; 
 	var naturalHeight = $("#myimg")[0].naturalHeight; 
 
-	var temp = 0;
-	var times = 0;
+	var a = naturalHeight / naturalWidth;
+	var b = naturalWidth / naturalHeight;
 
-	if(naturalWidth < naturalHeight)
+	if(a*w<h)
 	{
 		$("#myimg").css('width', w + 'px');
-		$("#myimg").css('height', 'auto');
+		$("#myimg").css('height', a*w + 'px');
 	}
-	else
+
+	if(b*h<w)
 	{
+		$("#myimg").css('width', b*h + 'px');
 		$("#myimg").css('height', h + 'px');
-		$("#myimg").css('width', 'auto');
 	}
+
+
+
+	// naturalWidth /= temp;
+	// naturalHeight /= temp;
+
+
+
+	// if(naturalWidth < naturalHeight)
+	// {
+	// 	$("#myimg").css('width', w + 'px');
+	// 	$("#myimg").css('height', 'auto');
+	// }
+	// else
+	// {
+	// 	$("#myimg").css('height', h + 'px');
+	// 	$("#myimg").css('width', 'auto');
+	// }
 
 	// naturalWidth /= temp;
 	// naturalHeight /= temp;
