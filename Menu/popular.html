@@ -47,22 +47,12 @@
 	var w = document.documentElement.clientWidth;
 	var h = document.documentElement.clientHeight;
 
-	// $("#H").text($("#H").text()+h);
-	// $("#W").text($("#W").text()+w);
+	var naturalWidth = $("#myimg")[0].naturalWidth; 
+	var naturalHeight = $("#myimg")[0].naturalHeight; 
 
 
-	// var naturalWidth = $("#myimg").width(); 
-	// var naturalHeight = $("#myimg").height(); 
-
-	// console.log(naturalHeight);
-	// console.log(naturalWidth);
-
-	console.log(h);
-	console.log(w);
-
-	$("#myimg").css('height', h);
-	$("#myimg").css('width', w);
-
+	$("#myimg").css('width', '360px');
+	$("#myimg").css('height', '270px');
 
 
 </script>
