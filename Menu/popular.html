@@ -24,10 +24,11 @@
 
 <body data-spy="scroll" data-target=".navbar" data-offset="60">
 
-	<!-- <p id="H">Height : </p> -->
-	<!-- <p id="W">Width : </p> -->
-
-	<img id="myimg" src="images/冰淇淋鬆餅.jpg">
+	<center>
+	<div class="picFrame">
+		<img id="myimg" src="images/冰淇淋鬆餅.jpg">
+	</div>
+	</center>
 
 
 	<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
@@ -49,33 +50,87 @@
 
 	var index = 0;
 
+
 	function myfunction()
 	{
-		var w = document.documentElement.clientWidth;
-		var h = document.documentElement.clientHeight;
-
-		var naturalWidth = $("#myimg")[0].naturalWidth; 
-		var naturalHeight = $("#myimg")[0].naturalHeight; 
-
-		var a = naturalHeight / naturalWidth;
-		var b = naturalWidth / naturalHeight;
-
-		if(a*w < h)
+		$(document).ready(function ()
 		{
-			$("#myimg").css('width', w + 'px');
-			$("#myimg").css('height', a*w + 'px');
-			var diff = (h - a*w) / 2;
-			$("#myimg").css('margin-top', diff + 'px');
-		}
+			var w = document.documentElement.clientWidth;
+			var h = document.documentElement.clientHeight;
 
-		if(b*h < w)
-		{
-			$("#myimg").css('width', b*h + 'px');
-			$("#myimg").css('height', h + 'px');
-			var diff = (w - b*h) / 2;
-			$("#myimg").css('margin-left', diff + 'px');
-		}
+		    var $img = $("#myimg"),
+		        img = new Image();
+		    $(img).on('load', function()
+		    {
+				var naturalWidth = $("#myimg")[0].naturalWidth; 
+				var naturalHeight = $("#myimg")[0].naturalHeight; 
+				var min = 0;
+
+				if(w < h) min = w;
+				else min = h;
+
+				$(".picFrame").css('width', min + 'px');
+				$(".picFrame").css('height', min + 'px');
+
+				if(naturalHeight > naturalWidth)
+				{
+					$("#myimg").css('width', 'auto');
+					$("#myimg").css('height', min + 'px');
+					$("#myimg").css('margin-top', '0px');
+				}
+				else
+				{
+					$("#myimg").css('width', min + 'px');
+					$("#myimg").css('height', 'auto');
+					var currentHeight = $("#myimg").height();
+					var diff = (min - currentHeight) / 2;
+					$("#myimg").css('margin-top', diff + 'px');
+				}
+		    }).attr('src', $img.attr('src'));    
+		});
 	}
+
+
+
+	// function myfunction()
+	// {
+	// 	var w = document.documentElement.clientWidth;
+	// 	var h = document.documentElement.clientHeight;
+
+
+		// $('#myimg').load(function() 
+		// {
+
+		// 	var naturalWidth = $("#myimg")[0].naturalWidth; 
+		// 	var naturalHeight = $("#myimg")[0].naturalHeight; 
+		// 	var min = 0;
+
+		// 	if(w < h) min = w;
+		// 	else min = h;
+
+		// 	$(".picFrame").css('width', min + 'px');
+		// 	$(".picFrame").css('height', min + 'px');
+
+		// 	if(naturalHeight > naturalWidth)
+		// 	{
+		// 		$("#myimg").css('width', 'auto');
+		// 		$("#myimg").css('height', min + 'px');
+		// 	}
+		// 	else
+		// 	{
+		// 		$("#myimg").css('width', min + 'px');
+		// 		$("#myimg").css('height', 'auto');
+				
+		// 		$('#myimg').load(function() 
+		// 		{
+		// 			var currentHeight = $("#myimg").height();
+		// 			var diff = (min - currentHeight) / 2;
+		// 			$("#myimg").css('margin-top', diff + 'px');
+		// 		});
+		// 	}
+		// });
+
+	// }
 
 	myfunction();
 
