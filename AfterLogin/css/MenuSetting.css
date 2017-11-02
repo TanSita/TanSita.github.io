@@ -21,5 +21,13 @@ body
 {
 	width: 320px;
 	height: 568px;
+	background-color: white;
+}
+
+
+.myclass embed
+{
+	width: 320px;
+	height: 568px;
 }
 
