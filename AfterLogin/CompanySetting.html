@@ -37,13 +37,8 @@
         
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right admin-menu">
-                    <li class="active">
-                        <a href="./profile.html">
-                            <i class="glyphicon glyphicon-user"></i>個人檔案
-                        </a>
-                    </li>
 
-                    <li>
+                    <li class="active">
                         <a href="#">
                             <i class="glyphicon glyphicon-cog"></i>設定
                         </a>
@@ -60,10 +55,15 @@
     </nav>
 
 
-    <!-- 公司設定 -->
     <div class="row" id="CompanySetting">
-        <div class="col-sm-3">
+        <div class="col-xs-3">
             <ul class="nav nav-pills nav-stacked admin-menu" >
+                <li>
+                    <a href="./ProfileSetting.html">
+                        <i class="glyphicon glyphicon-user"></i> 個人檔案設定
+                    </a>
+                </li>
+
                 <li class="active">
                     <a href="#">
                         <i class="glyphicon glyphicon-briefcase"></i> 公司頁面設定
@@ -78,14 +78,16 @@
             </ul>
         </div>
 
-        <div class="col-sm-9">
+        <!-- 這裡開始不一樣 Company Setting -->
+
+        <div class="col-xs-9">
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <div class="row">
-                        <div class="col-xs-11">
+                        <div class="col-md-11 col-xs-10">
                             <strong class="panel-title text-left">餐廳網址</strong>
                         </div>
-                        <div class="col-xs-1">
+                        <div class="col-md-1 col-xs-2">
                             <button class="btn btn-success">更改</button>
                         </div>
                     </div>
@@ -111,18 +113,18 @@
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <div class="row">
-                        <div class="col-xs-10">
+                        <div class="col-md-10 col-xs-8">
                             <strong class="panel-title text-left">公司封面照</strong>
                         </div>
                         
-                        <div class="col-xs-1">
+                        <div class="col-md-1 col-xs-2">
                             <div class="monkeyb-cust-file">
                               <span>選擇</span>
                               <input type="file" id="uploader" onchange="readURL(this);">
                             </div>  
                         </div>
                         
-                        <div class="col-xs-1">
+                        <div class="col-md-1 col-xs-2">
                             <button class="btn btn-success">上傳</button>
                         </div>
                     </div>
