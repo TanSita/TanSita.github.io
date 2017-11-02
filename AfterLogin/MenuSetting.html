@@ -23,7 +23,14 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+
+
+
+
 </head>
+
+
+
 
 <body class="bg-1" data-spy="scroll" data-target=".navbar">
 
@@ -90,25 +97,25 @@
             
             <div class="col-xs-5">
                 <div class="myclass">
-                    <embed src="../Menu/index.html"></embed>
+                    <iframe src="../Menu/index.html" id="myframe"></embed>
                 </div>
             </div>
+            <script type="text/javascript">
 
+                $(document).ready(function()
+                {
+                    console.log($("#myframe").contents().find('body').html("a"));
+                });
+
+            </script>
         </div>
 
   </div>
 
+
+
+
 </body>
-
-<script type="text/javascript">
-    $( ".jscolor" ).change(function() 
-    {
-        var mycolor = $(".jscolor").val();
-        $(".myclass").css({"background-color": "#"+mycolor});
-    });
-
-
-</script>
 
 
 </html>
