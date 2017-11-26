@@ -1,6 +1,6 @@
 body
 {
-    padding-top: 50px;
+    padding-top:50px;
     font: 400 15px/1.8 Lato, sans-serif;
     color: #777;
 }
@@ -11,16 +11,8 @@ body
     color: #bdbdbd;
 }
 
-.row
+.jumbotron h2
 {
-	margin-left: 0px;
-	margin-right: 0px;
-}
-
-
-#Source , #Edited
-{
-	width: 320px;
-	height: 568px;
+    color: black;
 }
 

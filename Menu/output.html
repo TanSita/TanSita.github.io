@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>Menu</title>
+	<meta charset="utf-8">
+
+	<!-- bootstrap.css -->
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+	<!-- jquery 要先放 , bs會用到-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js" type="text/javascript"></script>
+
+	<!-- wow.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+    <script> new WOW().init(); </script>
+
+
+    <!-- Something about smoothTouchScroll -->
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.kinetic.min.js"></script>
+    <script src="js/jquery.smoothTouchScroll.min.js"></script>
+
+
+    <!-- animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+
+    <!-- smoothTouchScroll.css -->
+    <link rel="Stylesheet" type="text/css" href="css/smoothTouchScroll.css" />
+    
+    <!-- import our css -->
+    <link rel="Stylesheet" type="text/css" href="css/output.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/less.js/2.7.2/less.min.js"></script>
+
+
+</head>
+
+
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bar0" onclick="more();">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>                        
+            </button>
+            <a class="navbar-brand" href="#myPage" onclick="backPage();">Back</a>
+        </div>
+    
+        <div class="collapse navbar-collapse" id="bar0">
+            <ul class="nav navbar-nav navbar-right" id="FoodType0">
+                
+            </ul>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bar0">
+            <ul class="nav navbar-nav navbar-right" id="FoodType0">
+                <li class="FoodTypes0" id="FoodTypes0_0">
+                    <a href="#" onclick="nextPage('bar0','bar0_0')">義大利麵</a>
+                </li>
+                <li class="FoodTypes0" id="FoodTypes0_1">
+                    <a href="#" onclick="nextPage('bar0','bar0_1')">點心</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bar0_0">
+            <ul class="nav navbar-nav navbar-right" id="FoodType0_0">
+                <li class="FoodTypes0_0" id="FoodTypes0_0_0">
+                    <a href="#" onclick = "nextPage('bar0_0','bar0_0_0')">茄汁義大利麵</a>
+                </li>
+                <li class="FoodTypes0_0" id="FoodTypes0_0_1">
+                    <a href="#" onclick = "nextPage('bar0_0','bar0_0_1')">青醬海陸義大利麵</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bar0_1">
+            <ul class="nav navbar-nav navbar-right" id="FoodType0_1">
+                <li class="FoodTypes0_0" id="FoodTypes0_1_0">
+                    <a href="#" onclick = "nextPage('bar0_1','bar0_1_0')">麥克雞塊</a>
+                </li>
+                <li class="FoodTypes0_0" id="FoodTypes0_1_1">
+                    <a href="#" onclick = "nextPage('bar0_1','bar0_1_1')">微笑薯餅</a>
+                </li>
+            </ul>
+        </div>
+
+
+        <div class="collapse navbar-collapse" id="bar0_0_0">
+            <ul class="nav navbar-nav navbar-right" id="FoodType0_0_0">
+                <img src="images/茄汁義大利麵.jpg" width="100%" id="FoodTypes0_0_0_0">
+            </ul>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bar0_0_1">
+            <ul class="nav navbar-nav navbar-right" id="FoodType0_0_1">
+                <img src="images/青醬海陸義大利麵.jpg" width="100%" id="FoodTypes0_0_1_0">
+            </ul>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bar0_1_0">
+            <ul class="nav navbar-nav navbar-right" id="FoodType0_0_1">
+                <img src="images/麥克雞塊.jpg" width="100%" id="FoodTypes0_1_0_0">
+            </ul>
+        </div>
+
+
+        <div class="collapse navbar-collapse" id="bar0_1_1">
+            <ul class="nav navbar-nav navbar-right" id="FoodType0_1_1">
+                <img src="images/微笑薯餅.jpg" width="100%" id="FoodTypes0_1_1_0">
+            </ul>
+        </div>
+
+        
+    </div>
+</nav>
+
+
+<div class="jumbotron">
+
+    <div id="touchScroller">
+        <a href="./popular.html"><img src="images/冰淇淋鬆餅.jpg" class="img-circle Stories"/></a>
+        <a href="#"><img src="images/乳酪餅.jpg" class="img-circle Stories"/></a>
+        <a href="#"><img src="images/青醬海陸義大利麵.jpg" class="img-circle Stories"/></a>
+        <a href="#"><img src="images/茄汁義大利麵.jpg" class="img-circle Stories"/></a>
+        <a href="#"><img src="images/起司火腿法國吐司.jpg" class="img-circle Stories"/></a>
+        <a href="#"><img src="images/麥克雞塊.jpg" class="img-circle Stories"/></a>
+        <a href="#"><img src="images/黑胡椒蘑菇鐵板麵.jpg" class="img-circle Stories"/></a>
+        <a href="#"><img src="images/微笑薯餅.jpg" class="img-circle Stories"/></a>
+        <a href="#"><img src="images/滿福總匯.jpg" class="img-circle Stories"/></a>
+        <a href="#"><img src="images/鮪魚起士烤土司.jpg" class="img-circle Stories"/></a>
+        <a href="#"><img src="images/鮪魚起司蛋餅.jpg" class="img-circle Stories"/></a>
+        <a href="#"><img src="images/鮮奶阿華田.jpg" class="img-circle Stories"/></a>
+    </div>
+
+    <center>
+        <!-- <h3>來找找好吃的食物吧！</h3>  -->
+        <div class="form-group">
+          <input type="text" class="form-control" id="test" placeholder="來找找好吃的食物吧！">
+        </div>
+        <form>
+            <div class="input-group">
+                <input type="email" class="form-control" size="50" placeholder="搜尋 ... " required>
+                <div class="input-group-btn">
+                    <button class="btn btn-danger" type="submit">
+                        <i class="glyphicon glyphicon-search"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </center>
+</div> 
+
+
+<script type="text/javascript">
+
+    var bar0index = 0;
+    var bar1index = 0;
+
+    $(function() 
+    {
+        $("#touchScroller").smoothTouchScroll();
+        // $("#touchScroller").smoothTouchScroll({ continuousScrolling: true });
+    });
+    
+    function AddNext(TypeAddTextboxID)
+    {
+        var TypeAddTextboxNum = TypeAddTextboxID.replace("TypeAddButton","");
+
+        // 因為有一個是button
+        var index = $("#FoodType" + TypeAddTextboxNum)[0].children.length - 1;
+
+        var barNum = TypeAddTextboxNum + "_" + index;
+
+        $("#" + TypeAddTextboxID).before('<input type="text" class="form-control TypeAddTextboxNums' + TypeAddTextboxNum + '" id="TypeAddTextboxNums' + barNum +'" placeholder="輸入餐點分類">');
+
+        $(".container").append(
+            '<div class="collapse navbar-collapse" id="bar' + TypeAddTextboxNum + "_" + index + '">' +
+                '<ul class="nav navbar-nav navbar-right" id="' +
+                    "FoodType" + barNum + '">' +
+                    makeButton(barNum) + 
+                '</ul>' + 
+            '</div>'
+            );
+    }
+
+    function makeButton(thisNum)
+    {
+        var myhtml = 
+            '<button id="TypeAddButton' + thisNum + '"' + 
+                        ' class="btn btn-success form-control"' + 
+                        ' onclick="AddNext('+ "'" +
+                        'TypeAddButton' + thisNum + "'" + 
+                        ');">新增餐點分類</button>';
+
+        return myhtml;
+    }
+
+    function EditItem(barID , itemID , num)
+    {
+        alert("XD");
+        // var ItemValue = $("#"+itemID)[0].children[0].text;
+        // ItemValue = ItemValue.replace(/\s+/g,"");
+
+        // console.log(bar0);
+
+        // $("#"+itemID).html('<input type="text" class="form-control EditTypeNums" id="EditTypeNums' + num +'" placeholder="輸入餐點分類" value="' + ItemValue + '"    >');
+    }
+
+    function DeleteItem(itemID , num)
+    {
+        $("#"+itemID).html("");
+    }
+
+    var thisID = [];
+    var nextID = [];
+    var flag = false;
+
+    function nextPage(oldID,newID)
+    {
+        $("#" + oldID).hide();
+        $("#" + newID).show();
+        thisID.push(oldID);
+        nextID.push(newID);
+    }
+
+    function backPage()
+    {
+        $("#" + nextID.pop()).hide();
+        $("#" + thisID.pop()).show();
+    }
+
+    function more()
+    {
+        if(flag)
+        {
+            $("#" + nextID[nextID.length-1]).hide();
+            flag = false;
+        }
+        else
+        {
+            $("#" + nextID[nextID.length-1]).show();
+            flag = true;
+        }
+    }
+
+
+    // $("#FoodTypes0").click(function() 
+    // {
+    //     $("#myNavbar").hide("slow", function() 
+    //     {
+    //         $("#myNavbar2").show();
+    //         // alert( "Animation complete." );
+    //     });
+    // });
+
+    // $('.TouchScroller').kinetic();
+  
+    // $(document).ready(function() {
+    //     $("#TouchScroller").smoothTouchScroll({ 
+    //         continuousScrolling: true
+    //     });
+    // });
+
+    // $(".TouchScroller").draggable({
+    //     axis: "x",
+    //     start: function(event, ui) {
+    //         start = ui.position.left;
+    //     },
+    //     stop: function(event, ui) {
+    //         stop = ui.position.left;
+    //     }
+    // });
+
+
+
+
+</script>
+
+</body>
+</html>
