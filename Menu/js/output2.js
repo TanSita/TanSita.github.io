@@ -1,8 +1,3 @@
-// var json = $.getJSON("../TryJson/myjson.json");
-// $(document).ready(function()
-// {
-//     console.log(json.responseText);
-// });
 var mypanel_colors = ["info","warning","danger","success"];
 var mypanel_colorsLen = mypanel_colors.length;
 
@@ -10,6 +5,32 @@ var json;
 var fsrc = "";
 var shoppingitems = [];
 var alreadyClick = [];
+
+var newList = 
+{
+    "action":"new",
+    "food":
+    [
+    ]
+}
+
+var editList = 
+{
+    "action":"edit",
+    "food":
+    [
+    ]
+}
+
+var delList = 
+{
+    "action":"delete",
+    "food":
+    [
+    ]
+}
+
+
 
 mysmoothTouchScroll();
 
@@ -110,14 +131,16 @@ function uploadImage(name , price , src , intro , top10)
     return myhtml;
 }
 
-function add3buttons(imageID , name , price , src , intro , top10)
+function add3buttons(hudingID , imageID , name , price , src , intro , top10 , category)
 {
     var myhtml = 
     '<br><br>'+
     '<span class="myCorfirmButton" onclick="myConfirm(' + 
-    "'" + imageID + "','" + name + "','" + price + "','" + 
-          src + "','" + intro + "'," + top10 +  
-    ');">修改</span>' +
+    hudingID + ",'" + imageID + "','" +
+    name + "'," + price + ",'" + src + "','" + 
+    intro + "'," + top10 + ",'" + category + "'" + 
+    ');">' + 
+    '修改</span>' +
     '<span class="myDeleteButton" onclick="myDelete(' +
      "'" + imageID + "'" + 
     ');">刪除</span>' +
@@ -127,31 +150,36 @@ function add3buttons(imageID , name , price , src , intro , top10)
     return myhtml;        
 }
 
-function myConfirm(imageID , name , price , src , intro , top10)
+function myConfirm(hudingID , imageID , name , price , src , intro , top10 , category)
 {
     var fname = $("#myname").val();
-    var fprice = $("#myprice").val();
+    var fprice = parseInt($("#myprice").val());
     var fintro = $("#myintro").val();
     var ftop10 = false;
+    
+    var fcategoryID = imageID.split("_")[0];
+    var fnum = fcategoryID.replace("category","");
+    var fcategoryTitleID = "categoryTitle" + fnum;
+    var fcategory = $("#" + fcategoryTitleID)[0].innerHTML;
 
     if($(".star")[1].getAttribute("id")=="fullstar")
     {
         ftop10 = true;
     }
 
-    if(fname.length>0 && fprice.length>0 && fintro.length>0)
+    if(fname.length>0 && fprice.toString().length>0 && fintro.length>0)
     {
         //如果有更新圖片
         if(fsrc.length > 0) 
         {
             //更改圖片
-            $("#" + imageID).replaceWith(addImage(imageID,fname,fprice,fsrc,fintro,ftop10)); 
-            $("." + imageID).replaceWith(addtop10(imageID,fname,fprice,fsrc,fintro,ftop10)); 
+            $("#" + imageID).replaceWith(addImage(hudingID,imageID,fname,fprice,fsrc,fintro,ftop10,fcategory)); 
+            $("." + imageID).replaceWith(addtop10(hudingID,imageID,fname,fprice,fsrc,fintro,ftop10,fcategory)); 
 
             //如果之前沒有放到top10就放過去
             if(top10==false && ftop10==true)
             {
-                $(".scrollableArea").append(addtop10(imageID , fname , fprice , fsrc , fintro , ftop10));
+                $(".scrollableArea").append(addtop10(hudingID,imageID,fname,fprice,fsrc,fintro,ftop10,fcategory));
                 mysmoothTouchScroll();
             }
             //如果之前放在top10 就移除
@@ -165,12 +193,12 @@ function myConfirm(imageID , name , price , src , intro , top10)
         //沒更新圖片的話，就只要把其他資訊改一改就好惹
         else
         {
-            $("#" + imageID).replaceWith(addImage(imageID,fname,fprice,src,fintro,ftop10)); //新增圖片到某個分類
-            $("." + imageID).replaceWith(addtop10(imageID,fname,fprice,src,fintro,ftop10)); 
+            $("#" + imageID).replaceWith(addImage(hudingID,imageID,fname,fprice,src,fintro,ftop10,fcategory)); 
+            $("." + imageID).replaceWith(addtop10(hudingID,imageID,fname,fprice,src,fintro,ftop10,fcategory)); 
 
             if(top10==false && ftop10==true)
             {
-                $(".scrollableArea").append(addtop10(imageID , fname , fprice , src , fintro , ftop10));
+                $(".scrollableArea").append(addtop10(hudingID,imageID,fname,fprice,src,fintro,ftop10,fcategory));
                 mysmoothTouchScroll();
             }
             else if(top10==true && ftop10==false)
@@ -224,7 +252,7 @@ function myCancel()
 
 // alert box (add / edit /show)
 
-function addAlert(categoryID)
+function addAlert(num)
 {
     // I = initial
     // f = function 
@@ -241,38 +269,41 @@ function addAlert(categoryID)
 
     }).then(function () 
     {
-        var categoryLen = $("#" + categoryID)[0].children.length;
+        var fcategoryID = "category" + num;
+        var fcategoryTitleID = "categoryTitle" + num;
+        var fcategoryLen = $("#" + fcategoryID)[0].children.length;
         var fImageLastID;
         var fImagenum = 0; //如果啥都沒 就從0開始
+        var fcategory = $("#" + fcategoryTitleID)[0].innerHTML;
 
-        if(categoryLen > 0)
+        if(fcategoryLen > 0)
         {
-            fImageLastID = $("#" + categoryID + " > div:last").attr('id');
-            fImagenum = parseInt(fImageLastID.replace(categoryID + "_" + "image",""));
+            fImageLastID = $("#" + fcategoryID + " > div:last").attr('id');
+            fImagenum = parseInt(fImageLastID.replace(fcategoryID + "_" + "image",""));
             fImagenum += 1;
         }
         
-        var fImageID = categoryID + "_" + "image" + fImagenum;
+        var fImageID = fcategoryID + "_" + "image" + fImagenum;
 
         var fname = $("#myname").val();
-        var fprice = $("#myprice").val();
+        var fprice = parseInt($("#myprice").val());
         var fintro = $("#myintro").val();
         var ftop10 = false;
 
         if($(".star")[1].getAttribute("id")=="fullstar")
         {
             ftop10 = true;
-            // append ...
         }
 
-        if(fname.length>0 && fprice.length>0 && 
+        if( fname.length>0 && fprice.toString().length>0 && 
             fintro.length>0 && fsrc.length>0 )
         {
-            $("#" + categoryID).append(addImage(fImageID,fname,fprice,fsrc,fintro,ftop10)); //新增圖片到某個分類
+
+            $("#" + fcategoryID).append(addImage(-1,fImageID,fname,fprice,fsrc,fintro,ftop10,fcategory)); //新增圖片到某個分類
 
             if(ftop10==true)
             {
-                $(".scrollableArea").append(addtop10(fImageID , fname , fprice , fsrc , fintro , ftop10));
+                $(".scrollableArea").append(addtop10(-1 , fImageID , fname , fprice , fsrc , fintro , ftop10 , fcategory));
                 mysmoothTouchScroll();
             }
             
@@ -281,7 +312,7 @@ function addAlert(categoryID)
     })
 }
 
-function editAlert(imageID , name , price , src , intro , top10)
+function editAlert(hudingID , imageID , name , price , src , intro , top10 , category)
 {
     // name 是原本資料的
     // fname 是改之後的
@@ -291,7 +322,7 @@ function editAlert(imageID , name , price , src , intro , top10)
         title: '編輯餐點',
         showConfirmButton: false,
         html:   uploadImage(name,price,src,intro,top10) +
-                add3buttons(imageID,name,price,src,intro,top10)
+                add3buttons(hudingID,imageID,name,price,src,intro,top10,category)
 
     }).then(function () 
     {
@@ -410,20 +441,28 @@ function showStar(top10)
 
 //關於新增Image
 
-function addImage(imageID , name , price , src , intro , top10)
+function addImage(hudingID , imageID , name , price , src , intro , top10 , category)
 {
-    var categoryID = imageID.split("_")[0];
-
     var myhtml = 
-    '<div class="col-xs-4 text-center" id="' + imageID + '">' +
-        // '<a href="#' + categoryID +'" onclick="' +  
+    '<div class="col-xs-4 text-center"' +  
+        ' hudingID = ' + hudingID + 
+        ' imageID = "' + imageID + '"' +
+        ' name = "' + name + '"' +
+        ' price = ' + price + 
+        ' src = "' + src + '"' +
+        ' intro = "' + intro + '"' +
+        ' top10 = ' + top10 + 
+        ' category = "' + category + '"' +
+        ' id="' + imageID + '">' +
         '<a onclick="' +  
-            'editAlert(' + "'" + imageID + "','" + name +
-            "','" + price + "','" + src + "','" + intro + "'" + "," + top10 +
-            ')">' + 
+            'editAlert(' + hudingID + ",'" + imageID + "','" +
+            name + "'," + price + ",'" + src + "','" + 
+            intro + "'," + top10 + ",'" + category + "'" + 
+            ');">' + 
             '<img class="img-rounded" src="' + src + '" width="100%">' +
         '</a>' +
     '</div>';
+
 
     return myhtml;
 }
@@ -452,14 +491,23 @@ function showImage(name , price , src , intro , top10)
     return myhtml;
 }
 
-function addtop10(imageID , name , price , src , intro , top10)
+function addtop10(hudingID , imageID , name , price , src , intro , top10 , category)
 {
     var myhtml = 
-    // '<a href="#" class="' + imageID + '" onclick="' +  
-    '<a class="' + imageID + '" onclick="' +  
-    'editAlert(' + "'" + imageID + "','" + name + "','" + 
-    price + "','" + src + "','" + intro + "'" + "," + top10 +
-    ')">' + 
+    '<a class="' + imageID + '"' + 
+        ' hudingID = ' + hudingID + 
+        ' imageID = "' + imageID + '"' +
+        ' name = "' + name + '"' +
+        ' price = ' + price + 
+        ' src = "' + src + '"' +
+        ' intro = "' + intro + '"' +
+        ' top10 = ' + top10 + 
+        ' category = "' + category + '"' +
+        ' onclick="' +  
+        'editAlert(' + hudingID + ",'" + imageID + "','" +
+        name + "'," + price + ",'" + src + "','" + 
+        intro + "'," + top10 + ",'" + category + "'" + 
+        ');">' + 
         '<img src="' + src + '" class="img-circle Stories"/>' +
     '</a>';
 
@@ -642,13 +690,13 @@ function addListTextbox()
         num += 1;
     }
 
-    $("#" + "addCategoryTextButton").before(makeListTextbox(num,'new'));
+    $("#" + "addCategoryTextButton").before(makeListTextbox(num,'new',false));
     $("body").append(makeCategory(num,''));
 
     $(".navbar li a").css({"display" : "inline-block" , "width" : "calc(100% - 90px)"});
 }
 
-function makeListTextbox(num,new_or_edit)
+function makeListTextbox(num,new_or_edit,huding)
 {
     var myhtml = 
     '<li id="' + "list" + num + '">' + 
@@ -657,14 +705,14 @@ function makeListTextbox(num,new_or_edit)
         '" id="' + new_or_edit + 'CategoryTextbox' + num +
         '" placeholder="輸入餐點分類">';
     
-    myhtml += makeOKDeleteButton(num,new_or_edit);
+    myhtml += makeOKDeleteButton(num,new_or_edit,huding);
 
     myhtml += '</li>';
 
     return myhtml;
 }
 
-function makeList(num , listText)
+function makeList(num , listText , huding)
 {
     var listID = "list" + num;
     var categoryID = "category" + num;
@@ -673,7 +721,7 @@ function makeList(num , listText)
     '<li id="' + listID + '">' +
         '<a href="#' + categoryID + '">' + listText +
         '</a>' + 
-        makeEditDeleteButton(num) +
+        makeEditDeleteButton(num,huding) +
     '</li>';
 
     return myhtml;
@@ -692,7 +740,7 @@ function makeCategory(num , listText)
                     '<strong class="panel-title" id="' + categoryTitleID + '">' + listText + '</strong>' +
                 '</div>' +
                 '<div class="alignright">' +
-                    '<button class="btn btn-success " onclick="addAlert(\'' + categoryID + '\')">' + '新增</button>' +
+                    '<button class="btn btn-success " onclick="addAlert(' + num + ')">' + '新增</button>' +
                 '</div>' +
             '</div>' +
         '</div>' +
@@ -706,41 +754,82 @@ function makeCategory(num , listText)
     return myhtml;
 }
 
-function OKItem(num,new_or_edit)
+function OKItem(num,new_or_edit,huding)
 {
     var mylistID = "list" + num;
     var mycategoryTitleID = "categoryTitle" + num;
-    
-    var myTextboxID = "";
 
-    if(new_or_edit=='edit')
-    {
-        myTextboxID = "editCategoryTextbox" + num
-    }
-    else if(new_or_edit=='new')
-    {
-        myTextboxID = "newCategoryTextbox" + num;
-    }
+    var myTextboxID = new_or_edit + "CategoryTextbox" + num;
 
     var mylistText = $("#" + myTextboxID).val();
 
     if(mylistText.length>0)
     {
-        $("#" + mylistID).replaceWith(makeList(num,mylistText));
+        $("#" + mylistID).replaceWith(makeList(num,mylistText,huding));
         $("#" + mycategoryTitleID)[0].innerHTML = mylistText;
+
+        if(new_or_edit=='edit')
+        {
+            if(huding==true)
+            {
+                var mycategoryID = "category" + num;
+                var mycategoryLen = $("#" + mycategoryID)[0].children.length;
+
+                for(var i=0;i<mycategoryLen;i++)
+                {
+                    var myfood = $("#" + mycategoryID)[0].children[i];
+                    var myHudingID = parseInt(myfood.getAttribute("HudingID"));
+                    var myname = myfood.getAttribute("name");
+                    var myprice = parseInt(myfood.getAttribute("price"));
+                    var mysrc = myfood.getAttribute("src");
+                    var myintro = myfood.getAttribute("intro");
+                    var mytop10 = myfood.getAttribute("top10") == "true";
+                    var mycategory = mylistText;
+                    myfood.setAttribute("category" , mylistText);
+
+                    Hudingedit(myHudingID,myname,myprice,mysrc,myintro,mytop10,mycategory);
+                    console.log(editList);
+                }
+            }
+            else
+            {
+                var mycategoryID = "category" + num;
+                var mycategoryLen = $("#" + mycategoryID)[0].children.length;
+
+                for(var i=0;i<mycategoryLen;i++)
+                {
+                    var myfood = $("#" + mycategoryID)[0].children[i];
+                    var myimageID = myfood.getAttribute("imageID");
+                    var myname = myfood.getAttribute("name");
+                    var myprice = parseInt(myfood.getAttribute("price"));
+                    var mysrc = myfood.getAttribute("src");
+                    var myintro = myfood.getAttribute("intro");
+                    var mytop10 = myfood.getAttribute("top10") == "true";
+                    var mycategory = mylistText;
+                    myfood.setAttribute("category" , mylistText);
+
+                    TSadd(myimageID,myname,myprice,mysrc,myintro,mytop10,mycategory);
+                    console.log(newList);
+                }
+            }
+        }
+        else if(new_or_edit=='new')
+        {
+
+        }
     }
 
     $(".navbar li a").css({"display" : "inline-block" , "width" : "calc(100% - 90px)"});
 }
 
-function EditItem(num)
+function EditItem(num , huding)
 {
     var mylistID = "list" + num;
 
-    $("#" + mylistID).replaceWith(makeListTextbox(num,'edit'));
+    $("#" + mylistID).replaceWith(makeListTextbox(num,'edit',huding));
 }
 
-function DeleteItem(num)
+function DeleteItem(num , huding)
 {
     var mylistID = "list" + num;
     var mycategoryID = "category" + num;
@@ -749,7 +838,7 @@ function DeleteItem(num)
     $("#" + mycategoryID).parent().replaceWith('');
 }
 
-function makeOKDeleteButton(num,new_or_edit)
+function makeOKDeleteButton(num,new_or_edit,huding)
 {
     var myhtml = 
     '<button class="btn nothing"></button>' + 
@@ -758,26 +847,140 @@ function makeOKDeleteButton(num,new_or_edit)
     '   <span class="glyphicon glyphicon-trash"></span>' + 
     '</button>' + 
     '<button class="btn btn-success pull-right"' + 
-    'onclick="OKItem(\'' + num + "','" + new_or_edit + '\');" >' + 
+    'onclick="OKItem(' + num + ",'" + new_or_edit + "'," + huding + ');" >' + 
     '   <span class="glyphicon glyphicon-ok"></span>' + 
     '</button>';
 
     return myhtml;
 }
 
-
-function makeEditDeleteButton(num)
+function makeEditDeleteButton(num , huding)
 {
     var myhtml = 
     '<button class="btn nothing"></button>' + 
     '<button class="btn btn-danger pull-right"' + 
-    'onclick="DeleteItem(\'' + num + '\');" >' + 
+    'onclick="DeleteItem(' + num + ',' + huding + ');" >' + 
     '   <span class="glyphicon glyphicon-trash"></span>' + 
     '</button>' + 
     '<button class="btn btn-info pull-right"' + 
-    'onclick="EditItem(\''+ num + '\');" >' + 
+    'onclick="EditItem(' + num + ',' + huding + ');" >' + 
     '   <span class="glyphicon glyphicon-pencil"></span>' + 
     '</button>';
 
     return myhtml;
+}
+
+
+// about output json 
+
+function TSsearch(imageID)
+{
+    var newListfood = newList["food"];
+    var newListfoodLen = newListfood.length;
+
+    for(var i=0;i<newListfoodLen;i++)
+    {
+        if(newListfood[i]["imageID"]==imageID)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
+function TSadd(imageID,name,price,src,intro,top10,category)
+{
+    var newListfood = newList["food"];
+
+    var element = 
+    {
+        "imageID" : imageID,
+        "name" : name,
+        "price" : price,
+        "src" : src,
+        "intro" : intro,
+        "top10" : top10,
+        "category" : category
+    }
+
+    var myindex = TSsearch(imageID);
+
+    if(myindex >= 0)
+    {
+        newListfood[myindex] = element;
+    }
+    else
+    {
+        newListfood.push(element);
+    }
+}
+
+function TSdel(imageID)
+{
+    var newListfood = newList["food"];
+    var myindex = TSsearch(imageID);
+    newListfood.splice(myindex,1);
+}
+
+function Hudingsearch(HudingID)
+{
+    var editListfood = editList["food"];
+    var editListfoodLen = editListfood.length;
+
+    for(var i=0;i<editListfoodLen;i++)
+    {
+        if(editListfood[i]["id"] == HudingID)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
+function Hudingedit(HudingID,name,price,src,intro,top10,category)
+{
+    var editListfood = editList["food"];
+
+    var element = 
+    {
+        "id" : HudingID,
+        "name" : name,
+        "price" : price,
+        "src" : src,
+        "intro" : intro,
+        "top10" : top10,
+        "category" : category
+    }
+
+    var myindex = Hudingsearch(HudingID);
+
+    if(myindex >= 0)
+    {
+        editListfood[myindex] = element;
+    }
+    else
+    {
+        editListfood.push(element);
+    }
+
+}
+
+function Hudingdel(HudingID)
+{
+    var delListfood = delList["food"];
+    var editListfood = editList["food"];
+
+    var element = 
+    {
+        "id" : HudingID
+    }
+
+    delListfood.push(element);
+
+    var myindex = Hudingsearch(HudingID);
+
+    if(myindex >= 0)
+    {
+        editListfood.splice(myindex,1);
+    }
 }

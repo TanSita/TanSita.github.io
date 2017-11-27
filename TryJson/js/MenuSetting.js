@@ -1,6 +1,7 @@
 var mypanel_colors = ["info","warning","danger","success"];
 var mypanel_colorsLen = mypanel_colors.length;
-
+var mycategoryArray = [];
+var mycategoriesLen = [];
 
 $(window).on('load' , function()
 {
@@ -17,38 +18,42 @@ $(window).on('load' , function()
     {
     	$.each(data,function(i,item) 
     	{
-	    	var mylistText = data[i]["text"];
-	    	var mycategoryID = "category" + i;
+    		var mylistText = data[i]["category"];
+    		var mycategoryIndex = mycategoryArray.indexOf(mylistText);
+	    	var mycategoryID = "category" + mycategoryIndex;
 
-	    	mycategories.append(makeList(i,mylistText)); //新增一個li到Source的ui底下
-	    	mybody.append(makeCategory(i,mylistText)); //新增一個div到Source的body底下
+    		if(mycategoryIndex == -1)
+    		{
+    			mycategoryIndex = mycategoryArray.length;
+	    		mycategoryArray.push(mylistText);
+	    		mycategoriesLen.push(0);
+		    	mycategoryID = "category" + mycategoryIndex;
+			  	mycategories.append(makeList(mycategoryIndex,mylistText,true)); //新增一個li到Source的ui底下
+		    	mybody.append(makeCategory(mycategoryIndex,mylistText)); //新增一個div到Source的body底下
+			}
 
-	    	var Images = data[i]["images"];
-    		$.each(Images,function(ImageIndex) 
-	    	{
-	    		// edit 只要知道 image所屬的div的id 不用知道分類id
-	    		// $("#"+ImageID).replaceWith ....
+	    	var myimageIndex = mycategoriesLen[mycategoryIndex];
 
-	    		var Image = Images[ImageIndex];
+			var myimageID = mycategoryID + "_" + "image" + myimageIndex;
+    		var myname = data[i]["name"];
+    		var myprice = data[i]["price"];
+    		var mysrc = data[i]["src"];
+    		var myintro = data[i]["intro"];
+    		var mytop10 = data[i]["top10"];
+    		var myhudingID = data[i]["id"];
+    		var mycategory = data[i]["category"];
 
-				var myimageID = mycategoryID + "_" + "image" + ImageIndex;
-	    		var myname = Image["name"];
-	    		var myprice = Image["price"];
-	    		var mysrc = Image["src"];
-	    		var myintro = Image["intro"];
-	    		var mytop10 = Image["top10"];
+			var category = $("#Source").contents().find("#" + mycategoryID);
 
-				var category = $("#Source").contents().find("#"+mycategoryID);
+			category.append(makeImage(myhudingID,myimageID,myname,myprice,mysrc,myintro,mytop10,mycategory)); //新增圖片到某個分類
+			
+			if(mytop10==true)
+			{
+				$("#Source").contents().find(".scrollableArea").append(maketop10(myhudingID,myimageID,myname,myprice,mysrc,myintro,mytop10,mycategory)); //新增圖片到某個分類
+			}
 
-				category.append(makeImage(myimageID,myname,myprice,mysrc,myintro,mytop10)); //新增圖片到某個分類
-				
-				//這邊的true的type是string
-				if(mytop10=="true")
-				{
-					$("#Source").contents().find(".scrollableArea").append(maketop10(myimageID,myname,myprice,mysrc,myintro,mytop10)); //新增圖片到某個分類
-				}
+			mycategoriesLen[mycategoryIndex]++;
 
-			});
         });
 
 
@@ -66,65 +71,25 @@ $(window).on('load' , function()
 });
 
 
-
 function SetValue()
 {
-	// 讓textbox 變成 word
-	var mycontents = $("#Source").contents();
-	var mynewTextboxs = mycontents.find(".newCategoryTextbox");
-	var myeditTextboxs = mycontents.find(".editCategoryTextbox");
 
-	for(var i=0;i<mynewTextboxs.length;i++)
-	{
-		var myid = mynewTextboxs[i].getAttribute("id");
-		var mynum = myid.replace("newCategoryTextbox","");
-		var mylistID = "list" + mynum;
-		var mycategoryID = "category" + mynum;
-		var mylistText = mynewTextboxs[i].value;
-		if(mylistText.length>0)
-		{
-			mycontents.find("#" + myid).replaceWith(makeLink(mynum,mylistText));
-			mycontents.find("body").append(makeCategory(mynum,mylistText));
-		}
-	}
-
-	// for edit 
-	for(var i=0;i<myeditTextboxs.length;i++)
-	{
-		var myid = myeditTextboxs[i].getAttribute("id");
-		var mynum = myid.replace("editCategoryTextbox","");
-		var mylistID = "list" + mynum;
-		var mycategoryID = "category" + mynum;
-		var mylistText = myeditTextboxs[i].value;
-		var mycategoryTitleID = "categoryTitle" + mynum;
-
-		if(mylistText.length>0)
-		{
-			mycontents.find("#" + myid).replaceWith(makeLink(mynum,mylistText));
-			mycontents.find("#" + mycategoryTitleID)[0].innerHTML = mylistText;
-		}
-	}
-
-
-
-    $("#Source").contents().find(".navbar li a").css({"display" : "inline-block" , "width" : "calc(100% - 90px)"});
-	// var mya = document.getElementById("Source").contentWindow.a;
 }
 
-function makeLink(num , listText)
-{
-	var categoryID = "category" + num;
+// function makeLink(num , listText , huding)
+// {
+// 	var categoryID = "category" + num;
 
-	var myhtml = 
-	'<a href="#' + categoryID + '">' + listText +
-	'</a>' + 
-	makeEditDeleteButton(num);
+// 	var myhtml = 
+// 	'<a href="#' + categoryID + '">' + listText +
+// 	'</a>' + 
+// 	makeEditDeleteButton(num,huding);
 
-	return myhtml;
-}
+// 	return myhtml;
+// }
 
 
-function makeList(num , listText)
+function makeList(num , listText , huding)
 {
 	var listID = "list" + num;
 	var categoryID = "category" + num;
@@ -133,7 +98,7 @@ function makeList(num , listText)
 	'<li id="' + listID + '">' +
 		'<a href="#' + categoryID + '">' + listText +
 		'</a>' + 
-		makeEditDeleteButton(num) +
+		makeEditDeleteButton(num,huding) +
 	'</li>';
 
 	return myhtml;
@@ -152,7 +117,7 @@ function makeCategory(num , listText)
     		 		'<strong class="panel-title" id="' + categoryTitleID + '">' + listText + '</strong>' +
 		 		'</div>' +
 		 		'<div class="alignright">' +
-            		'<button class="btn btn-success " onclick="addAlert(\'' + categoryID + '\')">' + '新增</button>' +
+            		'<button class="btn btn-success " onclick="addAlert(' + num + ');">' + '新增</button>' +
         		'</div>' +
         	'</div>' +
     	'</div>' +
@@ -166,17 +131,25 @@ function makeCategory(num , listText)
 	return myhtml;
 }
 
-function makeImage(imageID , name , price , src , intro , top10)
+// hudingID name price src intro top10 category
+function makeImage(hudingID , imageID , name , price , src , intro , top10 , category)
 {
-    var categoryID = imageID.split("_")[0];
-
     var myhtml = 
-    '<div class="col-xs-4 text-center" id="' + imageID + '">' +
-        // '<a href="#' + categoryID +'" onclick="' +  
+    '<div class="col-xs-4 text-center"' +  
+    	' hudingID = ' + hudingID + 
+    	' imageID = "' + imageID + '"' +
+    	' name = "' + name + '"' +
+    	' price = ' + price + 
+    	' src = "' + src + '"' +
+    	' intro = "' + intro + '"' +
+    	' top10 = ' + top10 + 
+    	' category = "' + category + '"' +
+    	' id="' + imageID + '">' +
         '<a onclick="' +  
-            'editAlert(' + "'" + imageID + "','" + name +
-            "','" + price + "','" + src + "','" + intro + "'" + "," + top10 +
-            ')">' + 
+            'editAlert(' + hudingID + ",'" + imageID + "','" +
+            name + "'," + price + ",'" + src + "','" + 
+            intro + "'," + top10 + ",'" + category + "'" + 
+            ');">' + 
             '<img class="img-rounded" src="' + src + '" width="100%">' +
         '</a>' +
     '</div>';
@@ -184,30 +157,39 @@ function makeImage(imageID , name , price , src , intro , top10)
     return myhtml;
 }
 
-function maketop10(imageID , name , price , src , intro , top10)
+function maketop10(hudingID , imageID , name , price , src , intro , top10 , category)
 {
     var myhtml = 
-    // '<a href="#" class="' + imageID + '" onclick="' +  
-    '<a class="' + imageID + '" onclick="' +  
-    'editAlert(' + "'" + imageID + "','" + name + "','" + 
-    price + "','" + src + "','" + intro + "'" + "," + top10 +
-    ')">' + 
+    '<a class="' + imageID + '"' + 
+    	' hudingID = ' + hudingID + 
+    	' imageID = "' + imageID + '"' +
+    	' name = "' + name + '"' +
+    	' price = ' + price + 
+    	' src = "' + src + '"' +
+    	' intro = "' + intro + '"' +
+    	' top10 = ' + top10 + 
+    	' category = "' + category + '"' +
+    	' onclick="' +  
+	    'editAlert(' + hudingID + ",'" + imageID + "','" +
+        name + "'," + price + ",'" + src + "','" + 
+        intro + "'," + top10 + ",'" + category + "'" + 
+        ');">' + 
         '<img src="' + src + '" class="img-circle Stories"/>' +
     '</a>';
 
     return myhtml;
 }
 
-function makeEditDeleteButton(num)
+function makeEditDeleteButton(num , huding)
 {
     var myhtml = 
     '<button class="btn nothing"></button>' + 
     '<button class="btn btn-danger pull-right"' + 
-    'onclick="DeleteItem(\'' + num + '\');" >' + 
+    'onclick="DeleteItem(' + num + ',' + huding + ');" >' + 
     '   <span class="glyphicon glyphicon-trash"></span>' + 
     '</button>' + 
     '<button class="btn btn-info pull-right"' + 
-    'onclick="EditItem(\''+ num + '\');" >' + 
+    'onclick="EditItem(' + num + ',' + huding + ');" >' + 
     '   <span class="glyphicon glyphicon-pencil"></span>' + 
     '</button>';
 
