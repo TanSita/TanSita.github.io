@@ -89,7 +89,70 @@ $(window).on('load' , function()
     
 });
 
+function newListOP(imageID,name,price,src,intro,top10,category)
+{
+	var myfood = $("#Source").contents().find("#" + imageID);
+	myfood.replaceWith(makeImage(-1,mypublictsID,imageID,name,price,src,intro,top10,category));
 
+	var myfoodtop10 = $("#Source").contents().find("." + imageID);
+	myfoodtop10.replaceWith(maketop10(-1,mypublictsID,imageID,name,price,src,intro,top10,category));
+
+	var mycategoryID = imageID.split("_")[0];
+	var mynum = mycategoryID.replace("category","");
+	var mylistID = "list" + mynum;
+	var mylist = $("#Source").contents().find("#" + mylistID);
+	mylist.replaceWith(makeList(mynum,category,true,true));
+    $("#Source").contents().find(".navbar li a").css({"display" : "inline-block" , "width" : "calc(100% - 90px)"});
+
+}
+
+function newListOPDemo(imageID,name,price,src,intro,top10,category)
+{
+	var mycategoryID = imageID.split("_")[0];
+	
+	var democategories = $("#Edited").contents().find("#categories");
+	var demobody = $("#Edited").contents().find("body");
+
+    var demonum = 0; 
+    var categoriesLen = $("#Edited").contents().find("#categories").children().length;
+
+	var notinCategories = true;
+
+	// 如果categoriesLen == 0 就不會跑底下的for
+	for(var i=0;i<categoriesLen;i++)
+	{
+		var mylistID = democategories[0].children[i].getAttribute("id");
+		var listText = $("#Edited").contents().find("#" + mylistID).text();
+
+		if(listText == category)
+			notinCategories = false;
+	}
+
+    // add category
+	if(notinCategories) //如果本來沒有這個category
+	{
+		if(categoriesLen > 0) //categories length > 0
+		{
+	        var categoriesLastID = $("#Edited").contents().find("#categories > li:last").attr("ID");
+	        demonum = parseInt(categoriesLastID.replace("list",""));
+        	demonum += 1;
+    	}
+    	// 如果 categories length == 0 , var demonum = 0 (宣告的)
+
+        $("#Edited").contents().find("#categories").append(makeListDemo(demonum,category));
+	    $("#Edited").contents().find("body").append(makeCategoryDemo(demonum,category));
+	}
+        
+    
+    // add Image
+	var democategory = $("#Edited").contents().find("#" + mycategoryID);
+	democategory.append(makeImageDemo(-1,mypublictsID,imageID,name,price,src,intro,top10,category));
+
+	if(top10==true)
+	{
+		$("#Edited").contents().find(".scrollableArea").append(maketop10Demo(-1,mypublictsID,imageID,name,price,src,intro,top10,category)); //新增圖片到某個分類
+	}
+}
 
 function SetValue()
 {
@@ -180,52 +243,18 @@ function SetValue()
 		var mytop10 = TSnewListFood[i].top10;
 		var mycategory = TSnewListFood[i].category;
 
-		var myfood = $("#Source").contents().find("#" + myimageID);
-		myfood.replaceWith(makeImage(-1,mypublictsID,myimageID,myname,myprice,mysrc,myintro,mytop10,mycategory));
-
-		var myfoodtop10 = $("#Source").contents().find("." + myimageID);
-		myfoodtop10.replaceWith(maketop10(-1,mypublictsID,myimageID,myname,myprice,mysrc,myintro,mytop10,mycategory));
-
-		var mycategoryID = myimageID.split("_")[0];
-		var mynum = mycategoryID.replace("category","");
-		var mylistID = "list" + mynum;
-		var mylist = $("#Source").contents().find("#" + mylistID);
-		mylist.replaceWith(makeList(mynum,mycategory,true,true));
-	    $("#Source").contents().find(".navbar li a").css({"display" : "inline-block" , "width" : "calc(100% - 90px)"});
-
-
+		// Source
+		newListOP(myimageID,myname,myprice,mysrc,myintro,mytop10,mycategory);
 
 
 		// Demo
-		var democategories = $("#Edited").contents().find("#categories");
-		var demobody = $("#Edited").contents().find("body");
-
-	    var demonum = 0; 
-	    var categoriesLen = $("#Edited").contents().find("#categories").children().length;
-
-	    if(categoriesLen > 0)
-	    {
-	        var categoriesLastID = $("#Edited").contents().find("#categories > li:last").attr("ID");
-	        demonum = parseInt(categoriesLastID.replace("list",""));
-	        demonum += 1;
-	    }
-
-	    $("#Edited").contents().find("#categories").append(makeListDemo(demonum,mycategory));
-	    $("#Edited").contents().find("body").append(makeCategoryDemo(demonum,mycategory));
-
-
-
-
-		var democategory = $("#Edited").contents().find("#" + mycategoryID);
-		democategory.append(makeImageDemo(-1,mypublictsID,myimageID,myname,myprice,mysrc,myintro,mytop10,mycategory));
-
-		if(mytop10==true)
-		{
-			$("#Edited").contents().find(".scrollableArea").append(maketop10Demo(-1,mypublictsID,myimageID,myname,myprice,mysrc,myintro,mytop10,mycategory)); //新增圖片到某個分類
-		}
+		newListOPDemo(myimageID,myname,myprice,mysrc,myintro,mytop10,mycategory);
+		
 
 		mypublictsID++;
 	}
+
+
 
 
 

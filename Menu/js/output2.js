@@ -890,8 +890,8 @@ function OKItem(num,new_or_edit,huding,ts)
                     var myintro = myfood.getAttribute("intro");
                     var mytop10 = myfood.getAttribute("top10") == "true";
                     var mycategory = mylistText;
-                    myfood.setAttribute("category" , mylistText);
-                    $("." + myimageID).attr("category" , mylistText);
+                    // myfood.setAttribute("category" , mylistText);
+                    // $("." + myimageID).attr("category" , mylistText);
 
                     HudingeditListedit(myhudingID,myname,myprice,mysrc,myintro,mytop10,mycategory);
                     
@@ -913,8 +913,8 @@ function OKItem(num,new_or_edit,huding,ts)
                     var myintro = myfood.getAttribute("intro");
                     var mytop10 = myfood.getAttribute("top10") == "true";
                     var mycategory = mylistText;
-                    myfood.setAttribute("category" , mylistText);
-                    $("." + myimageID).attr("category" , mylistText);
+                    // myfood.setAttribute("category" , mylistText);
+                    // $("." + myimageID).attr("category" , mylistText);
 
 
                     HudingnewListadd(myimageID,myname,myprice,mysrc,myintro,mytop10,mycategory);
@@ -938,8 +938,8 @@ function OKItem(num,new_or_edit,huding,ts)
                     var myintro = myfood.getAttribute("intro");
                     var mytop10 = myfood.getAttribute("top10") == "true";
                     var mycategory = mylistText;
-                    myfood.setAttribute("category" , mylistText);
-                    $("." + myimageID).attr("category" , mylistText);
+                    // myfood.setAttribute("category" , mylistText);
+                    // $("." + myimageID).attr("category" , mylistText);
 
                     TSeditListedit(mytsID,myname,myprice,mysrc,myintro,mytop10,mycategory);
                     
@@ -961,8 +961,8 @@ function OKItem(num,new_or_edit,huding,ts)
                     var myintro = myfood.getAttribute("intro");
                     var mytop10 = myfood.getAttribute("top10") == "true";
                     var mycategory = mylistText;
-                    myfood.setAttribute("category" , mylistText);
-                    $("." + myimageID).attr("category" , mylistText);
+                    // myfood.setAttribute("category" , mylistText);
+                    // $("." + myimageID).attr("category" , mylistText);
 
                     TSnewListadd(myimageID,myname,myprice,mysrc,myintro,mytop10,mycategory);
                     console.log(TSnewList);
