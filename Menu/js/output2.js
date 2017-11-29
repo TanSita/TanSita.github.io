@@ -858,13 +858,40 @@ function makeCategory(num , listText)
     return myhtml;
 }
 
+function editListOP(num , listText , flag , flagID , editListedit , newListadd)
+{
+    var mycategoryID = "category" + num;
+    var mycategoryLen = $("#" + mycategoryID)[0].children.length;
+
+    for(var i=0;i<mycategoryLen;i++)
+    {
+        var myfood = $("#" + mycategoryID)[0].children[i];
+        var myimageID = myfood.getAttribute("imageID");
+        var myname = myfood.getAttribute("name");
+        var myprice = parseInt(myfood.getAttribute("price"));
+        var mysrc = myfood.getAttribute("src");
+        var myintro = myfood.getAttribute("intro");
+        var mytop10 = myfood.getAttribute("top10") == "true";
+        var mycategory = listText;
+
+        if(flag==true)
+        {
+            var myflagID = parseInt(myfood.getAttribute(flagID));
+            editListedit(myflagID,myname,myprice,mysrc,myintro,mytop10,mycategory);
+        }
+        else
+        {
+            newListadd(myimageID,myname,myprice,mysrc,myintro,mytop10,mycategory);
+        }
+    }
+}
+
 function OKItem(num,new_or_edit,huding,ts)
 {
     var mylistID = "list" + num;
     var mycategoryTitleID = "categoryTitle" + num;
 
     var myTextboxID = new_or_edit + "CategoryTextbox" + num;
-
     var mylistText = $("#" + myTextboxID).val();
 
     if(mylistText.length>0)
@@ -874,104 +901,12 @@ function OKItem(num,new_or_edit,huding,ts)
 
         if(new_or_edit=='edit')
         {
-            if(huding==true)
-            {
-                var mycategoryID = "category" + num;
-                var mycategoryLen = $("#" + mycategoryID)[0].children.length;
-
-                for(var i=0;i<mycategoryLen;i++)
-                {
-                    var myfood = $("#" + mycategoryID)[0].children[i];
-                    var myimageID = myfood.getAttribute("imageID");
-                    var myhudingID = parseInt(myfood.getAttribute("hudingID"));
-                    var myname = myfood.getAttribute("name");
-                    var myprice = parseInt(myfood.getAttribute("price"));
-                    var mysrc = myfood.getAttribute("src");
-                    var myintro = myfood.getAttribute("intro");
-                    var mytop10 = myfood.getAttribute("top10") == "true";
-                    var mycategory = mylistText;
-                    // myfood.setAttribute("category" , mylistText);
-                    // $("." + myimageID).attr("category" , mylistText);
-
-                    HudingeditListedit(myhudingID,myname,myprice,mysrc,myintro,mytop10,mycategory);
-                    
-                    console.log(HudingeditList);
-                }
-            }
-            else
-            {
-                var mycategoryID = "category" + num;
-                var mycategoryLen = $("#" + mycategoryID)[0].children.length;
-
-                for(var i=0;i<mycategoryLen;i++)
-                {
-                    var myfood = $("#" + mycategoryID)[0].children[i];
-                    var myimageID = myfood.getAttribute("imageID");
-                    var myname = myfood.getAttribute("name");
-                    var myprice = parseInt(myfood.getAttribute("price"));
-                    var mysrc = myfood.getAttribute("src");
-                    var myintro = myfood.getAttribute("intro");
-                    var mytop10 = myfood.getAttribute("top10") == "true";
-                    var mycategory = mylistText;
-                    // myfood.setAttribute("category" , mylistText);
-                    // $("." + myimageID).attr("category" , mylistText);
-
-
-                    HudingnewListadd(myimageID,myname,myprice,mysrc,myintro,mytop10,mycategory);
-                    console.log(HudingnewList);
-                }
-            }
-
-            if(ts==true)
-            {
-                var mycategoryID = "category" + num;
-                var mycategoryLen = $("#" + mycategoryID)[0].children.length;
-
-                for(var i=0;i<mycategoryLen;i++)
-                {
-                    var myfood = $("#" + mycategoryID)[0].children[i];
-                    var myimageID = myfood.getAttribute("imageID");
-                    var mytsID = parseInt(myfood.getAttribute("tsID"));
-                    var myname = myfood.getAttribute("name");
-                    var myprice = parseInt(myfood.getAttribute("price"));
-                    var mysrc = myfood.getAttribute("src");
-                    var myintro = myfood.getAttribute("intro");
-                    var mytop10 = myfood.getAttribute("top10") == "true";
-                    var mycategory = mylistText;
-                    // myfood.setAttribute("category" , mylistText);
-                    // $("." + myimageID).attr("category" , mylistText);
-
-                    TSeditListedit(mytsID,myname,myprice,mysrc,myintro,mytop10,mycategory);
-                    
-                    console.log(TSeditList);
-                }
-            }
-            else
-            {
-                var mycategoryID = "category" + num;
-                var mycategoryLen = $("#" + mycategoryID)[0].children.length;
-
-                for(var i=0;i<mycategoryLen;i++)
-                {
-                    var myfood = $("#" + mycategoryID)[0].children[i];
-                    var myimageID = myfood.getAttribute("imageID");
-                    var myname = myfood.getAttribute("name");
-                    var myprice = parseInt(myfood.getAttribute("price"));
-                    var mysrc = myfood.getAttribute("src");
-                    var myintro = myfood.getAttribute("intro");
-                    var mytop10 = myfood.getAttribute("top10") == "true";
-                    var mycategory = mylistText;
-                    // myfood.setAttribute("category" , mylistText);
-                    // $("." + myimageID).attr("category" , mylistText);
-
-                    TSnewListadd(myimageID,myname,myprice,mysrc,myintro,mytop10,mycategory);
-                    console.log(TSnewList);
-                }
-            }
+            editListOP(num,mylistText,huding,"hudingID",HudingeditListedit,HudingnewListadd);
+            editListOP(num,mylistText,ts,"tsID",TSeditListedit,TSnewListadd);
         }
         else if(new_or_edit=='new')
         {
-
+            // do nothing now ...
         }
     }
 
@@ -985,69 +920,38 @@ function EditItem(num , huding , ts)
     $("#" + mylistID).replaceWith(makeListTextbox(num,'edit',huding,ts));
 }
 
+function delListOP(num,flag , flagID , editListdel , newListdel)
+{
+    var mycategoryID = "category" + num;
+    var mycategoryLen = $("#" + mycategoryID)[0].children.length;
+
+    for(var i=0;i<mycategoryLen;i++)
+    {
+        var myfood = $("#" + mycategoryID)[0].children[i];
+        var myimageID = myfood.getAttribute("imageID");
+
+        if(flag==true)
+        {
+            var myflagID = parseInt(myfood.getAttribute(flagID));
+            editListdel(myflagID);
+        }
+        else
+        {
+            newListdel(myimageID);
+        }
+        
+        $("." + myimageID).replaceWith('');
+    }
+}
+
 function DeleteItem(num , huding , ts)
 {
-    if(huding==true)
-    {
-        var mycategoryID = "category" + num;
-        var mycategoryLen = $("#" + mycategoryID)[0].children.length;
+    // Demo
+    delListOP(num,huding,"hudingID",HudingeditListdel,HudingnewListdel);
+    delListOP(num,ts,"tsID",TSeditListdel,TSnewListdel);
 
-        for(var i=0;i<mycategoryLen;i++)
-        {
-            var myfood = $("#" + mycategoryID)[0].children[i];
-            var myhudingID = parseInt(myfood.getAttribute("hudingID"));
-            var myimageID = myfood.getAttribute("imageID");
 
-            $("." + myimageID).replaceWith('');
-            HudingeditListdel(myhudingID);
-        }
-    }
-    else
-    {
-        var mycategoryID = "category" + num;
-        var mycategoryLen = $("#" + mycategoryID)[0].children.length;
-
-        for(var i=0;i<mycategoryLen;i++)
-        {
-            var myfood = $("#" + mycategoryID)[0].children[i];
-            var myimageID = myfood.getAttribute("imageID");
-            
-            $("." + myimageID).replaceWith('');
-            HudingnewListdel(myimageID);
-        }
-    }
-
-    if(ts==true)
-    {
-        var mycategoryID = "category" + num;
-        var mycategoryLen = $("#" + mycategoryID)[0].children.length;
-
-        for(var i=0;i<mycategoryLen;i++)
-        {
-            var myfood = $("#" + mycategoryID)[0].children[i];
-            var mytsID = parseInt(myfood.getAttribute("tsID"));
-            var myimageID = myfood.getAttribute("imageID");
-
-            console.log(myimageID);
-            $("." + myimageID).replaceWith('');
-            TSeditListdel(mytsID);
-        }
-    }
-    else
-    {
-        var mycategoryID = "category" + num;
-        var mycategoryLen = $("#" + mycategoryID)[0].children.length;
-
-        for(var i=0;i<mycategoryLen;i++)
-        {
-            var myfood = $("#" + mycategoryID)[0].children[i];
-            var myimageID = myfood.getAttribute("imageID");
-
-            $("." + myimageID).replaceWith('');
-            TSnewListdel(myimageID);
-        }
-    }
-
+    // Source
     var mylistID = "list" + num;
     var mycategoryID = "category" + num;
 

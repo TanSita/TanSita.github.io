@@ -159,4 +159,30 @@ function sortResults(mylist,prop, asc)
 sortResults(TSnewList.food,'imageID', true);
 
 
-console.log(TSnewList);
+// console.log(TSnewList);
+
+var aaa = [];
+
+
+function lala()
+{
+	aaa.push("123");
+}
+
+function haha()
+{
+	aaa.push("456");
+}
+
+function fku(f)
+{
+
+}
+
+fku(haha());
+fku(lala());
+fku(haha());
+fku(haha());
+fku(lala());
+
+console.log(aaa);

@@ -89,6 +89,33 @@ $(window).on('load' , function()
     
 });
 
+function clearTSJson()
+{
+	document.getElementById("Source").contentWindow.TSnewList = 
+	{
+	    "action":"new",
+	    "food":
+	    [
+	    ]
+	}
+
+	document.getElementById("Source").contentWindow.TSeditList = 
+	{
+	    "action":"edit",
+	    "food":
+	    [
+	    ]
+	}
+
+	document.getElementById("Source").contentWindow.TSdelList = 
+	{
+	    "action":"delete",
+	    "food":
+	    [
+	    ]
+	}	
+}
+
 function newListOP(imageID,name,price,src,intro,top10,category)
 {
 	var myfood = $("#Source").contents().find("#" + imageID);
@@ -103,7 +130,6 @@ function newListOP(imageID,name,price,src,intro,top10,category)
 	var mylist = $("#Source").contents().find("#" + mylistID);
 	mylist.replaceWith(makeList(mynum,category,true,true));
     $("#Source").contents().find(".navbar li a").css({"display" : "inline-block" , "width" : "calc(100% - 90px)"});
-
 }
 
 function newListOPDemo(imageID,name,price,src,intro,top10,category)
@@ -159,6 +185,64 @@ function sortResults(mylist,prop, asc)
     });
 }
 
+function delListOPDemo(tsID)
+{
+	var myfood = $("#Edited").contents().find("[tsID=" + tsID + "]");
+	var myimageID = myfood.attr("imageID");
+	myfood.replaceWith('');
+
+	var mycategoryID = myimageID.split("_")[0];
+	var mycategory = $("#Edited").contents().find("#" + mycategoryID);
+	if(mycategory[0].children.length==0)
+	{
+		var mynum = mycategoryID.replace("category","");
+		var mylistID = "list" + mynum;
+		var mylist = $("#Edited").contents().find("#" + mylistID);
+		mylist.replaceWith('');
+
+		mycategory.parent().replaceWith('');
+	}
+}
+
+function editListOPDemo(tsID,name,price,src,intro,top10,category)
+{
+	var myfood = $("#Edited").contents().find("[tsID=" + tsID + "]");
+	var myhudingID = myfood.attr("hudingID");
+	var myimageID = myfood.attr("imageID");
+	var oldtop10 = myfood.attr("top10")=="true";
+
+	// 只是為了拿num
+	var mycategoryID = myimageID.split("_")[0];
+	var mynum = mycategoryID.replace("category","");
+
+	// change list
+	var mylistID = "list" + mynum;
+	var mylist = $("#Edited").contents().find("#" + mylistID);
+	mylist.replaceWith(makeListDemo(mynum,category));
+
+	// change category title
+	var mycategoryTitleID = "categoryTitle" + mynum;
+	var mycategoryTitle = $("#Edited").contents().find("#" + mycategoryTitleID);
+	mycategoryTitle[0].innerHTML = category;
+
+    // make Image (hudingID 跟 imageID 有 my)
+	$("#Edited").contents().find("#" + myimageID).replaceWith(makeImageDemo(myhudingID,tsID,myimageID,name,price,src,intro,top10,category));
+
+
+    // make top10 (hudingID 跟 imageID 有 my)
+	if(oldtop10==false && top10==true)
+    {
+	    // hudingID 跟 imageID 有 my
+		$("#Edited").contents().find(".scrollableArea").append(maketop10Demo(-1,tsID,myimageID,name,price,src,intro,top10,category)); //新增圖片到某個分類
+		document.getElementById("Edited").contentWindow.mysmoothTouchScroll();
+    }
+    else if(oldtop10==true && top10==false)
+    {
+        $("#Edited").contents().find("." + myimageID).replaceWith('');
+    }
+
+}
+
 function SetValue()
 {
 	
@@ -180,22 +264,7 @@ function SetValue()
 	for(var i=0;i<TSdelListFood.length;i++)
 	{
 		var mytsID = TSdelListFood[i].tsID;
-		var myfood = $("#Edited").contents().find("[tsID=" + mytsID + "]");
-		var myimageID = myfood.attr("imageID");
-		console.log(myimageID);
-		myfood.replaceWith('');
-
-		var mycategoryID = myimageID.split("_")[0];
-		var mycategory = $("#Edited").contents().find("#" + mycategoryID);
-		if(mycategory[0].children.length==0)
-		{
-			var mynum = mycategoryID.replace("category","");
-			var mylistID = "list" + mynum;
-			var mylist = $("#Edited").contents().find("#" + mylistID);
-			mylist.replaceWith('');
-
-			mycategory.parent().replaceWith('');
-		}
+		delListOPDemo(mytsID);
 	}
 
 	for(var i=0;i<TSeditListFood.length;i++)
@@ -208,39 +277,7 @@ function SetValue()
 		var mytop10 = TSeditListFood[i].top10;
 		var mycategory = TSeditListFood[i].category;	
 
-
-		var myfood = $("#Edited").contents().find("[tsID=" + mytsID + "]");
-		var myhudingID = myfood.attr("hudingID");
-		var myimageID = myfood.attr("imageID");
-		var oldtop10 = myfood.attr("top10")=="true";
-
-		var mycategoryID = myimageID.split("_")[0];
-		var mynum = mycategoryID.replace("category","");
-		var mylistID = "list" + mynum;
-		var mylist = $("#Edited").contents().find("#" + mylistID);
-		mylist.replaceWith(makeListDemo(mynum,mycategory));
-		var mycategoryTitleID = "categoryTitle" + mynum;
-
-		console.log(mycategoryID,mynum,mylistID,mycategoryTitleID,mycategory);
-
-		var mycategoryTitle = $("#Edited").contents().find("#" + mycategoryTitleID);
-		mycategoryTitle[0].innerHTML = mycategory;
-
-
-
-		if(oldtop10==false && mytop10==true)
-        {
-			$("#Edited").contents().find(".scrollableArea").append(maketop10Demo(-1,mytsID,myimageID,myname,myprice,mysrc,myintro,mytop10,mycategory)); //新增圖片到某個分類
-			document.getElementById("Edited").contentWindow.mysmoothTouchScroll();
-        }
-        else if(oldtop10==true && mytop10==false)
-        {
-        	console.log("hihi");
-            $("#Edited").contents().find("." + myimageID).replaceWith('');
-        }
-
-		$("#Edited").contents().find("." + myimageID).replaceWith(maketop10Demo(myhudingID,mytsID,myimageID,myname,myprice,mysrc,myintro,mytop10,mycategory));
-		$("#Edited").contents().find("#" + myimageID).replaceWith(makeImageDemo(myhudingID,mytsID,myimageID,myname,myprice,mysrc,myintro,mytop10,mycategory));
+		editListOPDemo(mytsID,myname,myprice,mysrc,myintro,mytop10,mycategory)
 	}
 
 	for(var i=0;i<TSnewListFood.length;i++)
@@ -256,47 +293,16 @@ function SetValue()
 		// Source
 		newListOP(myimageID,myname,myprice,mysrc,myintro,mytop10,mycategory);
 
-
 		// Demo
 		newListOPDemo(myimageID,myname,myprice,mysrc,myintro,mytop10,mycategory);
 		
-
 		mypublictsID++;
 	}
 
 
-
-
-
-
-
 	document.getElementById("Edited").contentWindow.mysmoothTouchScroll();
 
-
-	// clear
-	document.getElementById("Source").contentWindow.TSnewList = 
-	{
-	    "action":"new",
-	    "food":
-	    [
-	    ]
-	}
-
-	document.getElementById("Source").contentWindow.TSeditList = 
-	{
-	    "action":"edit",
-	    "food":
-	    [
-	    ]
-	}
-
-	document.getElementById("Source").contentWindow.TSdelList = 
-	{
-	    "action":"delete",
-	    "food":
-	    [
-	    ]
-	}	
+	clearTSJson();
 }
 
 function makeListDemo(num,listText)
