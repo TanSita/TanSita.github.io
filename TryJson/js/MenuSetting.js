@@ -347,10 +347,8 @@ function makeImageDemo(hudingID , tsID , imageID , name , price , src , intro , 
     	' category = "' + category + '"' +
     	' id="' + imageID + '">' +
         '<a onclick="' +  
-            'showAlert(' + hudingID + "," + tsID +  ",'" + 
-            imageID + "','" + name + "','" + price + "','" + src + "','" + 
-            intro + "'," + top10 + ",'" + category + "'" + 
-            ');">' + 
+            'showAlert(' + "'" + imageID + "','" + name + "','" + price + "','" + src + "','" + 
+            intro + "'," + top10 +  ');">' + 
             '<img class="img-rounded" src="' + src + '" width="100%">' +
         '</a>' +
     '</div>';
@@ -372,10 +370,8 @@ function maketop10Demo(hudingID , tsID , imageID , name , price , src , intro , 
     	' top10 = ' + top10 + 
     	' category = "' + category + '"' +
     	' onclick="' +  
-	    'showAlert(' + hudingID + "," + tsID +  ",'" + 
-            imageID + "','" + name + "','" + price + "','" + src + "','" + 
-            intro + "'," + top10 + ",'" + category + "'" + 
-            ');">' + 
+	    'showAlert(' + "'" + imageID + "','" + name + "','" + price + "','" + src + "','" + 
+            intro + "'," + top10 +  ');">' + 
         '<img src="' + src + '" class="img-circle Stories"/>' +
     '</a>';
 
