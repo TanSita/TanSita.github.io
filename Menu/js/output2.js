@@ -677,13 +677,15 @@ function showItems()
             '<td id="' + itemIDPrice + '">' + itemPrice + '</td>' +
             '<td id="' + itemIDCount + '">' + 1 + '</td>' +
             '<td>' +
-                '<span class="btn btn-danger btn-xs" ' +
-                'onclick="calculate(\''+ i + "','" + itemPrice + "'," + false + ');">－'+
-                '</span>' +
 
                 '<span class="btn btn-success btn-xs" ' +
                 'onclick="calculate(\''+ i + "','" + itemPrice + "'," + true + ');">＋'+
                 '</span>' +
+
+                '<span class="btn btn-danger btn-xs" ' +
+                'onclick="calculate(\''+ i + "','" + itemPrice + "'," + false + ');">－'+
+                '</span>' +
+
             '</td>'+
         '</tr>';
     }
