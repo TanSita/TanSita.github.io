@@ -467,6 +467,6 @@ function SaveValue()
 	var HudingdelList = document.getElementById("Source").contentWindow.HudingdelList;
 
 	var Hudingjson = [];
-	Hudingjson.append(HudingnewList,HudingeditList,HudingdelList);
+	Hudingjson.push(HudingnewList,HudingeditList,HudingdelList);
 	console.log(Hudingjson);
 }
