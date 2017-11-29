@@ -113,7 +113,7 @@ function newListOPDemo(imageID,name,price,src,intro,top10,category)
 	var democategories = $("#Edited").contents().find("#categories");
 	var demobody = $("#Edited").contents().find("body");
 
-    var demonum = 0; 
+    var demonum = parseInt(mycategoryID.replace("category",""));
     var categoriesLen = $("#Edited").contents().find("#categories").children().length;
 
 	var notinCategories = true;
@@ -131,14 +131,6 @@ function newListOPDemo(imageID,name,price,src,intro,top10,category)
     // add category
 	if(notinCategories) //如果本來沒有這個category
 	{
-		if(categoriesLen > 0) //categories length > 0
-		{
-	        var categoriesLastID = $("#Edited").contents().find("#categories > li:last").attr("ID");
-	        demonum = parseInt(categoriesLastID.replace("list",""));
-        	demonum += 1;
-    	}
-    	// 如果 categories length == 0 , var demonum = 0 (宣告的)
-
         $("#Edited").contents().find("#categories").append(makeListDemo(demonum,category));
 	    $("#Edited").contents().find("body").append(makeCategoryDemo(demonum,category));
 	}
@@ -148,10 +140,23 @@ function newListOPDemo(imageID,name,price,src,intro,top10,category)
 	var democategory = $("#Edited").contents().find("#" + mycategoryID);
 	democategory.append(makeImageDemo(-1,mypublictsID,imageID,name,price,src,intro,top10,category));
 
+	// add top10
 	if(top10==true)
 	{
+		console.log(-1,mypublictsID,imageID,name,price,src,intro,top10,category);
 		$("#Edited").contents().find(".scrollableArea").append(maketop10Demo(-1,mypublictsID,imageID,name,price,src,intro,top10,category)); //新增圖片到某個分類
 	}
+}
+
+function sortResults(mylist,prop, asc) 
+{
+    mylist = mylist.sort(function(a, b) {
+        if (asc) {
+            return (a[prop] > b[prop]) ? 1 : ((a[prop] < b[prop]) ? -1 : 0);
+        } else {
+            return (b[prop] > a[prop]) ? 1 : ((b[prop] < a[prop]) ? -1 : 0);
+        }
+    });
 }
 
 function SetValue()
@@ -166,6 +171,11 @@ function SetValue()
 	var TSnewListFood = TSnewList.food;
 	var TSeditListFood = TSeditList.food;
 	var TSdelListFood = TSdelList.food;
+
+	sortResults(TSnewListFood,'imageID', true);
+	// sortResults(TSeditListFood,'imageID', true);
+	// sortResults(TSdelListFood,'imageID', true);
+
 
 	for(var i=0;i<TSdelListFood.length;i++)
 	{
