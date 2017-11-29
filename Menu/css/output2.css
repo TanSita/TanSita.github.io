@@ -272,7 +272,7 @@ h4
 {
   border:1px solid;
   max-width:1px;
-  overflow: scroll;
+  overflow-x: scroll;
   white-space: nowrap;
 }
 
