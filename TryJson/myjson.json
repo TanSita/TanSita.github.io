@@ -2,7 +2,7 @@
     {
         "id" : 5,
         "name" : "茄汁義大利麵",
-        "price" : 130,
+        "price" : "130.0",
         "src" : "images/茄汁義大利麵.jpg",
         "intro" : "我是茄汁義大利麵",
         "top10" : true,
@@ -11,7 +11,7 @@
     {
         "id" : 12,
         "name" : "青醬海陸義大利麵",
-        "price" : 120,
+        "price" : "120.0",
         "src" : "images/青醬海陸義大利麵.jpg",
         "intro" : "好吃的 青醬海陸義大利麵！",
         "top10" : false,
@@ -20,7 +20,7 @@
     {
         "id" : 16,
         "name" : "冰淇淋鬆餅",
-        "price" : 110,
+        "price" : "110.0",
         "src" : "images/冰淇淋鬆餅.jpg",
         "intro" : "好吃的 冰淇淋鬆餅！",
         "top10" : true,

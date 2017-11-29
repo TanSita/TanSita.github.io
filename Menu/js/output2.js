@@ -6,7 +6,7 @@ var fsrc = "";
 var shoppingitems = [];
 var alreadyClick = [];
 
-var newList = 
+var HudingnewList = 
 {
     "action":"new",
     "food":
@@ -14,7 +14,7 @@ var newList =
     ]
 }
 
-var editList = 
+var HudingeditList = 
 {
     "action":"edit",
     "food":
@@ -22,7 +22,34 @@ var editList =
     ]
 }
 
-var delList = 
+var HudingdelList = 
+{
+    "action":"delete",
+    "food":
+    [
+    ]
+}
+
+// --------------------------------
+
+
+var TSnewList = 
+{
+    "action":"new",
+    "food":
+    [
+    ]
+}
+
+var TSeditList = 
+{
+    "action":"edit",
+    "food":
+    [
+    ]
+}
+
+var TSdelList = 
 {
     "action":"delete",
     "food":
@@ -131,18 +158,18 @@ function uploadImage(name , price , src , intro , top10)
     return myhtml;
 }
 
-function add3buttons(hudingID , imageID , name , price , src , intro , top10 , category)
+function add3buttons(hudingID , tsID , imageID , name , price , src , intro , top10 , category)
 {
     var myhtml = 
     '<br><br>'+
     '<span class="myCorfirmButton" onclick="myConfirm(' + 
-    hudingID + ",'" + imageID + "','" +
+    hudingID + "," + tsID + ",'" + imageID + "','" +
     name + "'," + price + ",'" + src + "','" + 
     intro + "'," + top10 + ",'" + category + "'" + 
     ');">' + 
     '修改</span>' +
     '<span class="myDeleteButton" onclick="myDelete(' +
-     "'" + imageID + "'" + 
+    hudingID + "," + tsID + ",'" + imageID + "'" +
     ');">刪除</span>' +
     '<span class="myCancelButton" onclick="myCancel();">取消</span>';
 
@@ -150,10 +177,10 @@ function add3buttons(hudingID , imageID , name , price , src , intro , top10 , c
     return myhtml;        
 }
 
-function myConfirm(hudingID , imageID , name , price , src , intro , top10 , category)
+function myConfirm(hudingID , tsID , imageID , name , price , src , intro , top10 , category)
 {
     var fname = $("#myname").val();
-    var fprice = parseInt($("#myprice").val());
+    var fprice = $("#myprice").val();
     var fintro = $("#myintro").val();
     var ftop10 = false;
     
@@ -167,19 +194,19 @@ function myConfirm(hudingID , imageID , name , price , src , intro , top10 , cat
         ftop10 = true;
     }
 
-    if(fname.length>0 && fprice.toString().length>0 && fintro.length>0)
+    if(fname.length>0 && fprice.length>0 && fintro.length>0)
     {
         //如果有更新圖片
         if(fsrc.length > 0) 
         {
             //更改圖片
-            $("#" + imageID).replaceWith(addImage(hudingID,imageID,fname,fprice,fsrc,fintro,ftop10,fcategory)); 
-            $("." + imageID).replaceWith(addtop10(hudingID,imageID,fname,fprice,fsrc,fintro,ftop10,fcategory)); 
+            $("#" + imageID).replaceWith(addImage(hudingID,tsID,imageID,fname,fprice,fsrc,fintro,ftop10,fcategory)); 
+            $("." + imageID).replaceWith(addtop10(hudingID,tsID,imageID,fname,fprice,fsrc,fintro,ftop10,fcategory)); 
 
             //如果之前沒有放到top10就放過去
             if(top10==false && ftop10==true)
             {
-                $(".scrollableArea").append(addtop10(hudingID,imageID,fname,fprice,fsrc,fintro,ftop10,fcategory));
+                $(".scrollableArea").append(addtop10(hudingID,tsID,imageID,fname,fprice,fsrc,fintro,ftop10,fcategory));
                 mysmoothTouchScroll();
             }
             //如果之前放在top10 就移除
@@ -188,29 +215,74 @@ function myConfirm(hudingID , imageID , name , price , src , intro , top10 , cat
                 $("." + imageID).replaceWith('');
             }
 
+            if(tsID>=0)
+            {
+                TSeditListedit(tsID,fname,fprice,fsrc,fintro,ftop10,fcategory);
+                // console.log(TSeditList);
+            }
+            else
+            {
+                TSnewListadd(imageID,fname,fprice,fsrc,fintro,ftop10,fcategory);
+                // console.log(TSnewList);
+            }
+
+            if(hudingID>=0)
+            {
+                HudingeditListedit(hudingID,fname,fprice,fsrc,fintro,ftop10,fcategory);
+                // console.log(HudingeditList);
+            }
+            else
+            {
+                HudingnewListadd(imageID,fname,fprice,fsrc,fintro,ftop10,fcategory);
+                // console.log(HudingnewList);
+            }
+
             fsrc = "";
         }
         //沒更新圖片的話，就只要把其他資訊改一改就好惹
         else
         {
-            $("#" + imageID).replaceWith(addImage(hudingID,imageID,fname,fprice,src,fintro,ftop10,fcategory)); 
-            $("." + imageID).replaceWith(addtop10(hudingID,imageID,fname,fprice,src,fintro,ftop10,fcategory)); 
+            $("#" + imageID).replaceWith(addImage(hudingID,tsID,imageID,fname,fprice,src,fintro,ftop10,fcategory)); 
+            $("." + imageID).replaceWith(addtop10(hudingID,tsID,imageID,fname,fprice,src,fintro,ftop10,fcategory)); 
 
             if(top10==false && ftop10==true)
             {
-                $(".scrollableArea").append(addtop10(hudingID,imageID,fname,fprice,src,fintro,ftop10,fcategory));
+                $(".scrollableArea").append(addtop10(hudingID,tsID,imageID,fname,fprice,src,fintro,ftop10,fcategory));
                 mysmoothTouchScroll();
             }
             else if(top10==true && ftop10==false)
             {
                 $("." + imageID).replaceWith('');
             }
+
+
+            if(tsID>=0)
+            {
+                TSeditListedit(tsID,fname,fprice,src,fintro,ftop10,fcategory);
+                // console.log(TSeditList);
+            }
+            else
+            {
+                TSnewListadd(imageID,fname,fprice,src,fintro,ftop10,fcategory);
+                // console.log(TSnewList);
+            }
+
+            if(hudingID>=0)
+            {
+                HudingeditListedit(hudingID,fname,fprice,src,fintro,ftop10,fcategory);
+                // console.log(HudingeditList);
+            }
+            else
+            {
+                HudingnewListadd(imageID,fname,fprice,src,fintro,ftop10,fcategory);
+                // console.log(HudingnewList);
+            }
         }
     }
     swal.close();
 }
 
-function myDelete(imageID)
+function myDelete(hudingID,tsID,imageID)
 {
     swal.close();
 
@@ -228,6 +300,28 @@ function myDelete(imageID)
     {
         $("#" + imageID).replaceWith('');
         $("." + imageID).replaceWith('');
+
+        if(tsID>=0)
+        {
+            TSeditListdel(tsID);
+            // console.log(TSeditList);
+        }
+        else
+        {
+            TSnewListdel(imageID);
+            // console.log(TSnewList);
+        }
+
+        if(hudingID>=0)
+        {
+            HudingeditListdel(hudingID);
+            // console.log(HudingeditList);
+        }
+        else
+        {
+            HudingnewListdel(imageID);
+            // console.log(HudingnewList);
+        }
 
         swal
         (
@@ -272,21 +366,21 @@ function addAlert(num)
         var fcategoryID = "category" + num;
         var fcategoryTitleID = "categoryTitle" + num;
         var fcategoryLen = $("#" + fcategoryID)[0].children.length;
-        var fImageLastID;
-        var fImagenum = 0; //如果啥都沒 就從0開始
+        var fimageLastID;
+        var fimagenum = 0; //如果啥都沒 就從0開始
         var fcategory = $("#" + fcategoryTitleID)[0].innerHTML;
 
         if(fcategoryLen > 0)
         {
-            fImageLastID = $("#" + fcategoryID + " > div:last").attr('id');
-            fImagenum = parseInt(fImageLastID.replace(fcategoryID + "_" + "image",""));
-            fImagenum += 1;
+            fimageLastID = $("#" + fcategoryID + " > div:last").attr('id');
+            fimagenum = parseInt(fimageLastID.replace(fcategoryID + "_" + "image",""));
+            fimagenum += 1;
         }
         
-        var fImageID = fcategoryID + "_" + "image" + fImagenum;
+        var fimageID = fcategoryID + "_" + "image" + fimagenum;
 
         var fname = $("#myname").val();
-        var fprice = parseInt($("#myprice").val());
+        var fprice = $("#myprice").val();
         var fintro = $("#myintro").val();
         var ftop10 = false;
 
@@ -295,24 +389,31 @@ function addAlert(num)
             ftop10 = true;
         }
 
-        if( fname.length>0 && fprice.toString().length>0 && 
+        if( fname.length>0 && fprice.length>0 && 
             fintro.length>0 && fsrc.length>0 )
         {
 
-            $("#" + fcategoryID).append(addImage(-1,fImageID,fname,fprice,fsrc,fintro,ftop10,fcategory)); //新增圖片到某個分類
+            $("#" + fcategoryID).append(addImage(-1,-1,fimageID,fname,fprice,fsrc,fintro,ftop10,fcategory)); //新增圖片到某個分類
 
             if(ftop10==true)
             {
-                $(".scrollableArea").append(addtop10(-1 , fImageID , fname , fprice , fsrc , fintro , ftop10 , fcategory));
+                $(".scrollableArea").append(addtop10(-1 , -1 , fimageID , fname , fprice , fsrc , fintro , ftop10 , fcategory));
                 mysmoothTouchScroll();
             }
-            
+
+            // json
+            TSnewListadd(fimageID,fname,fprice,fsrc,fintro,ftop10,fcategory);
+            // console.log(TSnewList);
+
+            HudingnewListadd(fimageID,fname,fprice,fsrc,fintro,ftop10,fcategory);
+            // console.log(HudingnewList);
+
             fsrc = ""; 
         }
     })
 }
 
-function editAlert(hudingID , imageID , name , price , src , intro , top10 , category)
+function editAlert(hudingID , tsID , imageID , name , price , src , intro , top10 , category)
 {
     // name 是原本資料的
     // fname 是改之後的
@@ -322,7 +423,7 @@ function editAlert(hudingID , imageID , name , price , src , intro , top10 , cat
         title: '編輯餐點',
         showConfirmButton: false,
         html:   uploadImage(name,price,src,intro,top10) +
-                add3buttons(hudingID,imageID,name,price,src,intro,top10,category)
+                add3buttons(hudingID,tsID,imageID,name,price,src,intro,top10,category)
 
     }).then(function () 
     {
@@ -441,28 +542,28 @@ function showStar(top10)
 
 //關於新增Image
 
-function addImage(hudingID , imageID , name , price , src , intro , top10 , category)
+function addImage(hudingID , tsID , imageID , name , price , src , intro , top10 , category)
 {
     var myhtml = 
     '<div class="col-xs-4 text-center"' +  
         ' hudingID = ' + hudingID + 
+        ' tsID = ' + tsID + 
         ' imageID = "' + imageID + '"' +
         ' name = "' + name + '"' +
-        ' price = ' + price + 
+        ' price = "' + price + '"' +
         ' src = "' + src + '"' +
         ' intro = "' + intro + '"' +
         ' top10 = ' + top10 + 
         ' category = "' + category + '"' +
         ' id="' + imageID + '">' +
         '<a onclick="' +  
-            'editAlert(' + hudingID + ",'" + imageID + "','" +
-            name + "'," + price + ",'" + src + "','" + 
+            'editAlert(' + hudingID + "," + tsID +  ",'" + 
+            imageID + "','" + name + "','" + price + "','" + src + "','" + 
             intro + "'," + top10 + ",'" + category + "'" + 
             ');">' + 
             '<img class="img-rounded" src="' + src + '" width="100%">' +
         '</a>' +
     '</div>';
-
 
     return myhtml;
 }
@@ -491,23 +592,24 @@ function showImage(name , price , src , intro , top10)
     return myhtml;
 }
 
-function addtop10(hudingID , imageID , name , price , src , intro , top10 , category)
+function addtop10(hudingID , tsID , imageID , name , price , src , intro , top10 , category)
 {
     var myhtml = 
     '<a class="' + imageID + '"' + 
         ' hudingID = ' + hudingID + 
+        ' tsID = ' + tsID + 
         ' imageID = "' + imageID + '"' +
         ' name = "' + name + '"' +
-        ' price = ' + price + 
+        ' price = "' + price + '"' +
         ' src = "' + src + '"' +
         ' intro = "' + intro + '"' +
         ' top10 = ' + top10 + 
         ' category = "' + category + '"' +
         ' onclick="' +  
-        'editAlert(' + hudingID + ",'" + imageID + "','" +
-        name + "'," + price + ",'" + src + "','" + 
-        intro + "'," + top10 + ",'" + category + "'" + 
-        ');">' + 
+        'editAlert(' + hudingID + "," + tsID +  ",'" + 
+            imageID + "','" + name + "','" + price + "','" + src + "','" + 
+            intro + "'," + top10 + ",'" + category + "'" + 
+            ');">' + 
         '<img src="' + src + '" class="img-circle Stories"/>' +
     '</a>';
 
@@ -690,13 +792,13 @@ function addListTextbox()
         num += 1;
     }
 
-    $("#" + "addCategoryTextButton").before(makeListTextbox(num,'new',false));
+    $("#" + "addCategoryTextButton").before(makeListTextbox(num,'new',false,false));
     $("body").append(makeCategory(num,''));
 
     $(".navbar li a").css({"display" : "inline-block" , "width" : "calc(100% - 90px)"});
 }
 
-function makeListTextbox(num,new_or_edit,huding)
+function makeListTextbox(num,new_or_edit,huding,ts)
 {
     var myhtml = 
     '<li id="' + "list" + num + '">' + 
@@ -705,14 +807,14 @@ function makeListTextbox(num,new_or_edit,huding)
         '" id="' + new_or_edit + 'CategoryTextbox' + num +
         '" placeholder="輸入餐點分類">';
     
-    myhtml += makeOKDeleteButton(num,new_or_edit,huding);
+    myhtml += makeOKDeleteButton(num,new_or_edit,huding,ts);
 
     myhtml += '</li>';
 
     return myhtml;
 }
 
-function makeList(num , listText , huding)
+function makeList(num , listText , huding , ts)
 {
     var listID = "list" + num;
     var categoryID = "category" + num;
@@ -721,7 +823,7 @@ function makeList(num , listText , huding)
     '<li id="' + listID + '">' +
         '<a href="#' + categoryID + '">' + listText +
         '</a>' + 
-        makeEditDeleteButton(num,huding) +
+        makeEditDeleteButton(num,huding,ts) +
     '</li>';
 
     return myhtml;
@@ -754,7 +856,7 @@ function makeCategory(num , listText)
     return myhtml;
 }
 
-function OKItem(num,new_or_edit,huding)
+function OKItem(num,new_or_edit,huding,ts)
 {
     var mylistID = "list" + num;
     var mycategoryTitleID = "categoryTitle" + num;
@@ -765,7 +867,7 @@ function OKItem(num,new_or_edit,huding)
 
     if(mylistText.length>0)
     {
-        $("#" + mylistID).replaceWith(makeList(num,mylistText,huding));
+        $("#" + mylistID).replaceWith(makeList(num,mylistText,huding,ts));
         $("#" + mycategoryTitleID)[0].innerHTML = mylistText;
 
         if(new_or_edit=='edit')
@@ -778,7 +880,8 @@ function OKItem(num,new_or_edit,huding)
                 for(var i=0;i<mycategoryLen;i++)
                 {
                     var myfood = $("#" + mycategoryID)[0].children[i];
-                    var myHudingID = parseInt(myfood.getAttribute("HudingID"));
+                    var myimageID = myfood.getAttribute("imageID");
+                    var myhudingID = parseInt(myfood.getAttribute("hudingID"));
                     var myname = myfood.getAttribute("name");
                     var myprice = parseInt(myfood.getAttribute("price"));
                     var mysrc = myfood.getAttribute("src");
@@ -786,9 +889,11 @@ function OKItem(num,new_or_edit,huding)
                     var mytop10 = myfood.getAttribute("top10") == "true";
                     var mycategory = mylistText;
                     myfood.setAttribute("category" , mylistText);
+                    $("." + myimageID).attr("category" , mylistText);
 
-                    Hudingedit(myHudingID,myname,myprice,mysrc,myintro,mytop10,mycategory);
-                    console.log(editList);
+                    HudingeditListedit(myhudingID,myname,myprice,mysrc,myintro,mytop10,mycategory);
+                    
+                    console.log(HudingeditList);
                 }
             }
             else
@@ -807,9 +912,58 @@ function OKItem(num,new_or_edit,huding)
                     var mytop10 = myfood.getAttribute("top10") == "true";
                     var mycategory = mylistText;
                     myfood.setAttribute("category" , mylistText);
+                    $("." + myimageID).attr("category" , mylistText);
 
-                    TSadd(myimageID,myname,myprice,mysrc,myintro,mytop10,mycategory);
-                    console.log(newList);
+
+                    HudingnewListadd(myimageID,myname,myprice,mysrc,myintro,mytop10,mycategory);
+                    console.log(HudingnewList);
+                }
+            }
+
+            if(ts==true)
+            {
+                var mycategoryID = "category" + num;
+                var mycategoryLen = $("#" + mycategoryID)[0].children.length;
+
+                for(var i=0;i<mycategoryLen;i++)
+                {
+                    var myfood = $("#" + mycategoryID)[0].children[i];
+                    var myimageID = myfood.getAttribute("imageID");
+                    var mytsID = parseInt(myfood.getAttribute("tsID"));
+                    var myname = myfood.getAttribute("name");
+                    var myprice = parseInt(myfood.getAttribute("price"));
+                    var mysrc = myfood.getAttribute("src");
+                    var myintro = myfood.getAttribute("intro");
+                    var mytop10 = myfood.getAttribute("top10") == "true";
+                    var mycategory = mylistText;
+                    myfood.setAttribute("category" , mylistText);
+                    $("." + myimageID).attr("category" , mylistText);
+
+                    TSeditListedit(mytsID,myname,myprice,mysrc,myintro,mytop10,mycategory);
+                    
+                    console.log(TSeditList);
+                }
+            }
+            else
+            {
+                var mycategoryID = "category" + num;
+                var mycategoryLen = $("#" + mycategoryID)[0].children.length;
+
+                for(var i=0;i<mycategoryLen;i++)
+                {
+                    var myfood = $("#" + mycategoryID)[0].children[i];
+                    var myimageID = myfood.getAttribute("imageID");
+                    var myname = myfood.getAttribute("name");
+                    var myprice = parseInt(myfood.getAttribute("price"));
+                    var mysrc = myfood.getAttribute("src");
+                    var myintro = myfood.getAttribute("intro");
+                    var mytop10 = myfood.getAttribute("top10") == "true";
+                    var mycategory = mylistText;
+                    myfood.setAttribute("category" , mylistText);
+                    $("." + myimageID).attr("category" , mylistText);
+
+                    TSnewListadd(myimageID,myname,myprice,mysrc,myintro,mytop10,mycategory);
+                    console.log(TSnewList);
                 }
             }
         }
@@ -822,15 +976,76 @@ function OKItem(num,new_or_edit,huding)
     $(".navbar li a").css({"display" : "inline-block" , "width" : "calc(100% - 90px)"});
 }
 
-function EditItem(num , huding)
+function EditItem(num , huding , ts)
 {
     var mylistID = "list" + num;
 
-    $("#" + mylistID).replaceWith(makeListTextbox(num,'edit',huding));
+    $("#" + mylistID).replaceWith(makeListTextbox(num,'edit',huding,ts));
 }
 
-function DeleteItem(num , huding)
+function DeleteItem(num , huding , ts)
 {
+    if(huding==true)
+    {
+        var mycategoryID = "category" + num;
+        var mycategoryLen = $("#" + mycategoryID)[0].children.length;
+
+        for(var i=0;i<mycategoryLen;i++)
+        {
+            var myfood = $("#" + mycategoryID)[0].children[i];
+            var myhudingID = parseInt(myfood.getAttribute("hudingID"));
+            var myimageID = myfood.getAttribute("imageID");
+
+            $("." + myimageID).replaceWith('');
+            HudingeditListdel(myhudingID);
+        }
+    }
+    else
+    {
+        var mycategoryID = "category" + num;
+        var mycategoryLen = $("#" + mycategoryID)[0].children.length;
+
+        for(var i=0;i<mycategoryLen;i++)
+        {
+            var myfood = $("#" + mycategoryID)[0].children[i];
+            var myimageID = myfood.getAttribute("imageID");
+            
+            $("." + myimageID).replaceWith('');
+            HudingnewListdel(myimageID);
+        }
+    }
+
+    if(ts==true)
+    {
+        var mycategoryID = "category" + num;
+        var mycategoryLen = $("#" + mycategoryID)[0].children.length;
+
+        for(var i=0;i<mycategoryLen;i++)
+        {
+            var myfood = $("#" + mycategoryID)[0].children[i];
+            var mytsID = parseInt(myfood.getAttribute("tsID"));
+            var myimageID = myfood.getAttribute("imageID");
+
+            console.log(myimageID);
+            $("." + myimageID).replaceWith('');
+            TSeditListdel(mytsID);
+        }
+    }
+    else
+    {
+        var mycategoryID = "category" + num;
+        var mycategoryLen = $("#" + mycategoryID)[0].children.length;
+
+        for(var i=0;i<mycategoryLen;i++)
+        {
+            var myfood = $("#" + mycategoryID)[0].children[i];
+            var myimageID = myfood.getAttribute("imageID");
+
+            $("." + myimageID).replaceWith('');
+            TSnewListdel(myimageID);
+        }
+    }
+
     var mylistID = "list" + num;
     var mycategoryID = "category" + num;
 
@@ -838,32 +1053,32 @@ function DeleteItem(num , huding)
     $("#" + mycategoryID).parent().replaceWith('');
 }
 
-function makeOKDeleteButton(num,new_or_edit,huding)
+function makeOKDeleteButton(num,new_or_edit,huding,ts)
 {
     var myhtml = 
     '<button class="btn nothing"></button>' + 
     '<button class="btn btn-danger pull-right"' + 
-    'onclick="DeleteItem(\'' + num + '\');" >' + 
+    'onclick="DeleteItem(' + num + ',' + huding + ',' + ts + ');" >' + 
     '   <span class="glyphicon glyphicon-trash"></span>' + 
     '</button>' + 
     '<button class="btn btn-success pull-right"' + 
-    'onclick="OKItem(' + num + ",'" + new_or_edit + "'," + huding + ');" >' + 
+    'onclick="OKItem(' + num + ",'" + new_or_edit + "'," + huding + "," + ts + ');" >' + 
     '   <span class="glyphicon glyphicon-ok"></span>' + 
     '</button>';
 
     return myhtml;
 }
 
-function makeEditDeleteButton(num , huding)
+function makeEditDeleteButton(num , huding , ts)
 {
     var myhtml = 
     '<button class="btn nothing"></button>' + 
     '<button class="btn btn-danger pull-right"' + 
-    'onclick="DeleteItem(' + num + ',' + huding + ');" >' + 
+    'onclick="DeleteItem(' + num + ',' + huding + ',' + ts + ');" >' + 
     '   <span class="glyphicon glyphicon-trash"></span>' + 
     '</button>' + 
     '<button class="btn btn-info pull-right"' + 
-    'onclick="EditItem(' + num + ',' + huding + ');" >' + 
+    'onclick="EditItem(' + num + ',' + huding + ',' + ts + ');" >' + 
     '   <span class="glyphicon glyphicon-pencil"></span>' + 
     '</button>';
 
@@ -871,16 +1086,24 @@ function makeEditDeleteButton(num , huding)
 }
 
 
+
+
+
+
+
+
+
+
 // about output json 
 
-function TSsearch(imageID)
+function HudingnewListsearch(imageID)
 {
-    var newListfood = newList["food"];
-    var newListfoodLen = newListfood.length;
+    var HudingnewListfood = HudingnewList["food"];
+    var HudingnewListfoodLen = HudingnewListfood.length;
 
-    for(var i=0;i<newListfoodLen;i++)
+    for(var i=0;i<HudingnewListfoodLen;i++)
     {
-        if(newListfood[i]["imageID"]==imageID)
+        if(HudingnewListfood[i]["imageID"]==imageID)
         {
             return i;
         }
@@ -888,9 +1111,9 @@ function TSsearch(imageID)
     return -1;
 }
 
-function TSadd(imageID,name,price,src,intro,top10,category)
+function HudingnewListadd(imageID,name,price,src,intro,top10,category)
 {
-    var newListfood = newList["food"];
+    var HudingnewListfood = HudingnewList["food"];
 
     var element = 
     {
@@ -903,33 +1126,33 @@ function TSadd(imageID,name,price,src,intro,top10,category)
         "category" : category
     }
 
-    var myindex = TSsearch(imageID);
+    var myindex = HudingnewListsearch(imageID);
 
     if(myindex >= 0)
     {
-        newListfood[myindex] = element;
+        HudingnewListfood[myindex] = element;
     }
     else
     {
-        newListfood.push(element);
+        HudingnewListfood.push(element);
     }
 }
 
-function TSdel(imageID)
+function HudingnewListdel(imageID)
 {
-    var newListfood = newList["food"];
-    var myindex = TSsearch(imageID);
-    newListfood.splice(myindex,1);
+    var HudingnewListfood = HudingnewList["food"];
+    var myindex = HudingnewListsearch(imageID);
+    HudingnewListfood.splice(myindex,1);
 }
 
-function Hudingsearch(HudingID)
+function HudingeditListsearch(hudingID)
 {
-    var editListfood = editList["food"];
-    var editListfoodLen = editListfood.length;
+    var HudingeditListfood = HudingeditList["food"];
+    var HudingeditListfoodLen = HudingeditListfood.length;
 
-    for(var i=0;i<editListfoodLen;i++)
+    for(var i=0;i<HudingeditListfoodLen;i++)
     {
-        if(editListfood[i]["id"] == HudingID)
+        if(HudingeditListfood[i]["id"] == hudingID)
         {
             return i;
         }
@@ -937,13 +1160,13 @@ function Hudingsearch(HudingID)
     return -1;
 }
 
-function Hudingedit(HudingID,name,price,src,intro,top10,category)
+function HudingeditListedit(hudingID,name,price,src,intro,top10,category)
 {
-    var editListfood = editList["food"];
+    var HudingeditListfood = HudingeditList["food"];
 
     var element = 
     {
-        "id" : HudingID,
+        "id" : hudingID,
         "name" : name,
         "price" : price,
         "src" : src,
@@ -952,35 +1175,150 @@ function Hudingedit(HudingID,name,price,src,intro,top10,category)
         "category" : category
     }
 
-    var myindex = Hudingsearch(HudingID);
+    var myindex = HudingeditListsearch(hudingID);
 
     if(myindex >= 0)
     {
-        editListfood[myindex] = element;
+        HudingeditListfood[myindex] = element;
     }
     else
     {
-        editListfood.push(element);
+        HudingeditListfood.push(element);
     }
 
 }
 
-function Hudingdel(HudingID)
+function HudingeditListdel(hudingID)
 {
-    var delListfood = delList["food"];
-    var editListfood = editList["food"];
+    var HudingdelListfood = HudingdelList["food"];
+    var HudingeditListfood = HudingeditList["food"];
 
     var element = 
     {
-        "id" : HudingID
+        "id" : hudingID
     }
 
-    delListfood.push(element);
+    HudingdelListfood.push(element);
 
-    var myindex = Hudingsearch(HudingID);
+    var myindex = HudingeditListsearch(hudingID);
 
     if(myindex >= 0)
     {
-        editListfood.splice(myindex,1);
+        HudingeditListfood.splice(myindex,1);
+    }
+}
+
+
+// 預覽 ------------------------------------------
+
+function TSnewListsearch(imageID)
+{
+    var TSnewListfood = TSnewList["food"];
+    var TSnewListfoodLen = TSnewListfood.length;
+
+    for(var i=0;i<TSnewListfoodLen;i++)
+    {
+        if(TSnewListfood[i]["imageID"]==imageID)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
+function TSnewListadd(imageID,name,price,src,intro,top10,category)
+{
+    var TSnewListfood = TSnewList["food"];
+
+    var element = 
+    {
+        "imageID" : imageID,
+        "name" : name,
+        "price" : price,
+        "src" : src,
+        "intro" : intro,
+        "top10" : top10,
+        "category" : category
+    }
+
+    var myindex = TSnewListsearch(imageID);
+
+    if(myindex >= 0)
+    {
+        TSnewListfood[myindex] = element;
+    }
+    else
+    {
+        TSnewListfood.push(element);
+    }
+}
+
+function TSnewListdel(imageID)
+{
+    var TSnewListfood = TSnewList["food"];
+    var myindex = TSnewListsearch(imageID);
+    TSnewListfood.splice(myindex,1);
+}
+
+function TSeditListsearch(tsID)
+{
+    var TSeditListfood = TSeditList["food"];
+    var TSeditListfoodLen = TSeditListfood.length;
+
+    for(var i=0;i<TSeditListfoodLen;i++)
+    {
+        if(TSeditListfood[i]["tsID"] == tsID)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
+function TSeditListedit(tsID,name,price,src,intro,top10,category)
+{
+    var TSeditListfood = TSeditList["food"];
+
+    var element = 
+    {
+        "tsID" : tsID,
+        "name" : name,
+        "price" : price,
+        "src" : src,
+        "intro" : intro,
+        "top10" : top10,
+        "category" : category
+    }
+
+    var myindex = TSeditListsearch(tsID);
+
+    if(myindex >= 0)
+    {
+        TSeditListfood[myindex] = element;
+    }
+    else
+    {
+        TSeditListfood.push(element);
+    }
+
+}
+
+function TSeditListdel(tsID)
+{
+    var TSdelListfood = TSdelList["food"];
+    var TSeditListfood = TSeditList["food"];
+
+    var element = 
+    {
+        "tsID" : tsID
+    }
+
+    TSdelListfood.push(element);
+
+    var myindex = TSeditListsearch(tsID);
+
+    if(myindex >= 0)
+    {
+        TSeditListfood.splice(myindex,1);
     }
 }
