@@ -131,14 +131,14 @@ function uploadImage(name , price , src , intro , top10)
     var myhtml = 
     '<input id="myname" type="text" class="form-control" placeholder="菜名... " value="' + name + '" required>'+
 
-    '<div class="row alignleft">' +
-        '<input id="myprice" type="text" class="customTextbox" ' +
+    // '<div class="row alignleft">' +
+        '<input id="myprice" type="text" class="customTextbox alignleft" ' +
         'placeholder="價錢... " value="' + price + '" required>' +
-    '</div>' +
+    // '</div>' +
 
-    '<div class="alignright">' +
+    // '<div class="alignright">' +
         addStar(top10) +
-    '</div>' +
+    // '</div>' +
 
     '<br>' +
     '<img id="img_prev" src="' + src + '" width="50%">' +
