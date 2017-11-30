@@ -453,15 +453,47 @@ function showAlert(imageID , name , price , src , intro , top10)
             // buttonsStyling: false
         }).then(function () 
         {
-            var shoppingitemsLen = shoppingitems.length;
-            shoppingitems.push(name + "," + price);
+            swal(
+            {
+                title: '需購買的數量',
+                input: 'text',
+                // html: showImage(name,price,src,intro,top10),
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#f0ad4e',
+                confirmButtonText: '確定',
+                cancelButtonText: '取消',
+                confirmButtonClass: 'btn btn-success',
+                cancelButtonClass: 'btn btn-danger'
+            }).then(function (result) 
+            {
+                var count = parseInt(result); // 如果是奇怪的字 parseInt 之後會變成 NaN
 
-            swal
-            (
-                '已加入購物車！',
-                '感謝你的購買 m(____)m',
-                'success'
-            )
+                // 如果有. 代表是小數 就滾
+                // 不是奇怪的字 也不是小數 也沒有<=0 的 才能成功！
+                if(count <= 0 || isNaN(count) || result.indexOf(".") >= 0)
+                {
+                    swal
+                    (
+                        '數量錯誤！',
+                        '請輸入 > 0的整數！',
+                        'error'
+                    )
+                }
+                else
+                {
+                    var shoppingitemsLen = shoppingitems.length;
+                    shoppingitems.push(name + "," + price);
+
+                    swal
+                    (
+                        '已加入購物車！',
+                        '感謝您購買' + count + '份' + ' m(____)m',
+                        'success'
+                    )
+                }
+            });
+            
         });
     }
     else
