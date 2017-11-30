@@ -894,7 +894,31 @@ function OKItem(num,new_or_edit,huding,ts)
     var myTextboxID = new_or_edit + "CategoryTextbox" + num;
     var mylistText = $("#" + myTextboxID).val();
 
-    if(mylistText.length>0)
+    var notinCategories = true;
+    var mycategoriesLen = $("#categories").children().length - 1;
+
+    for(var i=0;i<mycategoriesLen;i++)
+    {
+
+        var childlistID = $("#categories")[0].children[i].getAttribute("id");
+        var childlistText = $("#" + childlistID).text().replace(/\s/g, '');
+
+        if(childlistText == mylistText)
+        {
+            notinCategories = false;
+            swal
+            (
+                '分類重複！',
+                '請換一個分類名稱 :D',
+                'error'
+            )
+
+            return;
+        }
+    }
+
+
+    if(mylistText.length>0 && notinCategories==true)
     {
         $("#" + mylistID).replaceWith(makeList(num,mylistText,huding,ts));
         $("#" + mycategoryTitleID)[0].innerHTML = mylistText;
