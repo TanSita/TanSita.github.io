@@ -4,7 +4,6 @@ var mypanel_colorsLen = mypanel_colors.length;
 var json;
 var fsrc = "";
 var shoppingitems = [];
-var alreadyClick = [];
 
 var HudingnewList = 
 {
@@ -56,8 +55,6 @@ var TSdelList =
     [
     ]
 }
-
-
 
 mysmoothTouchScroll();
 
@@ -440,11 +437,11 @@ function editAlert(hudingID , tsID , imageID , name , price , src , intro , top1
 
 function showAlert(imageID , name , price , src , intro , top10)
 {
-    if(alreadyClick.indexOf(imageID) < 0)
+    if(shoppingitems.indexOf(name + "," + price) < 0)
     {
         swal(
         {
-            title: '熱門美食',
+            title: '',
             html: showImage(name,price,src,intro,top10),
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -456,8 +453,8 @@ function showAlert(imageID , name , price , src , intro , top10)
             // buttonsStyling: false
         }).then(function () 
         {
+            var shoppingitemsLen = shoppingitems.length;
             shoppingitems.push(name + "," + price);
-            alreadyClick.push(imageID);
 
             swal
             (
@@ -473,14 +470,24 @@ function showAlert(imageID , name , price , src , intro , top10)
         {
             title: '熱門美食',
             html: showImage(name,price,src,intro,top10),
-            showConfirmButton: false,
+            showConfirmButton: true,
             showCancelButton: true,
+            confirmButtonColor: '#d9534f',
+            confirmButtonText: '移出購物車',
             cancelButtonColor: '#f0ad4e',
-            cancelButtonText: '本產品已經在購物車！',
-            cancelButtonClass: 'btn btn-danger'
+            cancelButtonText: '取消'
+            // cancelButtonClass: 'btn btn-danger'
         }).then(function () 
         {
+            var myindex = shoppingitems.indexOf(name + "," + price);
+            shoppingitems.splice(myindex,1);
 
+            swal
+            (
+                '已移出購物車！',
+                '真的不買嗎... (╥﹏╥)',
+                'success'
+            )
         },
         function (dismiss) 
         {
@@ -573,8 +580,14 @@ function showImage(name , price , src , intro , top10)
     var myhtml = 
     '<div class="panel panel-info">' + 
         '<div class="mypanel-heading">' +
-            '<strong class="alignleft">' + name + '</strong>' +
-            showStar(top10) +
+            '<strong class="alignleft">' + name + '</strong>';
+    
+    if(top10)
+    {
+        myhtml += showStar(top10);
+    }
+
+    myhtml+=
             '<strong class="text-danger alignmid">' + price + '</strong>' +
         '</div>' +
 
@@ -616,167 +629,6 @@ function addtop10(hudingID , tsID , imageID , name , price , src , intro , top10
     return myhtml;
 }
 
-// about shopping cart
-
-
-function calculate(num,price,addorminus) // true = add , false = minus
-{
-    var itemIDCount = "itemIDCount" + num;
-    var itemIDPrice = "itemIDPrice" + num;
-
-    var mycount = parseInt($("#"+itemIDCount).text());
-    var myprice = parseInt($("#"+itemIDPrice).text());
-
-    if(addorminus==true)
-    {
-        mycount += 1;
-        myprice = price * mycount;
-        $("#" + itemIDCount).text(mycount);
-        $("#" + itemIDPrice).text(myprice);
-    }
-    else
-    {
-        if(mycount>0)
-        {
-            mycount -= 1;
-            myprice = price * mycount;
-            $("#" + itemIDCount).text(mycount);
-            $("#" + itemIDPrice).text(myprice);
-        }
-    }
-}
-
-function showItems()
-{
-    var myhtml = 
-    '<table class="table table-bordered">' + 
-    '<thead>' + 
-        '<tr>' +
-            '<th class="text-center">餐點名稱</th>'+
-            '<th class="text-center">價錢</th>'+
-            '<th class="text-center">份數</th>'+
-            '<th class="text-center">設定</th>'+
-        '</tr>'+
-    '</thead>' +
-    '<tbody>';
-
-    for(var i=0;i<shoppingitems.length;i++)
-    {
-        // itemPrice 原本的錢
-        // itemIDPrice 會存放 * count 之後的錢
-
-        var splitItems = shoppingitems[i].split(",");
-        var itemName = splitItems[0];
-        var itemPrice = splitItems[1];
-        var itemIDPrice = "itemIDPrice" + i;
-        var itemIDCount = "itemIDCount" + i;
-
-        myhtml +=
-        '<tr>' +
-            '<td class="scrolltd">' + itemName + '</td>' +
-            '<td id="' + itemIDPrice + '">' + itemPrice + '</td>' +
-            '<td id="' + itemIDCount + '">' + 1 + '</td>' +
-            '<td>' +
-
-                '<span class="btn btn-success btn-xs" ' +
-                'onclick="calculate(\''+ i + "','" + itemPrice + "'," + true + ');">＋'+
-                '</span>' +
-
-                '<span class="btn btn-danger btn-xs" ' +
-                'onclick="calculate(\''+ i + "','" + itemPrice + "'," + false + ');">－'+
-                '</span>' +
-
-            '</td>'+
-        '</tr>';
-    }
-
-    myhtml += 
-    '</tbody>' + 
-    '</table>';
-
-    return myhtml;
-}
-
-
-function showResult()
-{
-    var mytotal = 0;
-
-    var myhtml = 
-    '<table class="table table-bordered">' + 
-    '<thead>' + 
-        '<tr>' +
-            '<th class="text-center">餐點名稱</th>'+
-            '<th class="text-center">價錢</th>'+
-            '<th class="text-center">份數</th>'+
-        '</tr>'+
-    '</thead>' +
-    '<tbody>' +
-    '<tr>';
-
-    for(var i=0;i<shoppingitems.length;i++)
-    {
-        var splitItems = shoppingitems[i].split(",");
-        var itemName = splitItems[0];
-        var itemIDPrice = "itemIDPrice" + i;
-        var itemIDCount = "itemIDCount" + i;
-        var myprice = parseInt($("#"+itemIDPrice).text());
-        var mycount = parseInt($("#"+itemIDCount).text());
-
-        mytotal += myprice;
-
-        myhtml +=
-        '<tr>' +
-            '<td class="scrolltd">' + itemName + '</td>' +
-            '<td>' + myprice + '</td>' +
-            '<td>' + mycount + '</td>' +
-        '</tr>';
-    }
-
-    myhtml += 
-    '</tbody>' + 
-    '</table>';
-
-    myhtml += '<br><hr>';
-    myhtml += '<strong>總共 ' + mytotal + '</strong>';
-
-
-    return myhtml;
-}
-
-function shoppingcart()
-{
-    swal(
-    {
-        title: '購物車',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#f0ad4e',
-        confirmButtonText: '我要點餐',
-        cancelButtonText: '取消',
-        confirmButtonClass: 'btn btn-success',
-        cancelButtonClass: 'btn btn-danger',
-        html: showItems()
-    }).then(function () 
-    {
-        swal(
-        {
-            title:'點餐成功！',
-            html: showResult()
-        });
-    },function (dismiss) 
-    {
-        if (dismiss === 'cancel') 
-        {
-            // swal
-            // (
-            //     'Cancelled',
-            //     'Your imaginary file is safe :)',
-            //     'error'
-            // )
-        }
-    });
-}
 
 
 

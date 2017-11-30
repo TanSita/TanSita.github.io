@@ -10,9 +10,6 @@ $(window).on('load' , function()
 	// edit --> demo
 	// A.html的+my
 
-	// 購物車隱藏
-	$("#Source").contents().find("#car").hide();
-
 	// categories = 右上角
 	var mycategories = $("#Source").contents().find("#categories");
 	var mybody = $("#Source").contents().find("body");
