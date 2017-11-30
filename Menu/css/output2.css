@@ -33,7 +33,7 @@ h4
 {
     margin-bottom: 0;
     /*background-color: #f4511e;*/
-    z-index: 9999;
+    z-index: 999;
     border: 0;
     font-size: 12px !important;
     line-height: 1.42857143 !important;
@@ -255,7 +255,7 @@ h4
 
 .swal2-modal .swal2-title
 {
-    padding-top: 35px;
+    /*padding-top: 35px;*/
 }
 
 .swal2-modal .swal2-content
