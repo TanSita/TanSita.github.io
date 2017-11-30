@@ -86,6 +86,55 @@ $(window).on('load' , function()
     
 });
 
+readme();
+
+function showReadme()
+{
+	var myhtml = 
+	'<div class="readme">' + 
+		"<li>左邊畫面為" + '<strong class="text-info">編輯</strong>' +
+		"、右邊畫面為"+ '<strong class="text-danger">顯示</strong>' + "。" + 
+		'</li>'+
+		'<li><strong class="text-info">編輯</strong>' + "完成後，" +
+		"點擊" + '<strong class="text-warning">預覽</strong>' + "按鈕" +
+		"，" + '<strong class="text-danger">顯示</strong>' + "就會更新您的修改。" + 
+		'</li>'+
+		'<li>' + 
+		'<strong class="text-info">編輯</strong>' + "中的食物分類，底下如果沒有食物，" + 
+		'<strong class="text-danger">顯示</strong>' + "就不會出現該食物分類。" + 
+		'</li>'+
+		'<li>' + 
+		'<strong class="text-danger">顯示</strong>' + 
+		"並不提供「購物車」功能，實際頁面才會提供。" +
+		'</li>'+
+		'<li>' + 
+		"如果確定不會變更了，請按" + 
+		'<strong class="text-success">儲存</strong>' + "按鈕。" +
+		'</li>'+
+	'</div>';
+
+	return myhtml;
+}
+
+function readme()
+{
+	swal(
+    {
+        title: '使用者須知',
+        html: showReadme(),
+        type: 'warning',
+        showCancelButton: false,
+        confirmButtonColor: '#3085d6',
+        // cancelButtonColor: '#f0ad4e',
+        confirmButtonText: '我瞭解了！！！'
+        // cancelButtonText: '取消'
+    }).then(function () 
+    {
+    });
+
+}
+
+
 function clearTSJson()
 {
 	document.getElementById("Source").contentWindow.TSnewList = 
