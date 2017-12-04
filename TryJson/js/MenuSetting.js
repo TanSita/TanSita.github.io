@@ -18,6 +18,11 @@ $(window).on('load' , function()
 	var democategories = $("#Edited").contents().find("#categories");
 	var demobody = $("#Edited").contents().find("body");
 
+
+	var myimageIDs = [];
+	var mysrcs = [];
+
+
     $.getJSON("./myjson.json",function(data)
     {
     	$.each(data,function(i,item) 
@@ -71,16 +76,8 @@ $(window).on('load' , function()
 			mypublictsID++;
 
 			// image
-
-			// $("#Source").contents().find(mydiv)
-			var $img = $("#Source").contents().find("#" + myimageID + " > a > img"),
-		        img = new Image();
-		    $(img).on('load', function()
-		    {
-		    	ImageSetting(myimageID , "Source");
-		    	ImageSetting(myimageID , "Edited");
-		    }).attr('src', mysrc);
-
+			myimageIDs.push(myimageID);
+			mysrcs.push(mysrc);
 
         });
 
@@ -95,12 +92,27 @@ $(window).on('load' , function()
 		document.getElementById("Source").contentWindow.mysmoothTouchScroll();
 		document.getElementById("Edited").contentWindow.mysmoothTouchScroll();
     	
+    }).done(function() 
+    {
+    	for(var i=0;i<myimageIDs.length;i++)
+    	{
+    		var myimageID = myimageIDs[i];
+    		var mysrc = mysrcs[i];
 
+    		var $img = $("#Source").contents().find("#" + myimageID + " > a > img"),
+		        img = new Image();
+
+		    $(img).on('load', function()
+		    {
+				ImagesSetting("Source");
+				ImagesSetting("Edited");
+		    }).attr('src', mysrc);
+    	}
+    	
     });
-    
-
-
 });
+
+
 
 // readme();
 
@@ -319,9 +331,6 @@ function SetValue()
 	var TSdelListFood = TSdelList.food;
 
 	sortResults(TSnewListFood,'imageID', true);
-	// sortResults(TSeditListFood,'imageID', true);
-	// sortResults(TSdelListFood,'imageID', true);
-
 
 	for(var i=0;i<TSdelListFood.length;i++)
 	{
@@ -472,7 +481,6 @@ function SaveValue()
 	console.log(Hudingjson);
 }
 
-
 function ImageSetting(imageID , type)
 {
 	var fixedmin = 90;
@@ -506,5 +514,24 @@ function ImageSetting(imageID , type)
 		var diff = (fixedmin - currentHeight) / 2;
 		SourceImg.css('padding-top', diff + 'px');
 	}
+}
 
+function ImagesSetting(type)
+{
+	var fixedmin = 90;
+
+	var mylen = $("#" + type).contents().find("body > div > div[id^='category']").length;
+
+	for(var i=0;i<mylen;i++)
+	{
+		var mycategoryID = $("#" + type).contents().find("body > div > div[id^='category']")[i].getAttribute("id");
+		var mycategoryLen = $("#" + type).contents().find("#" + mycategoryID)[0].children.length;
+
+		for(var j=0;j<mycategoryLen;j++)
+		{
+			var myimageID = $("#" + type).contents().find("#" + mycategoryID)[0].children[j].getAttribute("id");
+			
+			ImageSetting(myimageID,type);
+		}
+	}
 }
