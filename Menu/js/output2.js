@@ -1037,14 +1037,21 @@ function ImageSetting(imageID)
     $(mylink).css({ "display":"block" , "width": fixedmin + "px" });
     $(mylink).css({ "display":"block" , "height": fixedmin + "px" });
 
-    for(var i=0;i<1000;i++)
-    {
+    // for(var i=0;i<1000;i++)
+    // {
         var naturalWidth = $(myimage)[0].naturalWidth;
         var naturalHeight = $(myimage)[0].naturalHeight;
 
-        if(naturalWidth!=0 && naturalHeight!=0)
-            break;
-    }
+        if(naturalWidth!=0 && naturalHeight!=0) 
+        {
+            // break;
+        }
+        else
+        {
+            console.log("X",$(myimage)[0].width());
+            console.log("X",$(myimage)[0].height());
+        }
+    // }
 
     if(naturalHeight > naturalWidth)
     {        
