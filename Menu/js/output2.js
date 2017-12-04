@@ -1037,7 +1037,7 @@ function ImageSetting(imageID)
     $(mylink).css({ "display":"block" , "width": fixedmin + "px" });
     $(mylink).css({ "display":"block" , "height": fixedmin + "px" });
 
-    while(true)
+    for(var i=0;i<1000;i++)
     {
         var naturalWidth = $(myimage)[0].naturalWidth;
         var naturalHeight = $(myimage)[0].naturalHeight;
