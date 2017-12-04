@@ -1037,21 +1037,10 @@ function ImageSetting(imageID)
     $(mylink).css({ "display":"block" , "width": fixedmin + "px" });
     $(mylink).css({ "display":"block" , "height": fixedmin + "px" });
 
-    // for(var i=0;i<1000;i++)
-    // {
-        var naturalWidth = $(myimage)[0].naturalWidth;
-        var naturalHeight = $(myimage)[0].naturalHeight;
+    var naturalWidth = $(myimage)[0].naturalWidth;
+    var naturalHeight = $(myimage)[0].naturalHeight;
 
-        if(naturalWidth!=0 && naturalHeight!=0) 
-        {
-            // break;
-        }
-        else
-        {
-            console.log("X" , $(myimage).width());
-            console.log("X" , $(myimage).height());
-        }
-    // }
+    console.log(naturalWidth,naturalHeight);
 
     if(naturalHeight > naturalWidth)
     {        
@@ -1060,7 +1049,6 @@ function ImageSetting(imageID)
     }
     else
     {
-        console.log(naturalWidth,naturalHeight);
 
         $(myimage).css('width', (fixedmin-4) + 'px');
         $(myimage).css('height', 'auto');
