@@ -1027,16 +1027,16 @@ function TSeditListdel(tsID)
 
 function ImageSetting(imageID)
 {
+    var fixedmin = 90;
+
     var mydiv = "#" + imageID;
     var mylink = mydiv + " > a ";
     var myimage = mydiv + " > a > img"; 
 
-    var fixedmin = 90;
     $(mydiv).css({  "height": fixedmin + "px" });
     $(mylink).css({ "display":"block" , "width": fixedmin + "px" });
     $(mylink).css({ "display":"block" , "height": fixedmin + "px" });
 
-    
     var naturalWidth = $(myimage)[0].naturalWidth;
     var naturalHeight = $(myimage)[0].naturalHeight;
 

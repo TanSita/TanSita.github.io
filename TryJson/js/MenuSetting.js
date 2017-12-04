@@ -349,8 +349,8 @@ function SetValue()
 
 		editListOPDemo(mytsID,myname,myprice,mysrc,myintro,mytop10,mycategory);
 		
-		ImageSetting(myimageID , "Source");
-		ImageSetting(myimageID , "Edited");
+		document.getElementById(type).contentWindow.ImageSetting(myimageID,"Source");
+		document.getElementById(type).contentWindow.ImageSetting(myimageID,"Edited");
 	}
 
 	for(var i=0;i<TSnewListFood.length;i++)
@@ -371,8 +371,8 @@ function SetValue()
 		
 		mypublictsID++;
 
-		ImageSetting(myimageID , "Source");
-		ImageSetting(myimageID , "Edited");
+		document.getElementById(type).contentWindow.ImageSetting(myimageID,"Source");
+		document.getElementById(type).contentWindow.ImageSetting(myimageID,"Edited");
 	}
 
 
@@ -480,40 +480,40 @@ function SaveValue()
 	console.log(Hudingjson);
 }
 
-function ImageSetting(imageID , type)
-{
-	var fixedmin = 90;
+// function ImageSetting(myimageID,type);
+// {
+// 	var fixedmin = 90;
 
-	var mydiv = "#" + imageID;
-	var mylink = mydiv + " > a ";
-	var myimage = mydiv + " > a > img"; 
+// 	var mydiv = "#" + imageID;
+// 	var mylink = mydiv + " > a ";
+// 	var myimage = mydiv + " > a > img"; 
 
-    var SourceDiv = $("#" + type).contents().find(mydiv);
-    var SourceLink = $("#" + type).contents().find(mylink);
+//     var SourceDiv = $("#" + type).contents().find(mydiv);
+//     var SourceLink = $("#" + type).contents().find(mylink);
 
-    SourceDiv.css({  "height": fixedmin + "px" });
-    SourceLink.css({ "display":"block" , "width": fixedmin + "px" });
-    SourceLink.css({ "display":"block" , "height": fixedmin + "px" });
+//     SourceDiv.css({  "height": fixedmin + "px" });
+//     SourceLink.css({ "display":"block" , "width": fixedmin + "px" });
+//     SourceLink.css({ "display":"block" , "height": fixedmin + "px" });
 
-    var SourceImg = $("#" + type).contents().find(myimage);
+//     var SourceImg = $("#" + type).contents().find(myimage);
 	
-	var naturalWidth = SourceImg[0].naturalWidth;
-	var naturalHeight = SourceImg[0].naturalHeight;
+// 	var naturalWidth = SourceImg[0].naturalWidth;
+// 	var naturalHeight = SourceImg[0].naturalHeight;
 
-	if(naturalHeight > naturalWidth)
-	{
-		SourceImg.css('width', 'auto');
-		SourceImg.css('height', (fixedmin-4) + 'px');
-	}
-	else
-	{
-		SourceImg.css('width', (fixedmin-4) + 'px');
-		SourceImg.css('height', 'auto');
-		var currentHeight = SourceImg.height();
-		var diff = (fixedmin - currentHeight) / 2;
-		SourceImg.css('padding-top', diff + 'px');
-	}
-}
+// 	if(naturalHeight > naturalWidth)
+// 	{
+// 		SourceImg.css('width', 'auto');
+// 		SourceImg.css('height', (fixedmin-4) + 'px');
+// 	}
+// 	else
+// 	{
+// 		SourceImg.css('width', (fixedmin-4) + 'px');
+// 		SourceImg.css('height', 'auto');
+// 		var currentHeight = SourceImg.height();
+// 		var diff = (fixedmin - currentHeight) / 2;
+// 		SourceImg.css('padding-top', diff + 'px');
+// 	}
+// }
 
 function ImagesSetting(type)
 {
@@ -530,7 +530,7 @@ function ImagesSetting(type)
 		{
 			var myimageID = $("#" + type).contents().find("#" + mycategoryID)[0].children[j].getAttribute("id");
 			
-			ImageSetting(myimageID,type);
+			document.getElementById(type).contentWindow.ImageSetting(myimageID,type);
 		}
 	}
 }
