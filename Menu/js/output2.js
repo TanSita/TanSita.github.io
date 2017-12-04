@@ -234,6 +234,7 @@ function myConfirm(hudingID , tsID , imageID , name , price , src , intro , top1
                 // console.log(HudingnewList);
             }
 
+            ImagesSetting(imageID,fsrc);
             fsrc = "";
         }
         //沒更新圖片的話，就只要把其他資訊改一改就好惹
@@ -274,8 +275,9 @@ function myConfirm(hudingID , tsID , imageID , name , price , src , intro , top1
                 HudingnewListadd(imageID,fname,fprice,src,fintro,ftop10,fcategory);
                 // console.log(HudingnewList);
             }
+
+            ImagesSetting(imageID,src);
         }
-        ImageSetting(imageID);
     }
     swal.close();
 }
@@ -405,7 +407,7 @@ function addAlert(num)
             HudingnewListadd(fimageID,fname,fprice,fsrc,fintro,ftop10,fcategory);
 
             fsrc = ""; 
-            ImageSetting(fimageID);
+            ImagesSetting(fimageID,fsrc);
         }
     })
 }
@@ -1025,7 +1027,7 @@ function TSeditListdel(tsID)
 
 // Image Setting
 
-function ImageSetting(imageID)
+function ImageSetting(imageID,naturalWidth,naturalHeight)
 {
     var fixedmin = 90;
 
@@ -1040,8 +1042,6 @@ function ImageSetting(imageID)
     var naturalWidth = $(myimage)[0].naturalWidth;
     var naturalHeight = $(myimage)[0].naturalHeight;
 
-    console.log(naturalWidth,naturalHeight);
-
     if(naturalHeight > naturalWidth)
     {        
         $(myimage).css('width', 'auto');
@@ -1049,7 +1049,6 @@ function ImageSetting(imageID)
     }
     else
     {
-
         $(myimage).css('width', (fixedmin-4) + 'px');
         $(myimage).css('height', 'auto');
         var currentHeight = $(myimage).height();
@@ -1057,4 +1056,17 @@ function ImageSetting(imageID)
         $(myimage).css('padding-top', diff + 'px');
     }
 
+}
+
+function ImagesSetting(myimageID , mysrc)
+{
+    var img = $("#" + myimageID + " > a > img")[0];
+    img.src = mysrc;
+    img.onload = function()
+    {
+        var naturalWidth = this.naturalWidth;
+        var naturalHeight = this.naturalHeight;
+        
+        ImageSetting(myimageID,naturalWidth,naturalHeight);
+    }
 }
