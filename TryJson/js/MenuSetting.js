@@ -18,11 +18,6 @@ $(window).on('load' , function()
 	var democategories = $("#Edited").contents().find("#categories");
 	var demobody = $("#Edited").contents().find("body");
 
-
-	var myimageIDs = [];
-	var mysrcs = [];
-
-
     $.getJSON("./myjson.json",function(data)
     {
     	$.each(data,function(i,item) 
@@ -74,7 +69,6 @@ $(window).on('load' , function()
 
 			mycategoriesLen[mycategoryIndex]++;
 			mypublictsID++;
-
 
 			// image
 			var sourceimg = $("#Source").contents().find("#" + myimageID + " > a > img")[0];
