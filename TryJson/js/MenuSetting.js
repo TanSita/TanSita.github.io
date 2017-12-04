@@ -120,7 +120,7 @@ function readme()
 {
 	swal(
     {
-        title: '使用者須知',
+        title: '操作說明',
         html: showReadme(),
         type: 'warning',
         showCancelButton: false,
