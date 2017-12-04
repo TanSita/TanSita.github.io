@@ -4,6 +4,7 @@ var mycategoryArray = [];
 var mycategoriesLen = [];
 var mypublictsID = 0;
 
+
 $(window).on('load' , function()
 {
 	// source 小寫
@@ -69,6 +70,18 @@ $(window).on('load' , function()
 			mycategoriesLen[mycategoryIndex]++;
 			mypublictsID++;
 
+			// image
+
+			// $("#Source").contents().find(mydiv)
+			var $img = $("#Source").contents().find("#" + myimageID + " > a > img"),
+		        img = new Image();
+		    $(img).on('load', function()
+		    {
+		    	ImageSetting(myimageID , "Source");
+		    	ImageSetting(myimageID , "Edited");
+		    }).attr('src', mysrc);
+
+
         });
 
 
@@ -82,11 +95,14 @@ $(window).on('load' , function()
 		document.getElementById("Source").contentWindow.mysmoothTouchScroll();
 		document.getElementById("Edited").contentWindow.mysmoothTouchScroll();
     	
+
     });
     
+
+
 });
 
-readme();
+// readme();
 
 function showReadme()
 {
@@ -323,7 +339,10 @@ function SetValue()
 		var mytop10 = TSeditListFood[i].top10;
 		var mycategory = TSeditListFood[i].category;	
 
-		editListOPDemo(mytsID,myname,myprice,mysrc,myintro,mytop10,mycategory)
+		editListOPDemo(mytsID,myname,myprice,mysrc,myintro,mytop10,mycategory);
+		
+		ImageSetting(myimageID , "Source");
+		ImageSetting(myimageID , "Edited");
 	}
 
 	for(var i=0;i<TSnewListFood.length;i++)
@@ -343,6 +362,9 @@ function SetValue()
 		newListOPDemo(myimageID,myname,myprice,mysrc,myintro,mytop10,mycategory);
 		
 		mypublictsID++;
+
+		ImageSetting(myimageID , "Source");
+		ImageSetting(myimageID , "Edited");
 	}
 
 
@@ -389,12 +411,13 @@ function makeCategoryDemo(num,listText)
 	return myhtml;
 }
 
-
-
 function makeImageDemo(hudingID , tsID , imageID , name , price , src , intro , top10 , category)
 {
+	var mynum = parseInt(imageID.split("_")[0].replace("category",""));
+
     var myhtml = 
-    '<div class="col-xs-4 text-center"' +  
+    '<div class="col-xs-4 text-center border-' +  
+    	mypanel_colors[mynum%mypanel_colorsLen] + '"' +
     	' hudingID = ' + hudingID + 
     	' tsID = ' + tsID + 
     	' imageID = "' + imageID + '"' +
@@ -408,7 +431,7 @@ function makeImageDemo(hudingID , tsID , imageID , name , price , src , intro , 
         '<a onclick="' +  
             'showAlert(' + "'" + imageID + "','" + name + "','" + price + "','" + src + "','" + 
             intro + "'," + top10 +  ');">' + 
-            '<img class="img-rounded" src="' + src + '" width="100%">' +
+            '<img src="' + src + '" >' +
         '</a>' +
     '</div>';
 
@@ -437,56 +460,6 @@ function maketop10Demo(hudingID , tsID , imageID , name , price , src , intro , 
     return myhtml;
 }
 
-function makeImage(hudingID , tsID , imageID , name , price , src , intro , top10 , category)
-{
-    var myhtml = 
-    '<div class="col-xs-4 text-center"' +  
-    	' hudingID = ' + hudingID + 
-    	' tsID = ' + tsID + 
-    	' imageID = "' + imageID + '"' +
-    	' name = "' + name + '"' +
-    	' price = "' + price + '"' +
-    	' src = "' + src + '"' +
-    	' intro = "' + intro + '"' +
-    	' top10 = ' + top10 + 
-    	' category = "' + category + '"' +
-    	' id="' + imageID + '">' +
-        '<a onclick="' +  
-            'editAlert(' + hudingID + "," + tsID +  ",'" + 
-            imageID + "','" + name + "','" + price + "','" + src + "','" + 
-            intro + "'," + top10 + ",'" + category + "'" + 
-            ');">' + 
-            '<img class="img-rounded" src="' + src + '" width="100%">' +
-        '</a>' +
-    '</div>';
-
-    return myhtml;
-}
-
-function maketop10(hudingID , tsID , imageID , name , price , src , intro , top10 , category)
-{
-    var myhtml = 
-    '<a class="' + imageID + '"' + 
-    	' hudingID = ' + hudingID + 
-    	' tsID = ' + tsID + 
-    	' imageID = "' + imageID + '"' +
-    	' name = "' + name + '"' +
-    	' price = "' + price + '"' +
-    	' src = "' + src + '"' +
-    	' intro = "' + intro + '"' +
-    	' top10 = ' + top10 + 
-    	' category = "' + category + '"' +
-    	' onclick="' +  
-	    'editAlert(' + hudingID + "," + tsID +  ",'" + 
-            imageID + "','" + name + "','" + price + "','" + src + "','" + 
-            intro + "'," + top10 + ",'" + category + "'" + 
-            ');">' + 
-        '<img src="' + src + '" class="img-circle Stories"/>' +
-    '</a>';
-
-    return myhtml;
-}
-
 
 function SaveValue()
 {
@@ -497,4 +470,41 @@ function SaveValue()
 	var Hudingjson = [];
 	Hudingjson.push(HudingnewList,HudingeditList,HudingdelList);
 	console.log(Hudingjson);
+}
+
+
+function ImageSetting(imageID , type)
+{
+	var fixedmin = 90;
+
+	var mydiv = "#" + imageID;
+	var mylink = mydiv + " > a ";
+	var myimage = mydiv + " > a > img"; 
+
+    var SourceDiv = $("#" + type).contents().find(mydiv);
+    var SourceLink = $("#" + type).contents().find(mylink);
+
+    SourceDiv.css({  "height": fixedmin + "px" });
+    SourceLink.css({ "display":"block" , "width": fixedmin + "px" });
+    SourceLink.css({ "display":"block" , "height": fixedmin + "px" });
+
+    var SourceImg = $("#" + type).contents().find(myimage);
+	
+	var naturalWidth = SourceImg[0].naturalWidth;
+	var naturalHeight = SourceImg[0].naturalHeight;
+
+	if(naturalHeight > naturalWidth)
+	{
+		SourceImg.css('width', 'auto');
+		SourceImg.css('height', (fixedmin-4) + 'px');
+	}
+	else
+	{
+		SourceImg.css('width', (fixedmin-4) + 'px');
+		SourceImg.css('height', 'auto');
+		var currentHeight = SourceImg.height();
+		var diff = (fixedmin - currentHeight) / 2;
+		SourceImg.css('padding-top', diff + 'px');
+	}
+
 }

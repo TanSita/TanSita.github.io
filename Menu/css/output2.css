@@ -318,3 +318,36 @@
     margin-left: 10px;
     width : calc(100% - 100px);
 }
+
+.col-xs-4.text-center
+{
+    padding: 0px;
+}
+
+.border-info
+{
+    border: 2px solid;
+    border-color: #bce8f1;
+    background-color: #d9edf7;
+}
+
+.border-warning
+{
+    border: 2px solid;
+    border-color: #faebcc;
+    background-color: #fcf8e3;
+}
+
+.border-danger
+{
+    border: 2px solid;
+    border-color: #ebccd1;
+    background-color: #f2dede;
+}
+
+.border-success
+{
+    border: 2px solid;
+    border-color: #d6e9c6;
+    background-color: #dff0d8;
+}

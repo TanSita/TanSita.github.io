@@ -197,13 +197,13 @@ function myConfirm(hudingID , tsID , imageID , name , price , src , intro , top1
         if(fsrc.length > 0) 
         {
             //更改圖片
-            $("#" + imageID).replaceWith(addImage(hudingID,tsID,imageID,fname,fprice,fsrc,fintro,ftop10,fcategory)); 
-            $("." + imageID).replaceWith(addtop10(hudingID,tsID,imageID,fname,fprice,fsrc,fintro,ftop10,fcategory)); 
+            $("#" + imageID).replaceWith(makeImage(hudingID,tsID,imageID,fname,fprice,fsrc,fintro,ftop10,fcategory)); 
+            $("." + imageID).replaceWith(maketop10(hudingID,tsID,imageID,fname,fprice,fsrc,fintro,ftop10,fcategory)); 
 
             //如果之前沒有放到top10就放過去
             if(top10==false && ftop10==true)
             {
-                $(".scrollableArea").append(addtop10(hudingID,tsID,imageID,fname,fprice,fsrc,fintro,ftop10,fcategory));
+                $(".scrollableArea").append(maketop10(hudingID,tsID,imageID,fname,fprice,fsrc,fintro,ftop10,fcategory));
                 mysmoothTouchScroll();
             }
             //如果之前放在top10 就移除
@@ -239,12 +239,12 @@ function myConfirm(hudingID , tsID , imageID , name , price , src , intro , top1
         //沒更新圖片的話，就只要把其他資訊改一改就好惹
         else
         {
-            $("#" + imageID).replaceWith(addImage(hudingID,tsID,imageID,fname,fprice,src,fintro,ftop10,fcategory)); 
-            $("." + imageID).replaceWith(addtop10(hudingID,tsID,imageID,fname,fprice,src,fintro,ftop10,fcategory)); 
+            $("#" + imageID).replaceWith(makeImage(hudingID,tsID,imageID,fname,fprice,src,fintro,ftop10,fcategory)); 
+            $("." + imageID).replaceWith(maketop10(hudingID,tsID,imageID,fname,fprice,src,fintro,ftop10,fcategory)); 
 
             if(top10==false && ftop10==true)
             {
-                $(".scrollableArea").append(addtop10(hudingID,tsID,imageID,fname,fprice,src,fintro,ftop10,fcategory));
+                $(".scrollableArea").append(maketop10(hudingID,tsID,imageID,fname,fprice,src,fintro,ftop10,fcategory));
                 mysmoothTouchScroll();
             }
             else if(top10==true && ftop10==false)
@@ -275,6 +275,7 @@ function myConfirm(hudingID , tsID , imageID , name , price , src , intro , top1
                 // console.log(HudingnewList);
             }
         }
+        ImageSetting(imageID);
     }
     swal.close();
 }
@@ -390,22 +391,21 @@ function addAlert(num)
             fintro.length>0 && fsrc.length>0 )
         {
 
-            $("#" + fcategoryID).append(addImage(-1,-1,fimageID,fname,fprice,fsrc,fintro,ftop10,fcategory)); //新增圖片到某個分類
+            $("#" + fcategoryID).append(makeImage(-1,-1,fimageID,fname,fprice,fsrc,fintro,ftop10,fcategory)); //新增圖片到某個分類
 
             if(ftop10==true)
             {
-                $(".scrollableArea").append(addtop10(-1 , -1 , fimageID , fname , fprice , fsrc , fintro , ftop10 , fcategory));
+                $(".scrollableArea").append(maketop10(-1 , -1 , fimageID , fname , fprice , fsrc , fintro , ftop10 , fcategory));
                 mysmoothTouchScroll();
             }
 
             // json
             TSnewListadd(fimageID,fname,fprice,fsrc,fintro,ftop10,fcategory);
-            // console.log(TSnewList);
 
             HudingnewListadd(fimageID,fname,fprice,fsrc,fintro,ftop10,fcategory);
-            // console.log(HudingnewList);
 
             fsrc = ""; 
+            ImageSetting(fimageID);
         }
     })
 }
@@ -581,31 +581,6 @@ function showStar(top10)
 
 //關於新增Image
 
-function addImage(hudingID , tsID , imageID , name , price , src , intro , top10 , category)
-{
-    var myhtml = 
-    '<div class="col-xs-4 text-center"' +  
-        ' hudingID = ' + hudingID + 
-        ' tsID = ' + tsID + 
-        ' imageID = "' + imageID + '"' +
-        ' name = "' + name + '"' +
-        ' price = "' + price + '"' +
-        ' src = "' + src + '"' +
-        ' intro = "' + intro + '"' +
-        ' top10 = ' + top10 + 
-        ' category = "' + category + '"' +
-        ' id="' + imageID + '">' +
-        '<a onclick="' +  
-            'editAlert(' + hudingID + "," + tsID +  ",'" + 
-            imageID + "','" + name + "','" + price + "','" + src + "','" + 
-            intro + "'," + top10 + ",'" + category + "'" + 
-            ');">' + 
-            '<img class="img-rounded" src="' + src + '" width="100%">' +
-        '</a>' +
-    '</div>';
-
-    return myhtml;
-}
 
 function showImage(name , price , src , intro , top10)
 {
@@ -636,32 +611,6 @@ function showImage(name , price , src , intro , top10)
 
     return myhtml;
 }
-
-function addtop10(hudingID , tsID , imageID , name , price , src , intro , top10 , category)
-{
-    var myhtml = 
-    '<a class="' + imageID + '"' + 
-        ' hudingID = ' + hudingID + 
-        ' tsID = ' + tsID + 
-        ' imageID = "' + imageID + '"' +
-        ' name = "' + name + '"' +
-        ' price = "' + price + '"' +
-        ' src = "' + src + '"' +
-        ' intro = "' + intro + '"' +
-        ' top10 = ' + top10 + 
-        ' category = "' + category + '"' +
-        ' onclick="' +  
-        'editAlert(' + hudingID + "," + tsID +  ",'" + 
-            imageID + "','" + name + "','" + price + "','" + src + "','" + 
-            intro + "'," + top10 + ",'" + category + "'" + 
-            ');">' + 
-        '<img src="' + src + '" class="img-circle Stories"/>' +
-    '</a>';
-
-    return myhtml;
-}
-
-
 
 
 // 關於List編輯 刪除
@@ -1070,4 +1019,39 @@ function TSeditListdel(tsID)
     {
         TSeditListfood.splice(myindex,1);
     }
+}
+
+
+
+// Image Setting
+
+function ImageSetting(imageID)
+{
+    var mydiv = "#" + imageID;
+    var mylink = mydiv + " > a ";
+    var myimage = mydiv + " > a > img"; 
+
+    var fixedmin = 90;
+    $(mydiv).css({  "height": fixedmin + "px" });
+    $(mylink).css({ "display":"block" , "width": fixedmin + "px" });
+    $(mylink).css({ "display":"block" , "height": fixedmin + "px" });
+
+    
+    var naturalWidth = $(myimage)[0].naturalWidth;
+    var naturalHeight = $(myimage)[0].naturalHeight;
+
+    if(naturalHeight > naturalWidth)
+    {
+        $(myimage).css('width', 'auto');
+        $(myimage).css('height', (fixedmin-4) + 'px');
+    }
+    else
+    {
+        $(myimage).css('width', (fixedmin-4) + 'px');
+        $(myimage).css('height', 'auto');
+        var currentHeight = $(myimage).height();
+        var diff = (fixedmin - currentHeight) / 2;
+        $(myimage).css('padding-top', diff + 'px');
+    }
+
 }
