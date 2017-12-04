@@ -1048,8 +1048,8 @@ function ImageSetting(imageID)
         }
         else
         {
-            console.log("X",$(myimage)[0].width());
-            console.log("X",$(myimage)[0].height());
+            console.log("X" , $(myimage).width());
+            console.log("X" , $(myimage).height());
         }
     // }
 
