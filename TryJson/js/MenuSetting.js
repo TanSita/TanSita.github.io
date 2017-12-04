@@ -78,7 +78,6 @@ $(window).on('load' , function()
 			// image
 			myimageIDs.push(myimageID);
 			mysrcs.push(mysrc);
-
         });
 
 
