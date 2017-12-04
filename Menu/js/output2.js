@@ -1040,6 +1040,8 @@ function ImageSetting(imageID)
     var naturalWidth = $(myimage)[0].naturalWidth;
     var naturalHeight = $(myimage)[0].naturalHeight;
 
+    console.log(naturalWidth,naturalHeight);
+
     if(naturalHeight > naturalWidth)
     {
         $(myimage).css('width', 'auto');
