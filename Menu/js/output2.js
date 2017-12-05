@@ -406,8 +406,9 @@ function addAlert(num)
 
             HudingnewListadd(fimageID,fname,fprice,fsrc,fintro,ftop10,fcategory);
 
-            fsrc = ""; 
+
             ImagesSetting(fimageID,fsrc);
+            fsrc = ""; 
         }
     })
 }
