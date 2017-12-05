@@ -82,10 +82,6 @@ body
     border-radius: 50%;
 }
 
-.need-help
-{
-    margin-top: 10px;
-}
 
 .new-account
 {
@@ -125,4 +121,16 @@ body
 .pull-left
 {
     padding-left: 15px;
+}
+
+.anotherlogin
+{
+    color: #FFFF33;
+    display: block;
+    margin-top: 10px;
+}
+
+.anotherlogin:hover
+{
+    color: #FFFFFF;
 }
