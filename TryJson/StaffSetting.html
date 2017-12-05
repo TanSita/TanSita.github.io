@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>SmartMenu - Profile Setting</title>
+    <title>SmartMenu - Staff Setting</title>
     <meta charset="utf-8">
 
     <!-- bootstrap.css -->
@@ -58,14 +58,14 @@
     <div class="row" id="ProfileSetting">
         <div class="col-xs-3">
             <ul class="nav nav-pills nav-stacked admin-menu" >
-                <li class="active">
-                    <a href="#">
+                <li>
+                    <a href="./ProfileSetting.html">
                         <i class="glyphicon glyphicon-user"></i> 餐廳老闆設定
                     </a>
                 </li>
 
-                <li>
-                    <a href="./StaffSetting.html">
+                <li class="active">
+                    <a href="#">
                         <i class="glyphicon glyphicon-user"></i> 餐廳員工設定
                     </a>
                 </li>
@@ -88,23 +88,14 @@
 
         <div class="col-xs-9">
 
-            <!-- 使用者資訊 -->
+            <!-- 二個密碼 -->
             <form class="form-horizontal form-set" action="#">
                 <div class="panel panel-info">
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-xs-10">
-                                <strong class="panel-title text-left">使用者資訊</strong>
+                                <strong class="panel-title text-left">員工密碼設定</strong>
                             </div>
-                        </div>
-                    </div>
-                    
-                    <div class="panel-body">
-                        <div class="input-group first">
-                            <span class="input-group-addon" id="basic-addon1">
-                                <i class="glyphicon glyphicon-user"></i>
-                            </span>
-                            <input type="text" class="form-control" placeholder="使用者名稱" aria-describedby="basic-addon1">
                         </div>
                     </div>
 
@@ -113,7 +104,7 @@
                             <span class="input-group-addon" id="basic-addon1">
                                 <i class="glyphicon glyphicon-lock"></i>
                             </span>
-                            <input type="text" class="form-control" placeholder="使用者密碼" aria-describedby="basic-addon1">
+                            <input type="text" class="form-control" placeholder="員工密碼" aria-describedby="basic-addon1">
                         </div>
                     </div>
 
@@ -122,7 +113,7 @@
                             <span class="input-group-addon" id="basic-addon1">
                                 <i class="glyphicon glyphicon-lock"></i>
                             </span>
-                            <input type="text" class="form-control" placeholder="確認密碼" aria-describedby="basic-addon1">
+                            <input type="text" class="form-control" placeholder="員工密碼確認" aria-describedby="basic-addon1">
                         </div>
                     </div>
 
@@ -133,82 +124,52 @@
             </form>
 
 
-            <!-- 餐廳資訊 -->
-            <div class="panel panel-warning">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-10">
-                            <strong class="panel-title text-left">餐廳資訊</strong>
+            <!-- 三個密碼 -->
+
+
+            <form class="form-horizontal form-set" action="#">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-10">
+                                <strong class="panel-title text-left">員工密碼設定</strong>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="panel-body">
-                    <div class="input-group first">
-                        <span class="input-group-addon" id="basic-addon1">
-                            <i class="glyphicon glyphicon-cutlery"></i>
-                        </span>
-                        <input type="text" class="form-control" placeholder="餐廳名字" aria-describedby="basic-addon1" disabled>
-                    </div>
-                </div>
-
-                <div class="panel-body">
-                    <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon1">
-                            <i class="glyphicon glyphicon-home"></i>
-                        </span>
-                        <input type="text" class="form-control" placeholder="餐廳地址" aria-describedby="basic-addon1" disabled>
-                    </div>
-                </div>
-                
-                <div class="panel-body">
-                    <div class="input-group last">
-                        <span class="input-group-addon" id="basic-addon1">
-                            <i class="glyphicon glyphicon-phone-alt"></i>
-                        </span>
-                        <input type="text" class="form-control" placeholder="餐廳電話" aria-describedby="basic-addon1" disabled>
-                    </div>
-                </div>
-            </div>
-
-
-            <!-- 申請人資訊 -->
-            <div class="panel panel-success">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-10">
-                            <strong class="panel-title text-left">申請人資訊</strong>
+                    <div class="panel-body">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1">
+                                <i class="glyphicon glyphicon-lock"></i>
+                            </span>
+                            <input type="text" class="form-control" placeholder="員工舊密碼" aria-describedby="basic-addon1">
                         </div>
                     </div>
-                </div>
 
-                <div class="panel-body">
-                    <div class="input-group first">
-                        <span class="input-group-addon" id="basic-addon1">
-                            <i class="glyphicon glyphicon-tag"></i>
-                        </span>
-                        <input type="text" class="form-control" placeholder="申請人姓名" aria-describedby="basic-addon1" disabled>
+                    <div class="panel-body">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1">
+                                <i class="glyphicon glyphicon-lock"></i>
+                            </span>
+                            <input type="text" class="form-control" placeholder="員工新密碼" aria-describedby="basic-addon1">
+                        </div>
                     </div>
-                </div>
 
-                <div class="panel-body">
-                    <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon1">
-                            <i class="glyphicon glyphicon-phone"></i>
-                        </span>
-                        <input type="text" class="form-control" placeholder="申請人電話" aria-describedby="basic-addon1" disabled>
+                    <div class="panel-body">
+                        <div class="input-group last">
+                            <span class="input-group-addon" id="basic-addon1">
+                                <i class="glyphicon glyphicon-lock"></i>
+                            </span>
+                            <input type="text" class="form-control" placeholder="員工新密碼確認" aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+
+                    <div class="panel-footer text-right">
+                        <button class="btn btn-success">更改</button>
                     </div>
                 </div>
-                
-                <div class="panel-body">
-                    <div class="input-group last">
-                        <span class="input-group-addon" id="basic-addon1">
-                            <i class="glyphicon glyphicon-envelope"></i>
-                        </span>
-                        <input type="text" class="form-control" placeholder="申請人電子郵件" aria-describedby="basic-addon1" disabled>
-                    </div>
-                </div>
-            </div>
+            </form>
+
 
         </div>
     </div>
