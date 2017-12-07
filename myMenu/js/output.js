@@ -67,15 +67,10 @@ $(window).on('load' , function()
         // 這裡會等到json都做完 才會開始做～
 
         // $("#Source").contents().find(".navbar li a").css({"display" : "inline-block" , "width" : "calc(100% - 90px)"});
+        Iwanttoclick();
         mysmoothTouchScroll();
+        Iwanttoclick();
         
-        $('#touchScroller').kinetic({
-            filterTarget: function(target, e){
-                if (!/down|start/.test(e.type)){
-                    return !(/area|a|input/i.test(target.tagName));
-                }
-            }
-        });
         
     }).done(function() 
     {
@@ -83,6 +78,18 @@ $(window).on('load' , function()
     });
 });
 
+Iwanttoclick();
+
+function Iwanttoclick()
+{
+    $('#touchScroller').kinetic({
+            filterTarget: function(target, e){
+                if (!/down|start/.test(e.type)){
+                    return !(/area|a|input/i.test(target.tagName));
+                }
+            }
+        });
+}
 
 function mysmoothTouchScroll()
 {
