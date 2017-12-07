@@ -131,7 +131,7 @@ function makeImage(hudingID , imageID , name , price , src , intro , top10 , cat
         '<a onclick="' +  
             'showAlert(' + hudingID +  ",'" + imageID + "','" + name + "','" + price + "','" + src + "','" + 
             intro + "'," + top10 +  ');">' + 
-            '<img src="' + src + '" >' +
+            '<img src="' + src + '" width="100%">' +
         '</a>' +
     '</div>';
 
@@ -146,7 +146,7 @@ function maketop10(hudingID , imageID , name , price , src , intro , top10 , cat
         ' onclick="' +  
             'showAlert(' + hudingID +  ",'" + imageID + "','" + name + "','" + price + "','" + src + "','" + 
             intro + "'," + top10 +  ');">' + 
-        '<img src="' + src + '" class="img-circle Stories"/>' +
+        '<img src="' + src + '" class="img-circle Stories" width="100%"/>' +
     '</a>';
 
     return myhtml;
