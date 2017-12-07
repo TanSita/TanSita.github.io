@@ -12,7 +12,6 @@ $(window).on('load' , function()
     var mycategories = $("#categories");
     var mybody = $("body");
 
-    var firstTop10 = true;
     var Top10count = 0;
 
     $.getJSON("./myjson.json",function(data)
@@ -58,7 +57,6 @@ $(window).on('load' , function()
             {
                 if(Top10count%3==0)
                 {
-                    console.log("????????");                    
                     $(".carousel-inner").append(makeCarousel(parseInt(Top10count/3)));
                 }
 
