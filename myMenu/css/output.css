@@ -280,3 +280,12 @@
     border-color: #d6e9c6;
     background-color: #dff0d8;
 }
+
+
+.scrolltd
+{
+  border:1px solid;
+  max-width:1px;
+  overflow-x: scroll;
+  white-space: nowrap;
+}
