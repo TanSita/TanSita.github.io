@@ -69,6 +69,14 @@ $(window).on('load' , function()
         // $("#Source").contents().find(".navbar li a").css({"display" : "inline-block" , "width" : "calc(100% - 90px)"});
         mysmoothTouchScroll();
         
+        $('#touchScroller').kinetic({
+            filterTarget: function(target, e){
+                if (!/down|start/.test(e.type)){
+                    return !(/area|a|input/i.test(target.tagName));
+                }
+            }
+        });
+        
     }).done(function() 
     {
 
