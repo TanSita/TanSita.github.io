@@ -12,6 +12,9 @@ $(window).on('load' , function()
     var mycategories = $("#categories");
     var mybody = $("body");
 
+    var firstTop10 = true;
+    var Top10count = 0;
+
     $.getJSON("./myjson.json",function(data)
     {
         $.each(data,function(i,item) 
@@ -53,7 +56,14 @@ $(window).on('load' , function()
             // 如果這圖片是top10 還要append top10
             if(mytop10==true)
             {
-                // $(".scrollableArea").append(maketop10(myhudingID,myimageID,myname,myprice,mysrc,myintro,mytop10,mycategory)); //新增圖片到某個分類
+                if(Top10count%3==0)
+                {
+                    console.log("????????");                    
+                    $(".carousel-inner").append(makeCarousel(parseInt(Top10count/3)));
+                }
+
+                $("#carousel-inner" + parseInt(Top10count/3)).append(maketop10(myhudingID,myimageID,myname,myprice,mysrc,myintro,mytop10,mycategory)); //新增圖片到某個分類
+                Top10count++;
             }
 
             mycategoriesLen[mycategoryIndex]++;
@@ -73,6 +83,20 @@ $(window).on('load' , function()
     });
 });
 
+function makeCarousel(num)
+{
+    var active = '';
+    if(num == 0) active = "active";
+
+    var myhtml = 
+    '<div class="item ' + active + '">' +
+        '<center id="carousel-inner' + num + '">' + 
+
+        '</center>' +
+    '</div>';
+
+    return myhtml;
+}
 
 function makeList(num,listText)
 {
@@ -139,7 +163,7 @@ function maketop10(hudingID , imageID , name , price , src , intro , top10 , cat
         ' onclick="' +  
             'showAlert(' + hudingID +  ",'" + imageID + "','" + name + "','" + price + "','" + src + "','" + 
             intro + "'," + top10 +  ');">' + 
-        '<img src="' + src + '" class="img-circle Stories" width="100%"/>' +
+        '<img src="' + src + '" class="img-circle Stories"/>' +
     '</a>';
 
     return myhtml;

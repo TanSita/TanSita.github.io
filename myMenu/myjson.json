@@ -14,7 +14,7 @@
         "price" : "1200.0",
         "src" : "images/高花瓶.jpg",
         "intro" : "好美的 高花瓶！",
-        "top10" : false,
+        "top10" : true,
         "category":"花瓶"
     },
     {
@@ -32,7 +32,7 @@
         "price" : "120.0",
         "src" : "images/青醬雞肉義大利麵.jpg",
         "intro" : "好吃的 青醬雞肉義大利麵",
-        "top10" : false,
+        "top10" : true,
         "category":"義大利麵"
     },
     {
