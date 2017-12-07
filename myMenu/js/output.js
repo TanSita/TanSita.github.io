@@ -53,7 +53,7 @@ $(window).on('load' , function()
             // 如果這圖片是top10 還要append top10
             if(mytop10==true)
             {
-                $("#inner").append(maketop10(myhudingID,myimageID,myname,myprice,mysrc,myintro,mytop10,mycategory)); //新增圖片到某個分類
+                // $(".scrollableArea").append(maketop10(myhudingID,myimageID,myname,myprice,mysrc,myintro,mytop10,mycategory)); //新增圖片到某個分類
             }
 
             mycategoriesLen[mycategoryIndex]++;
@@ -66,24 +66,12 @@ $(window).on('load' , function()
         // 這裡會等到json都做完 才會開始做～
 
         
+        
     }).done(function() 
     {
 
     });
 });
-
-Iwanttoclick();
-
-function Iwanttoclick()
-{
-    $('#wrapper').kinetic({
-            filterTarget: function(target, e){
-                if (!/down|start/.test(e.type)){
-                    return !(/area|a|input/i.test(target.tagName));
-                }
-            }
-        });
-}
 
 
 function makeList(num,listText)
