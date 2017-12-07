@@ -517,6 +517,9 @@ function shoppingcart()
     });
 }
 
+// Image Setting
+
+// setting again if the size of window is changed
 $(document).ready(function()
 {
     $(window).resize(function() 
@@ -527,10 +530,6 @@ $(document).ready(function()
         }
     });
 });
-
-
-
-// Image Setting
 
 function ImageSetting(imageID,naturalWidth,naturalHeight)
 {
