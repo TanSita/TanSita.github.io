@@ -5,6 +5,7 @@ var mycategoriesLen = [];
 
 var shoppingitems = [];
 var forhuding = [];
+var myimageslist = [];
 
 
 $(window).on('load' , function()
@@ -68,6 +69,7 @@ $(window).on('load' , function()
 
             // image setting
             ImagesSetting(myimageID,mysrc);
+            myimageslist.push({"imageID" : myimageID,"src" : mysrc});
         });
 
 
@@ -99,11 +101,11 @@ function makeCarousel(num)
 function makeList(num,listText)
 {
     var listID = "list" + num;
-    var categoryID = "category" + num;
+    var panelID = "panel" + num;
 
     var myhtml = 
     '<li id="' + listID + '">' +
-        '<a href="#' + categoryID + '">' + listText +
+        '<a href="#' + panelID + '">' + listText +
         '</a>' + 
     '</li>';
 
@@ -114,9 +116,11 @@ function makeCategory(num,listText)
 {
     var categoryID = "category" + num;
     var categoryTitleID = "categoryTitle" + num;
+    var panelID = "panel" + num;
 
     var myhtml = 
-    '<div class="panel panel-' + mypanel_colors[num%mypanel_colorsLen] + '">' +
+    '<div id="' + panelID + '"' + 
+        'class="panel panel-' + mypanel_colors[num%mypanel_colorsLen] + '">' +
         '<div class="panel-heading">' +
              '<div class="row">' + 
                 '<div class="alignleft">' +
@@ -512,6 +516,17 @@ function shoppingcart()
         }
     });
 }
+
+$(document).ready(function()
+{
+    $(window).resize(function() 
+    {
+        for(var i=0;i<myimageslist.length;i++)
+        {
+            ImagesSetting(myimageslist[i].imageID , myimageslist[i].src);
+        }
+    });
+});
 
 
 
