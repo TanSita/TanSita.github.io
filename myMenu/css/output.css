@@ -65,14 +65,6 @@
     z-index: 1;
 }
 
-.bell
-{
-    position: fixed;
-    left: 10px;
-    bottom: 10px;
-    z-index: 1;
-}
-
 .col-xs-4
 {
     padding:5px 5px 5px 5px;
@@ -272,13 +264,21 @@
     background-color: #dff0d8;
 }
 
-
 .scrolltd
 {
   border:1px solid;
   max-width:1px;
   overflow-x: scroll;
   white-space: nowrap;
+}
+
+
+.bell
+{
+    position: fixed;
+    left: 10px;
+    bottom: 10px;
+    z-index: 1;
 }
 
 .glyphicon-bell

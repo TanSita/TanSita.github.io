@@ -499,6 +499,8 @@ function shoppingcart()
 
             console.log(forhuding);
 
+            window.location.href = "./buylist.html";
+
             // 產生QR code !!
 
         },function (dismiss) 
