@@ -490,6 +490,7 @@ function shoppingcart()
 
         }).then(function () 
         {
+            forhuding = [];
             // the json which is for huding
             for(var i=0;i<shoppingitems.length;i++)
             {
