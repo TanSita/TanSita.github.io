@@ -72,10 +72,7 @@ $(window).on('load' , function()
             myimageslist.push({"imageID" : myimageID,"src" : mysrc});
         });
 
-
         // 這裡會等到json都做完 才會開始做～
-
-        
         
     }).done(function() 
     {
@@ -313,6 +310,9 @@ function showAlert(hudingID , imageID , name , price , src , intro , top10)
 
 }
 
+
+// shopping cart
+
 function myjsonSearch(hudingID)
 {
     for(var i=0;i<shoppingitems.length;i++)
@@ -519,6 +519,20 @@ function shoppingcart()
         }
     });
 }
+
+
+// Service Bell
+function servicebell()
+{
+    swal
+    (
+        '您點了服務鈴',
+        '服務人員將會盡快為您服務！',
+        'success'
+    )
+}
+
+
 
 // Image Setting
 

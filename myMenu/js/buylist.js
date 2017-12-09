@@ -57,3 +57,15 @@ function maketable(name,price,count,scount,tprice)
 
     return myhtml;
 }
+
+
+// Service Bell
+function servicebell()
+{
+    swal
+    (
+        '您點了服務鈴',
+        '服務人員將會盡快為您服務！',
+        'success'
+    )
+}

@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>What am I buy?</title>
+    <title>BuyList</title>
     <meta charset="utf-8">
 
     <!-- bootstrap.css -->
@@ -56,11 +56,11 @@
 	<table class="table table-striped" id="mytable">
 		<thead>
 			<tr>
-				<th class="text-center" width="40%">餐點名稱</th>
-				<th class="text-center" width="15%">餐點單價</th>
-				<th class="text-center" width="15%">餐點份數</th>
-				<th class="text-center servecount" width="15%">出餐份數</th>
-				<th class="text-center" width="15%">餐點總價</th>
+				<th class="text-center" width="40%">名稱</th>
+				<th class="text-center" width="15%">單價</th>
+				<th class="text-center" width="15%">份數</th>
+				<th class="text-center servecount" width="15%">待上</th>
+				<th class="text-center" width="15%">總價</th>
 			</tr>
 		</thead>
 		<tbody id="mytablebody">
@@ -70,11 +70,10 @@
 </div>
 
 
-<button class="bell btn btn-lg btn-black" onclick="">
+<button class="bell btn btn-lg btn-black" onclick="servicebell();">
     <span class="glyphicon glyphicon-bell"></span> 
     服務鈴 
 </button>
-
 
 </body>
 
