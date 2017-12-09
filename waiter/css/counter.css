@@ -4,7 +4,16 @@
 	width: calc(100% - 40px);
 }
 
-.deleteListbutton
+.btn-black
 {
-	margin-top: -6px;
+    color: white;
+    background-color: black;
+}
+
+.btn-black:active , .btn-black:hover ,
+.btn-black:focus , .btn-black:visited
+{
+	cursor: auto;
+    color: white;
+    background-color: #black;
 }

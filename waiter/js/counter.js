@@ -56,8 +56,8 @@ function maketable(tablenum)
 {
     var myhtml = 
     '<div>' +
-        '<h4 class="form-setting form-control text-center">' + tablenum + "桌" + '</h4>' + 
-        '<span class="deleteListbutton btn btn-danger" ' +
+        '<span class="btn btn-black form-setting form-control text-center">' + tablenum + "桌" + '</span>' + 
+        '<span class="btn btn-danger" ' +
                 'onclick="delList(' + "this"  + ');">Ｘ'+
         '</span>' +
         '<table class="table table-striped" id="' + "mytable" + tablenum + '">' +
