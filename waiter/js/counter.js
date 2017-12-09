@@ -1,6 +1,9 @@
 
 $(window).on('load' , function()
 {
+    makeselect("peoplenum",20);
+    makeselect("tablenum",200);
+    
     var tsjson;
 
     // 名稱 單價 份數 總價
@@ -39,6 +42,15 @@ $(window).on('load' , function()
     });
 
 });
+
+function makeselect(myid,num)
+{
+    for (var i=1;i<=num;i++) 
+    {
+        var sel = document.getElementById(myid);
+        sel.options[sel.options.length] = new Option(i,i);
+    }
+}
 
 function maketable(tablenum)
 {
