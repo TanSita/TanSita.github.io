@@ -55,22 +55,27 @@ function makeselect(myid,num)
 function maketable(tablenum)
 {
     var myhtml = 
-    '<table class="table table-striped" id="' + "mytable" + tablenum + '">' +
+    '<div>' +
         '<h4 class="form-setting form-control text-center">' + tablenum + "桌" + '</h4>' + 
-        '<thead>' + 
-            '<tr>' +
-                '<th class="text-center" width="30%">名稱</th>' +
-                '<th class="text-center" width="14%">單價</th>' +
-                '<th class="text-center" width="14%">份數</th>' +
-                '<th class="text-center servecount" width="14%">待上</th>' +
-                '<th class="text-center" width="14%">總價</th>' +
-                '<th class="text-center" width="14%">設定</th>' +
-            '</tr>' +
-        '</thead>'+
-        '<tbody id="mytablebody">' +
-        
-        '</tbody>' +
-    '</table>';
+        '<span class="deleteListbutton btn btn-danger" ' +
+                'onclick="delList(' + "this"  + ');">Ｘ'+
+        '</span>' +
+        '<table class="table table-striped" id="' + "mytable" + tablenum + '">' +
+            '<thead>' + 
+                '<tr>' +
+                    '<th class="text-center" width="30%">名稱</th>' +
+                    '<th class="text-center" width="14%">單價</th>' +
+                    '<th class="text-center" width="14%">份數</th>' +
+                    '<th class="text-center servecount" width="14%">待上</th>' +
+                    '<th class="text-center" width="14%">總價</th>' +
+                    '<th class="text-center" width="14%">設定</th>' +
+                '</tr>' +
+            '</thead>'+
+            '<tbody id="mytablebody">' +
+            
+            '</tbody>' +
+        '</table>' +
+    '</div>';
 
     return myhtml;
 }
@@ -102,6 +107,11 @@ function makeElement(name,price,count,scount,tprice)
     '</tr>';
 
     return myhtml;
+}
+
+function delList(delbutton)
+{
+    delbutton.parentElement.replaceWith('');
 }
 
 function delfromList(delbutton)
