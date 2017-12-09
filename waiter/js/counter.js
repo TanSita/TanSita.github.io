@@ -110,12 +110,3 @@ function delfromList(delbutton)
 }
 
 
-function showPeoplenum(myvalue)
-{
-    $("#peoplenum").val(myvalue);
-}
-
-function showTablenum(myvalue)
-{
-    $("#tablenum").val(myvalue);
-}
