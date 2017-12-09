@@ -30,14 +30,13 @@
     
 
     <!-- import our css -->
-    <link rel="Stylesheet" type="text/css" href="css/index.css" />
+    <link rel="Stylesheet" type="text/css" href="css/common.css" />
 
 
 
 </head>
 
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="20">
-
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
@@ -51,7 +50,16 @@
         </div>
     
         <div class="collapse navbar-collapse" id="mybar">
-            <ul class="nav navbar-nav navbar-right" id="categories">
+            <ul class="nav navbar-nav navbar-right" id="workers">
+                <li>
+                    <a href="./waiter.html">服務生</a>
+                </li>
+                <li class="active">
+                    <a href="#">櫃台</a>
+                </li>
+                <li>
+                    <a href="./cooker.html">內場人員</a>
+                </li>
             </ul>
         </div>
 
@@ -59,9 +67,49 @@
 </nav>
 
 
+<div class="jumbotron firstdiv" id="QRcodeMaker">
+    <h3 class="text-center">產生QR code</h3>
+    <br>
+    <div class="row">
+        <div class="col-xs-6 text-center">
+            <h4>人數</h4>
+            <input id="peoplenum" class="form-control" type="number" step="1" min="1" max="10" value="1">
+        </div>
+
+        <div class="col-xs-6 text-center">
+            <h4>桌號</h4>
+            <input id="tablenum" class="form-control" type="number" min="1" max="200" value="1">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-6 text-center">
+            <input class="form-control" type="range" min="1" max="10" value="1" oninput="showPeoplenum(this.value);">
+        </div>
+
+        <div class="col-xs-6 text-center">
+            <input class="form-control" type="range" min="1" max="200" value="1" oninput="showTablenum(this.value);">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-offset-2 col-xs-8 text-center">
+            <button class="form-control btn btn-success">產生QR code</button>
+        </div>
+    </div>
+    
+</div>
+
+
+<div class="jumbotron" id="mybuyList">
+    <h3 class="text-center">訂單列表</h3>
+    <br>
+</div>
+
+
 </body>
 
-<script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript" src="js/counter.js"></script>
 
 
 </html>
