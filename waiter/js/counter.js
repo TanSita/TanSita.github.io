@@ -1,9 +1,5 @@
-
 $(window).on('load' , function()
 {
-    makeselect("peoplenum",20);
-    makeselect("tablenum",200);
-    
     var tsjson;
 
     // 名稱 單價 份數 總價
@@ -14,10 +10,12 @@ $(window).on('load' , function()
     {
         $.getJSON("./hudingjson.json",function(data)
         {
+
             $.each(data,function(i,item) 
             {
                 var mytablenum = item.Tnum;
                 var myorders = item.order;
+                var mytotalprice = 0;
 
                 $("#mybuyList").append(maketable(mytablenum));
 
@@ -27,48 +25,42 @@ $(window).on('load' , function()
                     var myname = myfood.name;
                     var myprice = myfood.price;
                     var mycount = order.count;
-                    var myscount = order.scount;
                     var mytprice = parseFloat(myprice) * mycount;
+                    mytotalprice += mytprice;
 
                     // console.log(myname,mycount,myscount);
-                    $("#mytable" + mytablenum).append(makeElement(myname,myprice,mycount,myscount,mytprice));
+                    $("#mytable" + mytablenum).append(makeElement(myname,myprice,mycount,mytprice));
                 });
 
+                $("#total" + mytablenum).text(mytotalprice + "元");
             });
         }).done(function() 
         {
-            // $("#mybuylist").append(maketotal(mytotalprice));
         });
     });
 
 });
 
-function makeselect(myid,num)
-{
-    for (var i=1;i<=num;i++) 
-    {
-        var sel = document.getElementById(myid);
-        sel.options[sel.options.length] = new Option(i,i);
-    }
-}
-
 function maketable(tablenum)
 {
     var myhtml = 
     '<div>' +
-        '<span class="btn btn-black form-setting form-control text-center">' + tablenum + "桌" + '</span>' + 
-        '<span class="btn btn-danger" ' +
-                'onclick="delList(' + "this"  + ');">Ｘ'+
-        '</span>' +
+        '<div class="tabletitle">' + 
+            '<span class="btn btn-black disableClick form-setting form-control text-center">' + tablenum + "桌" + '</span>' + 
+            '<span id="' + "total" + tablenum + '" ' + 
+            'class="btn btn-green disableClick text-center">' + "" + '</span>' + 
+            '<span class="btn btn-danger" ' +
+                    'onclick="delList(' + "this"  + ');">Ｘ'+
+            '</span>' +
+        '</div>' +
         '<table class="table table-striped" id="' + "mytable" + tablenum + '">' +
             '<thead>' + 
                 '<tr>' +
-                    '<th class="text-center" width="30%">名稱</th>' +
-                    '<th class="text-center" width="14%">單價</th>' +
-                    '<th class="text-center" width="14%">份數</th>' +
-                    '<th class="text-center servecount" width="14%">待上</th>' +
-                    '<th class="text-center" width="14%">總價</th>' +
-                    '<th class="text-center" width="14%">設定</th>' +
+                    '<th class="text-center" width="40%">名稱</th>' +
+                    '<th class="text-center" width="15%">單價</th>' +
+                    '<th class="text-center" width="15%">份數</th>' +
+                    '<th class="text-center" width="15%">總價</th>' +
+                    '<th class="text-center" width="15%">設定</th>' +
                 '</tr>' +
             '</thead>'+
             '<tbody id="mytablebody">' +
@@ -81,23 +73,14 @@ function maketable(tablenum)
 }
 
 
-function makeElement(name,price,count,scount,tprice)
+function makeElement(name,price,count,tprice)
 {
 
     var myhtml = 
     '<tr class="text-center">' +
         '<td class="scrolltd">' + name + '</td>' +
         '<td>' + price + '</td>' +
-        '<td>' + count + '</td>';
-        if(scount==0)
-        {
-            myhtml += '<td class="overcount">' + "X" + '</td>';
-        }
-        else
-        {
-            myhtml += '<td class="servecount">' + scount + '</td>';
-        }
-    myhtml +=
+        '<td>' + count + '</td>' +
         '<td>' + tprice + '</td>' +
         '<td>' + 
         '<span class="btn btn-danger btn-xs" ' +
@@ -111,7 +94,7 @@ function makeElement(name,price,count,scount,tprice)
 
 function delList(delbutton)
 {
-    delbutton.parentElement.replaceWith('');
+    delbutton.parentElement.parentElement.replaceWith('');
 }
 
 function delfromList(delbutton)

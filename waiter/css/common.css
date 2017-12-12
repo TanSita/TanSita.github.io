@@ -1,8 +1,10 @@
+/* body */
 body
 {
     background-color: #333;
 }
 
+/* navbar */
 .navbar 
 {
     margin-bottom: 0;
@@ -44,6 +46,7 @@ body
     margin-top: 50px;
 }
 
+/* jumbotron */
 .jumbotron 
 {
     /* 上 右 下 左;*/
@@ -52,16 +55,16 @@ body
     margin-bottom: 30px;
 }
 
-.jumbotron>hr
-{
-    width: 100%;
-    border-top-color: #000;
-}
-
+/* table */
 .table
 {
     border: 2px solid;
     margin-bottom: 50px;
+}
+
+.tabletitle
+{
+    margin-bottom: 10px;
 }
 
 .scrolltd
@@ -88,12 +91,17 @@ body
     color: white;
 }
 
-.bellbutton
+/* btn-black for table num*/
+.btn-black
 {
-    width: 50px;
-    height: 50px;
-    margin-bottom: 10px;
-    margin-left: 10px;
+    color: white;
+    background-color: black;
 }
 
-
+.disableClick:active , .disableClick:hover ,
+.disableClick:focus , .disableClick:visited
+{
+    cursor: auto;
+    color: white;
+    background-color: #black;
+}

@@ -1,19 +1,15 @@
 .form-setting
 {
 	display: inline-block;
-	width: calc(100% - 40px);
+	width: calc(100% - 150px);
 }
 
-.btn-black
+.btn-green
 {
+	margin-left: 5px;
+	margin-right: 5px;
+	width: 100px;
     color: white;
-    background-color: black;
+    background-color: #5cb85c;
 }
 
-.btn-black:active , .btn-black:hover ,
-.btn-black:focus , .btn-black:visited
-{
-	cursor: auto;
-    color: white;
-    background-color: #black;
-}

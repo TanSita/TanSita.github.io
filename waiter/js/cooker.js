@@ -1,4 +1,3 @@
-
 $(window).on('load' , function()
 {
     var tsjson;
@@ -25,8 +24,8 @@ $(window).on('load' , function()
                     var mycount = order.count;
                     var myscount = order.scount;
 
-                    // console.log(myname,mycount,myscount);
-                    $("#mytable" + mytablenum).append(makeElement(myname,mycount,myscount));
+                    if(myscount > 0)
+                        $("#mytable" + mytablenum).append(makeElement(myname,mycount,myscount));
                 });
 
             });
@@ -41,8 +40,10 @@ $(window).on('load' , function()
 function maketable(tablenum)
 {
     var myhtml = 
+    '<div class="tabletitle">' + 
+        '<span class="btn btn-black disableClick form-setting form-control text-center">' + tablenum + "桌" + '</span>' + 
+    '</div>' +
     '<table class="table table-striped" id="' + "mytable" + tablenum + '">' +
-        '<h4 class="form-setting form-control text-center">' + tablenum + "桌" + '</h4>' + 
         '<thead>' + 
             '<tr>' +
                 '<th class="text-center" width="40%">名稱</th>' +
