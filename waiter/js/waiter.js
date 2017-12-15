@@ -1,3 +1,5 @@
+var forhuding = [];
+
 $(window).on('load' , function()
 {
     var tsjson;
@@ -20,20 +22,20 @@ $(window).on('load' , function()
         {
             $.each(data,function(i,item) 
             {
-                var mytablenum = item.Tnum;
+                var mytableNum = item.tableNum;
                 var myorders = item.order;
 
-                $("#mybuyList").append(maketable(mytablenum));
+                $("#mybuyList").append(maketable(mytableNum));
 
                 $.each(myorders,function(index,order) 
                 {
-                    var myfood = tsjson[order.id];
+                    var myorderID = order.id;
+                    var myfood = tsjson[myorderID];
                     var myname = myfood.name;
                     var mycount = order.count;
                     var myscount = order.scount;
 
-                    // console.log(myname,mycount,myscount);
-                    $("#mytable" + mytablenum).append(makeElement(myname,mycount,myscount));
+                    $("#mytable" + mytableNum).append(makeElement(mytableNum,myorderID,myname,mycount,myscount));
                 });
 
             });
@@ -45,13 +47,13 @@ $(window).on('load' , function()
 
 });
 
-function maketable(tablenum)
+function maketable(tableNum)
 {
     var myhtml = 
     '<div class="tabletitle">' + 
-        '<span class="btn btn-black disableClick form-setting form-control text-center">' + tablenum + "桌" + '</span>' + 
+        '<span class="btn btn-black disableClick form-setting form-control text-center">' + tableNum + "桌" + '</span>' + 
     '</div>' +
-    '<table class="table table-striped" id="' + "mytable" + tablenum + '">' +
+    '<table class="table table-striped" id="' + "mytable" + tableNum + '">' +
         '<thead>' + 
             '<tr>' +
                 '<th class="text-center" width="40%">名稱</th>' +
@@ -68,63 +70,97 @@ function maketable(tablenum)
     return myhtml;
 }
 
-
-function makeElement(name,count,scount)
+function delfromList(tableNum,orderID,delbutton)
 {
+    swal(
+    {
+        title: '確定刪除？',
+        text: '按下確定此餐點將會被刪除...',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#f0ad4e',
+        confirmButtonText: '確定',
+        cancelButtonText: '取消',
+        confirmButtonClass: 'btn btn-success',
+        cancelButtonClass: 'btn btn-danger',
+    }).then(function () 
+    {
+        delbutton.parentElement.parentElement.replaceWith('');
+        editOrder(tableNum,orderID,-1);
+    },function (dismiss) 
+    {
+        if (dismiss === 'cancel') 
+        {
 
+        }
+    });
+}
+
+function makeElement(tableNum,orderID,name,count,scount)
+{
     var myhtml = 
     '<tr class="text-center">' +
         '<td class="scrolltd">' + name + '</td>' +
         '<td>' + count + '</td>';
-        if(scount==0)
-        {
-            myhtml += '<td class="overcount">' + "X" + '</td>';
-        }
+        
+        if(scount==0) 
+            myhtml += '<td class="overcount">' + scount + '</td>';
         else
-        {
             myhtml += '<td class="servecount">' + scount + '</td>';
-        }
-    myhtml +=
+    
+    myhtml+=
         '<td>' + 
-        '<span class="btn btn-success btn-xs" ' +
-                'onclick="calculate(' + "this" + "," + "true" + ');">＋'+
-                '</span>' +
+            '<span class="btn btn-success btn-xs" ' +
+            'onclick="calculate(' + tableNum + ',' 
+            + orderID + ',' + count + ',' +
+            "this" + "," + "true" + ');">＋'+
+            '</span>' +
 
-                '<span class="btn btn-warning btn-xs" ' +
-                'onclick="calculate(' + "this" + "," + "false" + ');">－'+
-                '</span>' +
+            '<span class="btn btn-warning btn-xs" ' +
+            'onclick="calculate(' + tableNum + ',' 
+            + orderID + ',' + count + ',' +
+            "this" + "," + "false" + ');">－'+
+            '</span>' +
+
+            '<span class="btn btn-danger btn-xs" ' +
+            'onclick="delfromList(' + tableNum + ',' 
+            + orderID + ',' + "this"  + ');">Ｘ'+
+            '</span>' +
         '</td>' +
     '</tr>';
 
     return myhtml;
 }
 
-function calculate(setting,addorminus)
+function calculate(tableNum,orderID,count,setting,addorminus)
 {
     var scount = setting.parentElement.previousElementSibling;
 
     var num = scount.innerText;
-    if(num == "X") num = 0;
-    else num = parseInt(num);
+    num = parseInt(num);
 
     if(addorminus == true)
     {
-        num += 1;
-        scount.innerText = num;
-        scount.setAttribute("class","servecount");
+        if(num < count)
+        {
+            num += 1;
+            scount.innerText = num;
+            scount.setAttribute("class","servecount");
+
+            editOrder(tableNum,orderID,num);
+        }
     }
     else
     {
         if(num > 0)
         {
             num -= 1;
+            scount.innerText = num;
+
             if(num==0)
-            {
-                scount.innerText = "X";
                 scount.setAttribute("class","overcount");
-            }
-            else
-                scount.innerText = num;
+
+            editOrder(tableNum,orderID,num);
         }
     }
 }
@@ -156,12 +192,54 @@ function delBell(bell)
 }
 
 
-function makeBell(tablenum)
+function makeBell(tableNum)
 {
     var myhtml = 
     '<button class="bellbutton btn btn-danger" onclick="delBell(this);">'+
-        + tablenum +
+        + tableNum +
     '</button>';
 
     return myhtml;
+}
+
+
+// for huding json
+
+
+function editOrder(tableNum , foodID , scount)
+{
+    for(var i=0;i<forhuding.length;i++)
+    {
+        var itemtableNum = forhuding[i].tableNum;
+
+        // order
+        if(itemtableNum == tableNum)
+        {
+            var itemOrder = forhuding[i].order;
+            for(var j=0;j<itemOrder.length;j++)
+            {
+                var itemfoodID = itemOrder[j].id;
+
+                if(itemfoodID == foodID)
+                {
+
+                    itemOrder[j].scount = scount;
+                    return 1;
+                }
+            }
+            itemOrder.push({"id":foodID,"scount":scount});
+            return 1;
+        }
+    }
+
+    // 如果沒這ㄍtableNum
+    forhuding.push({"tableNum" : tableNum,"order":[{"id" : foodID,"scount" : scount}]});
+    return 0;
+}
+
+
+function SaveValue()
+{
+    console.log(forhuding);
+    forhuding = [];
 }

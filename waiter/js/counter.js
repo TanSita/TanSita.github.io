@@ -13,11 +13,11 @@ $(window).on('load' , function()
 
             $.each(data,function(i,item) 
             {
-                var mytablenum = item.Tnum;
+                var mytableNum = item.tableNum;
                 var myorders = item.order;
                 var mytotalprice = 0;
 
-                $("#mybuyList").append(maketable(mytablenum));
+                $("#mybuyList").append(maketable(mytableNum));
 
                 $.each(myorders,function(index,order) 
                 {
@@ -28,11 +28,10 @@ $(window).on('load' , function()
                     var mytprice = parseFloat(myprice) * mycount;
                     mytotalprice += mytprice;
 
-                    // console.log(myname,mycount,myscount);
-                    $("#mytable" + mytablenum).append(makeElement(myname,myprice,mycount,mytprice));
+                    $("#mytable" + mytableNum).append(makeElement(myname,myprice,mycount,mytprice));
                 });
 
-                $("#total" + mytablenum).text(mytotalprice + "元");
+                $("#total" + mytableNum).text(mytotalprice + "元");
             });
         }).done(function() 
         {
@@ -41,26 +40,25 @@ $(window).on('load' , function()
 
 });
 
-function maketable(tablenum)
+function maketable(tableNum)
 {
     var myhtml = 
     '<div>' +
         '<div class="tabletitle">' + 
-            '<span class="btn btn-black disableClick form-setting form-control text-center">' + tablenum + "桌" + '</span>' + 
-            '<span id="' + "total" + tablenum + '" ' + 
+            '<span class="btn btn-black disableClick form-setting form-control text-center">' + tableNum + "桌" + '</span>' + 
+            '<span id="' + "total" + tableNum + '" ' + 
             'class="btn btn-green disableClick text-center">' + "" + '</span>' + 
             '<span class="btn btn-danger" ' +
                     'onclick="delList(' + "this"  + ');">Ｘ'+
             '</span>' +
         '</div>' +
-        '<table class="table table-striped" id="' + "mytable" + tablenum + '">' +
+        '<table class="table table-striped" id="' + "mytable" + tableNum + '">' +
             '<thead>' + 
                 '<tr>' +
                     '<th class="text-center" width="40%">名稱</th>' +
-                    '<th class="text-center" width="15%">單價</th>' +
-                    '<th class="text-center" width="15%">份數</th>' +
-                    '<th class="text-center" width="15%">總價</th>' +
-                    '<th class="text-center" width="15%">設定</th>' +
+                    '<th class="text-center" width="20%">單價</th>' +
+                    '<th class="text-center" width="20%">份數</th>' +
+                    '<th class="text-center" width="20%">總價</th>' +
                 '</tr>' +
             '</thead>'+
             '<tbody id="mytablebody">' +
@@ -72,6 +70,29 @@ function maketable(tablenum)
     return myhtml;
 }
 
+// submit按下去後，不重新整理的魔法 >3<
+$('#QRcodeMakerForm').submit(function () 
+{
+    makeQRcode();
+    return false;
+});
+
+
+function makeQRcode()
+{
+    var peopleNum = $("#peopleNum").val();
+    var tableNum = $("#tableNum").val();
+
+    if(peopleNum.length==0 || tableNum.length==0)
+    {
+
+    }
+    else
+    {
+        $("#QRcodeImg").attr({"src":"images/QRcode.png"});
+        console.log(peopleNum,tableNum);
+    }
+}
 
 function makeElement(name,price,count,tprice)
 {
@@ -82,11 +103,6 @@ function makeElement(name,price,count,tprice)
         '<td>' + price + '</td>' +
         '<td>' + count + '</td>' +
         '<td>' + tprice + '</td>' +
-        '<td>' + 
-        '<span class="btn btn-danger btn-xs" ' +
-                'onclick="delfromList(' + "this"  + ');">Ｘ'+
-                '</span>' +
-        '</td>' +
     '</tr>';
 
     return myhtml;
@@ -94,12 +110,28 @@ function makeElement(name,price,count,tprice)
 
 function delList(delbutton)
 {
-    delbutton.parentElement.parentElement.replaceWith('');
+    swal(
+    {
+        title: '確定刪除？',
+        text: '按下確定此訂單將會被刪除...',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#f0ad4e',
+        confirmButtonText: '確定',
+        cancelButtonText: '取消',
+        confirmButtonClass: 'btn btn-success',
+        cancelButtonClass: 'btn btn-danger',
+    }).then(function () 
+    {
+        delbutton.parentElement.parentElement.replaceWith('');
+    },function (dismiss) 
+    {
+        if (dismiss === 'cancel') 
+        {
+
+        }
+    });
 }
 
-function delfromList(delbutton)
-{
-    delbutton.parentElement.parentElement.replaceWith('');
-}
 
 

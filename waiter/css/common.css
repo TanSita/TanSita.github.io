@@ -76,12 +76,14 @@ body
 
 .servecount
 {
+    font-weight: bold;
     color: brown;
 }
 
 .overcount
 {
-    color: gray;
+    font-weight: bold;
+    color: #666666;
 }
 
 .form-setting

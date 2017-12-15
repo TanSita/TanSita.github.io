@@ -12,10 +12,11 @@ $(window).on('load' , function()
         {
             $.each(data,function(i,item) 
             {
-                var mytablenum = item.Tnum;
+                var mytableNum = item.tableNum;
                 var myorders = item.order;
+                var trashCount = 0;
 
-                $("#mybuyList").append(maketable(mytablenum));
+                $("#mybuyList").append(maketable(mytableNum));
 
                 $.each(myorders,function(index,order) 
                 {
@@ -25,36 +26,43 @@ $(window).on('load' , function()
                     var myscount = order.scount;
 
                     if(myscount > 0)
-                        $("#mytable" + mytablenum).append(makeElement(myname,mycount,myscount));
+                        $("#mytable" + mytableNum).append(makeElement(myname,mycount,myscount));
+                    else
+                        trashCount++;
                 });
+
+                if(trashCount==myorders.length)
+                    $("#mytable" + mytableNum).parent().replaceWith('');
 
             });
         }).done(function() 
         {
-            // $("#mybuylist").append(maketotal(mytotalprice));
+
         });
     });
 
 });
 
-function maketable(tablenum)
+function maketable(tableNum)
 {
     var myhtml = 
-    '<div class="tabletitle">' + 
-        '<span class="btn btn-black disableClick form-setting form-control text-center">' + tablenum + "桌" + '</span>' + 
-    '</div>' +
-    '<table class="table table-striped" id="' + "mytable" + tablenum + '">' +
-        '<thead>' + 
-            '<tr>' +
-                '<th class="text-center" width="40%">名稱</th>' +
-                '<th class="text-center" width="30%">份數</th>' +
-                '<th class="text-center servecount" width="30%">待上</th>' +
-            '</tr>' +
-        '</thead>'+
-        '<tbody id="mytablebody">' +
-        
-        '</tbody>' +
-    '</table>';
+    '<div>' + 
+        '<div class="tabletitle">' + 
+            '<span class="btn btn-black disableClick form-setting form-control text-center">' + tableNum + "桌" + '</span>' + 
+        '</div>' +
+        '<table class="table table-striped" id="' + "mytable" + tableNum + '">' +
+            '<thead>' + 
+                '<tr>' +
+                    '<th class="text-center" width="40%">名稱</th>' +
+                    '<th class="text-center" width="30%">份數</th>' +
+                    '<th class="text-center servecount" width="30%">待上</th>' +
+                '</tr>' +
+            '</thead>'+
+            '<tbody id="mytablebody">' +
+            
+            '</tbody>' +
+        '</table>' +
+    '</div>';
 
     return myhtml;
 }
@@ -65,20 +73,8 @@ function makeElement(name,count,scount)
     var myhtml = 
     '<tr class="text-center">' +
         '<td class="scrolltd">' + name + '</td>' +
-        '<td>' + count + '</td>';
-        
-    if(scount==0)
-    {
-        myhtml += 
-        '<td class="overcount">' + "X" + '</td>';
-    }
-    else
-    {
-        myhtml += 
-        '<td class="servecount">' + scount + '</td>';
-    }
-
-    myhtml += 
+        '<td>' + count + '</td>' +
+        '<td class="servecount">' + scount + '</td>' +
     '</tr>';
 
     return myhtml;

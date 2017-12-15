@@ -1,6 +1,6 @@
 [
 	{
-		"Tnum" : 8,
+		"tableNum" : 8,
 		"order":
 		[
 			{
@@ -16,7 +16,7 @@
 		]
 	},
 	{
-		"Tnum" : 7,
+		"tableNum" : 7,
 		"order":
 		[
 			{

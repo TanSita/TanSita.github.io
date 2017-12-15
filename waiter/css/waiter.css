@@ -5,3 +5,11 @@
     margin-bottom: 10px;
     margin-left: 10px;
 }
+
+.savebutton
+{
+    position: fixed;
+    left: 10px;
+    bottom: 10px;
+    z-index: 1;
+}
