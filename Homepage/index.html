@@ -74,17 +74,17 @@
         <div class="row wow fadeInUp">
             <div class="col-sm-4 col-xs-4 text-center imgframe">
                 <h4>公司1</h4>
-                <img src="images/menu4.jpg" class="customSize">        
+                <img src="images/cat.gif" >        
             </div>
             
             <div class="col-sm-4 col-xs-4 text-center imgframe">
                 <h4>公司2</h4>
-                <img src="images/menu2.jpg" class="customSize">        
+                <img src="images/menu4.jpg" >        
             </div>
 
             <div class="col-sm-4 col-xs-4 text-center imgframe">
                 <h4>公司3</h4>
-                <img src="images/menu3.jpg" class="customSize">        
+                <img src="images/menu3.jpg" >        
             </div>
         </div>
 
@@ -92,17 +92,17 @@
         <div class="row wow fadeInUp">
             <div class="col-sm-4 col-xs-4 text-center imgframe">
                 <h4>公司4</h4>
-                <img src="images/menu4.jpg" class="customSize">        
+                <img src="images/menu4.jpg" >        
             </div>
             
             <div class="col-sm-4 col-xs-4 text-center imgframe">
                 <h4>公司5</h4>
-                <img src="images/menu2.jpg" class="customSize">        
+                <img src="images/menu2.jpg" >        
             </div>
 
             <div class="col-sm-4 col-xs-4 text-center imgframe">
                 <h4>公司6</h4>
-                <img src="images/menu3.jpg" class="customSize">        
+                <img src="images/menu3.jpg" >        
             </div>
         </div>
 
@@ -110,17 +110,17 @@
         <div class="row wow fadeInUp">
             <div class="col-sm-4 col-xs-4 text-center imgframe">
                 <h4>公司7</h4>
-                <img src="images/menu4.jpg" class="customSize">        
+                <img src="images/menu4.jpg" >        
             </div>
             
             <div class="col-sm-4 col-xs-4 text-center imgframe">
                 <h4>公司8</h4>
-                <img src="images/menu2.jpg" class="customSize">        
+                <img src="images/menu2.jpg" >        
             </div>
 
             <div class="col-sm-4 col-xs-4 text-center imgframe">
                 <h4>公司9</h4>
-                <img src="images/menu3.jpg" class="customSize">        
+                <img src="images/menu3.jpg" >        
             </div>
         </div>
 
@@ -162,6 +162,7 @@
 
     <script>
 
+
         $(document).ready(function()
         {
             $('[data-toggle="tooltip"]').tooltip(); 
@@ -184,6 +185,40 @@
                 }
             });
         });
+
+        $(window).on('load' , function()
+        {
+            var mydiv = $(".col-sm-4.col-xs-4.text-center");
+            var divWidth = mydiv.width() + 40;
+            var h4height = $(".col-sm-4.col-xs-4.text-center > h4").height();
+            var fixedmin = divWidth - 40 - h4height - 10;
+            $(mydiv).css({  "height": divWidth + "px" });
+
+            var imgs = $(".col-sm-4.col-xs-4.text-center > img");
+            
+            for(var i=0;i<imgs.length;i++)
+            {
+                var naturalWidth = imgs[i].naturalWidth;
+                var naturalHeight = imgs[i].naturalHeight;
+
+                if(naturalHeight > naturalWidth)
+                {      
+                    imgs[i].style.width = 'auto';  
+                    imgs[i].style.height = fixedmin + 'px';  
+                }
+                else
+                {
+                    imgs[i].style.width = fixedmin + 'px';  
+                    imgs[i].style.height = 'auto';  
+
+                    var currentHeight = imgs[i].height;
+                    var diff = (fixedmin - currentHeight) / 2;
+                    imgs[i].style.paddingTop = diff + 'px';
+                }
+            }
+        });
+
+
     </script>
 
 </body>

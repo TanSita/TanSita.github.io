@@ -82,3 +82,5 @@ delOrder(5,5);
 console.log(forhuding);
 // console.log(JSON.stringify(forhuding));
 
+window.onunload = window.onbeforeunload = 
+function () { return "正在點餐中，確定要離開?" };

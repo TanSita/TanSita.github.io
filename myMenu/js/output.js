@@ -419,9 +419,29 @@ function calculate(hudingID , addorminus) // true = add , false = minus
 
 function delfromShoppingcart(hudingID , me)
 {
-    var index = myjsonSearch(hudingID);
-    shoppingitems.splice(index,1);
-    me.parentElement.parentElement.innerHTML = "";
+    swal(
+    {
+        title: '確定刪除？',
+        text: '按下確定此餐點將會被刪除...',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#f0ad4e',
+        confirmButtonText: '確定',
+        cancelButtonText: '取消',
+        confirmButtonClass: 'btn btn-success',
+        cancelButtonClass: 'btn btn-danger',
+    }).then(function () 
+    {
+        var index = myjsonSearch(hudingID);
+        shoppingitems.splice(index,1);
+        me.parentElement.parentElement.innerHTML = "";
+    },function (dismiss) 
+    {
+        if (dismiss === 'cancel') 
+        {
+
+        }
+    });
 }
 
 
