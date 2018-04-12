@@ -86,5 +86,7 @@ $(window).on('beforeunload',function(){return 'Your own message goes here...';})
 $(window).on('unload',function(){return'Your own message goes here...';});
 
 
+
+
 // window.onunload = window.onbeforeunload = 
 // function () { return "正在點餐中，確定要離開?" };
